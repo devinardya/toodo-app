@@ -15,7 +15,7 @@ const Board = () => {
     const [inputAddTodoBox, updateInputAddTodoBox] = useState("");
     const [addListModalStatus, updateAddListModalStatus] = useState(false);
     const [todoIndex, updateTodoIndex] = useState("");
-    const [todoboxMenu, updateTodoboxMenu] = useState(true);
+    const [todoboxMenu, updateTodoboxMenu] = useState(false);
     const [activeDropbox, updateActiveDropbox] = useState("");
 
 
@@ -105,7 +105,7 @@ const Board = () => {
    	const activateMenu = (e, id, index) => {
         e.preventDefault();
         let copyData = [...todobox];
-        console.log("e target id", id, "index", index)
+        console.log( "index", index)
         let indexArr = copyData.findIndex( x => x._id === id);
         console.log("index", indexArr)
         if (indexArr === index){
