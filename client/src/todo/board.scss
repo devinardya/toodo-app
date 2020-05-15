@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:wght@400;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+$Montserrat : 'Montserrat', sans-serif;
+$Open-Sans : 'Open Sans', sans-serif;
+
+$color-primary: rgb(240, 240, 240);
+$color-secondary: #406e8eff;
+$color-secondary-light: rgb(255, 255, 255);
+$color-text-title: #ffa84e;
+$color-text-dataTitle : #dd4600;
+$color-text-dataDesc : #737373;
+$color-text-dataDate : #737373;
+
+@mixin flex-column($justify, $align) {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin flex-row($justify, $align) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+.board-container-block {
+    background-color: $color-primary;
+    height: 100vh;
+    width: 100vw;
+    @include flex-column(center, center);
+
+    .board-block-header {
+        height: 10%;
+        width: 100vw;
+    }
+
+    .board-block-main {
+        height: 90%;
+        width: 100%;
+        overflow-x: scroll;
+        background-color: $color-secondary;
+        padding: 20px;
+        @include flex-row(flex-start, flex-start);
+
+        .board-block-boxes {
+            width: 100%;
+            height: 100%;
+            @include flex-row(flex-start, flex-start);
+
+            .board-block-main--form {
+                width: calc(20% - 10px);
+                background-color: $color-primary;
+                padding: 20px;
+                margin: 5px;
+                text-align: left;
+                border-radius: 5px;
+
+                form {
+                    width: 100%;
+
+                    input {
+                        width: 100%;
+                        height: 30px;
+                    }
+
+                    button {
+                        margin-top: 10px;
+                        height: 30px;
+                        width: 120px;
+                        border: none;
+                        border-radius: 10px;
+                        background-color: $color-text-dataDate;
+                        color: #fff;
+                    }
+                }
+            }
+
+            .board-block-main--eachbox {
+                width: calc(20% - 10px);
+                max-height: calc(100% - 10px);
+                background-color: $color-primary;
+                padding: 20px;
+                margin: 5px;
+                text-align: left;
+                border-radius: 5px;
+                position: relative;
+
+                .title-menu-button {
+                    background: transparent;
+                    border: none;
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+
+                    button {
+                        background: transparent;
+                        border: none;
+                        z-index: 9999;
+                        font-size: 18px;
+                        color: red;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .board-main-dropdown-active {
+                    display: block;
+                    position: absolute;
+                    top: 20px;
+                    right: -80px;
+                    width: 100px;
+                    z-index: 9999;
+                }
+
+                .board-main-dropdown {
+                    display: none;
+                }
+    
+                h4 {
+                    color: $color-text-dataDesc;
+                    font-family: $Montserrat;
+                    font-size: 16px;
+                    margin-bottom: 10px;
+                }
+    
+                ul {
+                    list-style-type: none;
+                    overflow-y: scroll;
+                    max-height: 50vh;
+                }
+    
+                .board-block-main--list {
+                    background-color: $color-secondary-light;
+                    margin: 5px 5px 10px 5px;
+                    padding: 10px 10px;
+                    text-align: left;
+                    line-height: 18px;
+                    font-family: $Open-Sans;
+                    -webkit-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
+                    -moz-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
+                    box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
+    
+                    .list-title {
+                        font-size: 14px;
+                        color: $color-text-dataTitle;
+                        font-weight: 600;
+                    }
+    
+                    .list-desc {
+                        font-size: 13px;
+                        color: $color-text-dataDesc;
+                    }
+    
+                    .list-date {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+
+      
+    }
+}
