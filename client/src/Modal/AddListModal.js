@@ -4,7 +4,6 @@ import './addlistmodal.scss'
 const AddListModal = ({addNewList, onAddListChange, onAddDescChange, todoIndex, addDescInput, addListInput, updateAddListModalStatus}) => {
 
 
-
     const onAddingList = (e, todoIndex) => {
         e.preventDefault();
         addNewList(todoIndex);
@@ -19,13 +18,21 @@ const AddListModal = ({addNewList, onAddListChange, onAddDescChange, todoIndex, 
         onAddDescChange(e.target.value)
     }
 
+    const cancelAdd = () => {
+        updateAddListModalStatus(false);
+    }
+
     return <div className ="modal-block-container">
                 <form onSubmit = {(e) => onAddingList(e, todoIndex)}>
-                    <label>Title</label>
+                    <h2>Add new list</h2>
+                    <label>Title:</label>
                     <input onChange={addList} type="text" value={addListInput}/>
-                    <label>Description</label>
+                    <label>Description:</label>
                     <input onChange={addDesc} type="text" value={addDescInput}/>
-                    <button>add new list to do box</button>
+                    <div className="modal-block-buttons">
+                        <div className="modal-block-cancel" onClick={cancelAdd}>Cancel</div>
+                        <button>add new list to do box</button>
+                    </div>
                 </form>
             </div>
 };

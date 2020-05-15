@@ -4,7 +4,7 @@ const uuid = require("uuid");
 const app = express();
 app.use(express.json());
 
-const {getClient, getDB, createObjectId} = require("./db")
+const {getDB, createObjectId} = require("./db")
 
 app.get('/todos/', (req, res) => {
     const db = getDB();
