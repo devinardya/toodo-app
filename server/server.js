@@ -203,7 +203,7 @@ app.delete('/todos/:todosid/list/:listid', (req, res) => {
 
 // TO MOVE A SPECIFIC LIST FROM ONE TO DO LIST BOX TO ANOTHER TO DO LIST BOX
 
-app.get('/todos/:oldid/todos/:newid/list/:listid', (req, res) => {
+app.patch('/todos/:oldid/todos/:newid/list/:listid', (req, res) => {
     const db = getDB();
     let oldDocId = req.params.oldid;
     let newDocId = req.params.newid;
@@ -220,44 +220,57 @@ app.get('/todos/:oldid/todos/:newid/list/:listid', (req, res) => {
         data: {$elemMatch : {id: listId}}
     })
     .then(result=> {
+        
         console.log("the result data", result.data)
         let index = result.data.findIndex(x => x.id === listId);
         savedData = result.data[index];
         console.log("Saved Data", savedData)
-    })
 
-    if (savedData !== null || savedData !== undefined) {
-        console.log("ENTER HERE!")
-        console.log("the saved data to push", savedData)
+       
+        if (savedData !== null || savedData !== undefined) {
+            
+            console.log("the saved data to push", savedData)
+            db.collection("todolist")
+            .updateOne( 
+                {_id : createObjectId(newDocId)}, 
+                {$push: {data: savedData}}
+            )
+            .then(result => {
+                //res.send(result)
+                console.log("Moved Array", savedData)
+            })  
+            .catch( e => {
+                console.error(e)
+                res.status(500).end();
+            })
+        }
+       
         db.collection("todolist")
         .updateOne( 
-            {_id : createObjectId(newDocId)}, 
-            {$push: {data: savedData}}
-        )
-        .then(result => {
-            res.send(result)
-            console.log("Moved Array", savedData)
-        })  
-        .catch( e => {
-            console.error(e)
-            res.status(500).end();
-        })
-    }
-   
-
-    db.collection("todolist")
-    .updateOne( 
-        {_id : createObjectId(oldDocId) , "data.id" : listId } , 
             {_id : createObjectId(oldDocId)},
             { $pull: { data: { id: listId } } },
             { multi: true }
-    )
-    .then( () => {
-        res.status(204).end()
-        console.log("List item is deleted")
-    })
-});
+        )
+        .then( () => {
+            //res.status(204).end()
+            console.log("List item is deleted")
+        })
 
+        db.collection("todolist")
+        .find({})
+        .toArray()
+        .then( data => {
+            console.log("Data from server", data)
+            res.send(data);
+        })
+        .catch( err => {
+            res.status(500).end();
+        })
+
+    })
+
+
+});
 
 
 app.listen(8090, () => {

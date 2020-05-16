@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+$Montserrat : 'Montserrat', sans-serif;
+$Open-Sans : 'Open Sans', sans-serif;
+
+$color-primary: rgb(240, 240, 240);
+$color-secondary: #406e8eff;
+$color-secondary-light: rgb(255, 255, 255);
+$color-text-title: #ffa84e;
+$color-text-dataTitle : #dd4600;
+$color-text-dataDesc : #737373;
+$color-text-cancel : #a7a7a7;
+
+@mixin flex-column($justify, $align) {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin flex-row($justify, $align) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+.modal-block-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(225,225,225, 0.75);
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include flex-column( center, center );
+
+    form {
+        width: 45%;
+        height: 40%;
+        background-color: $color-primary;
+        border-radius: 20px;
+        @include flex-column(center, center);
+        position: relative;
+        -webkit-box-shadow: -1px 2px 31px 9px rgba(181,181,181,1);
+        -moz-box-shadow: -1px 2px 31px 9px rgba(181,181,181,1);
+        box-shadow: -1px 2px 31px 9px rgba(181,181,181,1);
+
+        h2 {
+            margin-bottom: 20px;
+            font-family: $Montserrat;
+            color: $color-text-dataTitle;
+            font-weight: 600;
+        }
+
+        select {
+            width: 200px;
+            height: 40px;
+            margin: 30px 0;
+
+            option {
+                font-family: $Open-Sans;
+                font-size: 15px;
+            }
+        }
+
+        .modal-block-buttons {
+            @include flex-row(center,center );
+
+            .modal-block-cancel {
+                margin-top: 10px;
+                padding: 10px 25px;
+                border-radius: 10px;
+                width: 200px;
+                border: none;
+                background-color: $color-text-cancel;
+                color: #fff;
+                font-size: 13px;
+                margin-right: 20px;
+    
+                &:hover {
+                    cursor: pointer;
+                    background-color: darken($color: $color-text-dataDesc, $amount: 1.5);
+                }
+            }
+    
+            button {
+                margin-top: 10px;
+                padding: 10px 25px;
+                border-radius: 10px;
+                width: 200px;
+                border: none;
+                background-color: $color-text-title;
+                color: #fff;
+                font-size: 13px;
+    
+                &:hover {
+                    cursor: pointer;
+                    background-color: darken($color: $color-text-dataTitle, $amount: 1.5);
+                }
+            }
+        }
+        
+    }
+}

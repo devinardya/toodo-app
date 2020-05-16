@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {IoMdMenu, IoIosAddCircle} from 'react-icons/io';
-import {TiDelete} from 'react-icons/ti';
+import {TiDelete, TiArrowForward} from 'react-icons/ti';
 import {MdModeEdit} from 'react-icons/md';
 import AddListModal from '../Modal/AddListModal';
 import RenameTitleModal from '../Modal/RenameTitleModal';
 import RemoveListModal from '../Modal/RemoveListModal';
 import RemoveToDoModal from '../Modal/RemoveTodoBoxModal';
 import RenameListModal from '../Modal/RenameListModal';
+import MoveListModal from '../Modal/MoveListModal';
 import './board.scss';
 
 const Board = () => {
@@ -19,6 +20,7 @@ const Board = () => {
     const [removeOneListModalStatus, updateRemoveOneListModalStatus] = useState(false);
     const [removeTodoBoxModalStatus, updateRemoveTodoBoxModalStatus] = useState(false);
     const [renameListModalStatus, updateRenameListModalStatus] = useState(false);
+    const [moveListModalStatus, updateMoveListModalStatus] = useState(false);
     const [todoID, updatetodoID] = useState("");
     const [listId, updateListId] = useState("");
     const [listTitle, updateListTitle] = useState("");
@@ -106,6 +108,14 @@ const Board = () => {
         updateTodoboxMenu(false);
     }
 
+    const moveOneList = (todoid, listID, title) => {
+        updatetodoID(todoid);
+        updateListId(listID);
+        updateListTitle(title);
+        updateMoveListModalStatus(true);
+        updateTodoboxMenu(false);
+    }
+
 
     return <div className ="board-container-block">
                 <header className="board-block-header">
@@ -130,7 +140,7 @@ const Board = () => {
                                             } 
                                        </div>
                                         <ul>
-                                        {todo.data.map( x => {
+                                        {todo.data.map( (x, idx) => {
                                             return <li className="board-block-main--list" key={x.id}>
                                                         <p className="list-title">{x.todoTitle}</p>
                                                         <p className="list-desc">{x.description}</p>
@@ -140,6 +150,7 @@ const Board = () => {
                                                             <div className="board-block-main--list--buttons__part">
                                                                 <button onClick={() => deleteOneList(todo._id, x.id, x.todoTitle)}><TiDelete size="16px" style={{marginRight: "8px", position: "relative", top:"5px"}}/></button>
                                                                 <button onClick={() => renameOneList(todo._id, x.id, x.todoTitle, x.description)}><MdModeEdit size="16px" style={{marginRight: "8px", position: "relative", top:"5px"}}/></button>
+                                                                <button onClick={() => moveOneList(todo._id, x.id, x.todoTitle)}><TiArrowForward size="16px" style={{marginRight: "8px", position: "relative", top:"5px"}}/></button>
                                                             </div>
                                                         </div>
                                                   </li>
@@ -190,6 +201,15 @@ const Board = () => {
                                                     updateRenameListModalStatus = {updateRenameListModalStatus}
                                                     listTitle = {listTitle}
                                                     listDesc = {listDesc}
+                                                    todobox = {todobox}
+                                                    updateTodobox = {updateTodobox}
+                                                />
+                        }
+                        { moveListModalStatus && <MoveListModal 
+                                                    todoID = {todoID}
+                                                    listId = {listId}
+                                                    listTitle = {listTitle}
+                                                    updateMoveListModalStatus = {updateMoveListModalStatus}
                                                     todobox = {todobox}
                                                     updateTodobox = {updateTodobox}
                                                 />
