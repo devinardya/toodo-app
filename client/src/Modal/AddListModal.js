@@ -18,7 +18,7 @@ const AddListModal = ({addNewList, onAddListChange, onAddDescChange, todoIndex, 
         onAddDescChange(e.target.value)
     }
 
-    const cancelAdd = () => {
+    const cancel = () => {
         updateAddListModalStatus(false);
     }
 
@@ -30,7 +30,7 @@ const AddListModal = ({addNewList, onAddListChange, onAddDescChange, todoIndex, 
                     <label>Description:</label>
                     <input onChange={addDesc} type="text" value={addDescInput}/>
                     <div className="modal-block-buttons">
-                        <div className="modal-block-cancel" onClick={cancelAdd}>Cancel</div>
+                        <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
                         <button>add new list to do box</button>
                     </div>
                 </form>

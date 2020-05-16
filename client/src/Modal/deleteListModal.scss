@@ -39,9 +39,9 @@ $color-text-cancel : #a7a7a7;
     left: 0;
     @include flex-column( center, center );
 
-    form {
+    .modal-block-box {
         width: 45%;
-        height: 40%;
+        height: 30%;
         background-color: $color-primary;
         border-radius: 20px;
         @include flex-column(center, center);
@@ -51,31 +51,20 @@ $color-text-cancel : #a7a7a7;
 
         h2 {
             margin-bottom: 20px;
-            font-family: $Montserrat;
-            color: $color-text-dataTitle;
         }
 
-        label {
-            font-family: $Open-Sans;
-            margin-bottom: 5px;
-            color: $color-text-dataDesc;
-        }
+        p {
+            margin-bottom: 20px;
 
-        input {
-            margin-bottom: 15px;
-            width: 80%;
-            height: 40px;
-            padding-left: 10px;
-            font-size: 16px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            border-bottom: 2px solid $color-text-title;
+            span {
+                color: $color-text-dataTitle;
+                font-weight: 600;
+            }
         }
 
         .modal-block-buttons {
             @include flex-row(center,center );
-
+    
             .modal-block-cancel {
                 margin-top: 10px;
                 padding: 10px 25px;
@@ -109,7 +98,5 @@ $color-text-cancel : #a7a7a7;
                 }
             }
         }
-
-       
     }
 }

@@ -5,6 +5,8 @@ import {IoMdMenu, IoIosAddCircle} from 'react-icons/io';
 import {TiDelete} from 'react-icons/ti';
 import {MdModeEdit} from 'react-icons/md';
 import AddListModal from '../Modal/AddListModal';
+import RenameTitleModal from '../Modal/RenameTitleModal';
+import DeleteListModal from '../Modal/DeleteListModal';
 import './board.scss';
 
 const Board = () => {
@@ -14,7 +16,12 @@ const Board = () => {
     const [addDescInput, updateAddDescInput] = useState("");
     const [inputAddTodoBox, updateInputAddTodoBox] = useState("");
     const [addListModalStatus, updateAddListModalStatus] = useState(false);
+    const [renameTitleModalStatus, updateRenameTitleModalStatus] = useState(false);
+    const [removeOneListModalStatus, updateRemoveOneListModalStatus] = useState(false);
     const [todoIndex, updateTodoIndex] = useState("");
+    const [listId, updateListId] = useState("");
+    const [listTitle, updateListTitle] = useState("");
+    const [oldTitle, updateOldTitle] = useState("");
     const [todoboxMenu, updateTodoboxMenu] = useState(false);
     const [activeDropbox, updateActiveDropbox] = useState("");
 
@@ -58,7 +65,7 @@ const Board = () => {
             let index = copyData.findIndex(x => x._id === id);
             input.id = uuid();
             copyData[index].data = [...copyData[index].data, input];
-            updateTodobox(copyData)
+            updateTodobox(copyData);
           })
 
           updateAddDescInput("");
@@ -97,7 +104,7 @@ const Board = () => {
     };
 
     const addListModalActive = (id) => {
-        updateTodoIndex(id)
+        updateTodoIndex(id);
         updateAddListModalStatus(true);
 
     }
@@ -114,6 +121,20 @@ const Board = () => {
         }
     };
 
+    const activateRename = (id, title) => {
+        updateTodoIndex(id);
+        updateOldTitle(title);
+        updateRenameTitleModalStatus(true);
+        updateTodoboxMenu(false);
+    }
+
+    const deleteOneList = (todoID, listID, title) => {
+        updateTodoIndex(todoID);
+        updateListId(listID);
+        updateListTitle(title);
+        updateRemoveOneListModalStatus(true);
+    }
+
 
     return <div className ="board-container-block">
                 <header className="board-block-header">
@@ -124,9 +145,6 @@ const Board = () => {
                         {todobox.map( (todo, index) => {
                             return ( <div className="board-block-main--eachbox" key={todo._id}>
                                         <h4>{todo.title}</h4>
-                                        {/* <div className="title-menu-button">
-                                            <button onClick={() => removeTodoBox(todo._id)}><TiDelete /></button>
-                                       </div> */}
                                        <div className="title-menu-button">
                                             <button onClick={ (e) => activateMenu(e, todo._id, index)} >
                                                 <IoMdMenu size="18px" />
@@ -134,7 +152,7 @@ const Board = () => {
                                             {activeDropbox === todo._id && todoboxMenu ? 
                                                 <div className="board-main-dropdown-active">
                                                     <button onClick={() => removeTodoBox(todo._id)}><TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>Remove</button>
-                                                    <button><MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>Rename</button>
+                                                    <button onClick={() => activateRename(todo._id, todo.title)}><MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>Rename</button>
                                                 </div>
                                             :
                                                 null
@@ -145,8 +163,15 @@ const Board = () => {
                                             return <li className="board-block-main--list" key={x.id}>
                                                         <p className="list-title">{x.todoTitle}</p>
                                                         <p className="list-desc">{x.description}</p>
-                                                        <p className="list-date">{x.created}</p>
-                                                </li>
+                                                        
+                                                        <div className = "board-block-main--list--buttons">
+                                                            <p className="list-date">{x.created}</p>
+                                                            <div className="board-block-main--list--buttons__part">
+                                                                <button onClick={() => deleteOneList(todo._id, x.id, x.todoTitle)}><TiDelete size="16px" style={{marginRight: "8px", position: "relative", top:"5px"}}/></button>
+                                                                <button><MdModeEdit size="16px" style={{marginRight: "8px", position: "relative", top:"5px"}}/></button>
+                                                            </div>
+                                                        </div>
+                                                  </li>
                                         })}
                                         </ul>
                                         <div>
@@ -164,6 +189,23 @@ const Board = () => {
                                                     addDescInput = {addDescInput}
                                                     addListInput = {addListInput}
                                                     updateAddListModalStatus = {updateAddListModalStatus}
+                                                />
+                        }
+                        { renameTitleModalStatus && <RenameTitleModal 
+                                                    todoIndex = {todoIndex}
+                                                    updateRenameTitleModalStatus = {updateRenameTitleModalStatus}
+                                                    oldTitle = {oldTitle}
+                                                    todobox = {todobox}
+                                                    updateTodobox = {updateTodobox}
+                                                />
+                        }
+                        { removeOneListModalStatus && <DeleteListModal 
+                                                    todoIndex = {todoIndex}
+                                                    updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
+                                                    listId = {listId}
+                                                    listTitle = {listTitle}
+                                                    todobox = {todobox}
+                                                    updateTodobox = {updateTodobox}
                                                 />
                         }
                         {todobox.length <= 4 ?
