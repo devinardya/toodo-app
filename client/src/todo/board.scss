@@ -39,12 +39,14 @@ $color-text-dataDate : #737373;
     .board-block-header {
         height: 10%;
         width: 100vw;
+        
     }
 
     .board-block-main {
         height: 90%;
         width: 100%;
-        background-color: $color-secondary;
+        background: rgb(0,97,126);
+        background: linear-gradient(129deg, rgba(0,97,126,1) 0%, rgba(17,196,196,1) 100%);
         padding: 20px;
         overflow: hidden;
         @include flex-row(flex-start, flex-start);

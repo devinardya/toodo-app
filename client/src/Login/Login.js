@@ -38,6 +38,7 @@ const Login = () => {
    let warncolor;
     let warncolor2;
     let getSubmit;
+    let newcolor;
     let validateIcon1;
     let validateIcon2;
 
@@ -48,31 +49,35 @@ const Login = () => {
     // if user enter a character that is not alphabet, numbers, empty space,  - or _ and left the input box empty or more than 12 characters
     // then the input is not valid. 
     if (username.length === 0 ) {
-        warncolor = {color: "#fff"};
-        warncolor2 = {color: "#fff"};
+        warncolor = {color: "#ffa84e"};
+        warncolor2 = {color: "#ffa84e"};
+        newcolor = {color: "#ffa84e"};
         getSubmit = notSubmit;
-        validateIcon1 = <MdCancel className ="icons" size="12px" color="#fff" />
-        validateIcon2 = <MdCancel className ="icons" size="12px" color="#fff" />
+        validateIcon1 = <MdCancel className ="icons" size="12px" color="#ffa84e" />
+        validateIcon2 = <MdCancel className ="icons" size="12px" color="#ffa84e" />
     } else if (username.length > 12 ) {
-        warncolor = {color: "#fff"};
-        warncolor2 = {color: "#0a3c5f"};
+        warncolor = {color: "#ffa84e"};
+        warncolor2 = {color: "#ffffff"};
         getSubmit = notSubmit;
-        validateIcon1 = <MdCancel className ="icons" size="12px" color="#fff" />
-        validateIcon2 = <MdCancel className ="icons" size="12px" color="#0a3c5f" />
+        newcolor = {color: "#ffa84e"};
+        validateIcon1 = <MdCancel className ="icons" size="12px" color="#ffa84e" />
+        validateIcon2 = <MdCancel className ="icons" size="12px" color="#ffffff" />
         //console.log("this is false")
     } else if (notValidInput){
-        warncolor = {color: "#0a3c5f"};
-        warncolor2 = {color: "#fff"};
+        warncolor = {color: "#ffffff"};
+        warncolor2 = {color: "#ffa84e"};
         getSubmit = notSubmit;
-        validateIcon1 = <MdCancel className ="icons" size="12px" color="#0a3c5f" />
-        validateIcon2 = <MdCancel className ="icons" size="12px" color="#fff" />
+        newcolor = {color: "#ffa84e"};
+        validateIcon1 = <MdCancel className ="icons" size="12px" color="#ffffff" />
+        validateIcon2 = <MdCancel className ="icons" size="12px" color="#ffa84e" />
         //console.log("notvalidinput")
     } else {
-        warncolor = {color: "#0a3c5f"};
-        warncolor2 = {color: "#0a3c5f"};
+        warncolor = {color: "#ffffff"};
+        warncolor2 = {color: "#ffffff"};
         getSubmit = onSubmit;
-        validateIcon1 = <MdCheckCircle className ="icons" size="12px" color="#0a3c5f" />
-        validateIcon2 = <MdCheckCircle className ="icons" size="12px" color="#0a3c5f" />
+        newcolor = {color: "#ffffff"};
+        validateIcon1 = <MdCheckCircle className ="icons" size="12px" color="#ffffff" />
+        validateIcon2 = <MdCheckCircle className ="icons" size="12px" color="#ffffff" />
         //console.log("this is trueeee")
     }
 
@@ -80,7 +85,7 @@ const Login = () => {
                 <div className="login-block--box">
                     <h2>LOGIN</h2>
                     <form onSubmit={getSubmit}>
-                        <input onChange={onChange} placeholder="username" value={username} type="text"/>
+                        <input onChange={onChange} style={newcolor} placeholder="username" value={username} type="text"/>
                         <div className = "block__loginPage--form--authorization">
                              <p className="block__loginPage--form--authorization__warning" style={warncolor} > {validateIcon1} username have to be between 1 to 12 characters without empty space.</p>
                              <p className="block__loginPage--form--authorization__warning" style={warncolor2} > {validateIcon2} username can only contains uppercase, lowercase, hypen (-), underscore (_), and numbers.</p>
