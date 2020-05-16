@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import './addlistmodal.scss'
 
-const AddListModal = ({ todoID, todobox, updateTodobox, updateAddListModalStatus}) => {
+const AddListModal = ({ todoID, todobox, updateTodobox, updateAddListModalStatus, userName}) => {
 
     const [addListInput, updateAddListText] = useState("");
     const [addDescInput, updateAddDescInput] = useState("");
@@ -25,7 +25,7 @@ const AddListModal = ({ todoID, todobox, updateTodobox, updateAddListModalStatus
             todoTitle : addListInput,
             description : addDescInput,
         }
-        axios.post("/list/" + id, input)
+        axios.post("/list/" + id + "/user/" + userName, input)
         .then(response => {   
             console.log("response after adding data", response);
             let copyData = [...todobox];

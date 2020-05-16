@@ -44,9 +44,9 @@ $color-text-dataDate : #737373;
     .board-block-main {
         height: 90%;
         width: 100%;
-        overflow-x: scroll;
         background-color: $color-secondary;
         padding: 20px;
+        overflow: hidden;
         @include flex-row(flex-start, flex-start);
 
         .board-block-boxes {

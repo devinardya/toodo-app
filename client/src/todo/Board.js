@@ -11,7 +11,7 @@ import RenameListModal from '../Modal/RenameListModal';
 import MoveListModal from '../Modal/MoveListModal';
 import './board.scss';
 
-const Board = () => {
+const Board = ({location}) => {
 
     const [todobox, updateTodobox] = useState([]);
     const [inputAddTodoBox, updateInputAddTodoBox] = useState("");
@@ -28,15 +28,15 @@ const Board = () => {
     const [oldTitle, updateOldTitle] = useState("");
     const [todoboxMenu, updateTodoboxMenu] = useState(false);
     const [activeDropboxID, updateactiveDropboxID] = useState("");
-
+    let userName = location.state.user;
 
     useEffect( () => {
-        axios.get("/todos/")
+        axios.get("/todos/"+userName)
         .then(response => {   
             console.log(response.data);
             updateTodobox(response.data)
           })
-    }, []);
+    }, [userName]);
 
     const onAddingToDoBox = (e) => {
         let input = e.target.value;
@@ -48,7 +48,7 @@ const Board = () => {
         let input = {
             title : inputAddTodoBox
         }
-        axios.post("/todos/", input)
+        axios.post("/todos/"+userName, input)
         .then(response => {   
             console.log(response);
            //updateTodobox(response.data)
@@ -168,6 +168,7 @@ const Board = () => {
                                                     updateTodobox = {updateTodobox}
                                                     todoID = {todoID}
                                                     updateAddListModalStatus = {updateAddListModalStatus}
+                                                    userName = {userName}
                                                 />
                         }
                         { removeTodoBoxModalStatus && <RemoveToDoModal 
@@ -176,6 +177,7 @@ const Board = () => {
                                                     todoID = {todoID}
                                                     updateRemoveTodoBoxModalStatus = {updateRemoveTodoBoxModalStatus}
                                                     oldTitle = {oldTitle}
+                                                    userName = {userName}
                                                 />
                         }
                         { renameTitleModalStatus && <RenameTitleModal 
@@ -184,6 +186,7 @@ const Board = () => {
                                                     oldTitle = {oldTitle}
                                                     todobox = {todobox}
                                                     updateTodobox = {updateTodobox}
+                                                    userName = {userName}
                                                 />
                         }
                         { removeOneListModalStatus && <RemoveListModal 
@@ -193,6 +196,7 @@ const Board = () => {
                                                     listTitle = {listTitle}
                                                     todobox = {todobox}
                                                     updateTodobox = {updateTodobox}
+                                                    userName = {userName}
                                                 />
                         }
                         { renameListModalStatus && <RenameListModal 
@@ -203,6 +207,7 @@ const Board = () => {
                                                     listDesc = {listDesc}
                                                     todobox = {todobox}
                                                     updateTodobox = {updateTodobox}
+                                                    userName = {userName}
                                                 />
                         }
                         { moveListModalStatus && <MoveListModal 
@@ -212,6 +217,7 @@ const Board = () => {
                                                     updateMoveListModalStatus = {updateMoveListModalStatus}
                                                     todobox = {todobox}
                                                     updateTodobox = {updateTodobox}
+                                                    userName = {userName}
                                                 />
                         }
                         {todobox.length <= 4 ?

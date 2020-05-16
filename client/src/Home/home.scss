@@ -46,6 +46,10 @@ $color-text-dataDate : #737373;
         width: 140px;
     }
 
+    .home-login-button {
+        z-index: 99999999999999;
+    }
+
     @keyframes beforeAnimate {
         0%   { transform: translateX(0px);}
         50%  { transform: translateX(-50%);}
@@ -106,6 +110,7 @@ $color-text-dataDate : #737373;
         background-blend-mode:screen;
         filter: opacity(0.5);
         animation: beforeAnimate 20s ease-in-out infinite;
+        transform: rotateZ(360deg);
     }
 
     &::after {
@@ -122,6 +127,7 @@ $color-text-dataDate : #737373;
         background-blend-mode:screen;
         filter: opacity(0.3);
         animation: afterAnimate 20s ease-in-out infinite;
+        transform: rotateZ(360deg);
     }
 
     

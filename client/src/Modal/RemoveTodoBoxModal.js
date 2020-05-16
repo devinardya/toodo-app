@@ -2,10 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import './removeModal.scss'
 
-const RemoveTodoBoxModal = ({todoID, updateRemoveTodoBoxModalStatus, oldTitle, todobox, updateTodobox}) => {
+const RemoveTodoBoxModal = ({todoID, updateRemoveTodoBoxModalStatus, oldTitle, todobox, updateTodobox, userName}) => {
 
     const removeTodoBox = (id) => {
-        axios.delete("/todos/" + id)
+        axios.delete("/todos/" + id+"/user/"+userName)
         .then(response => {
             console.log("RESPONSE", response)
             let copy = [...todobox];

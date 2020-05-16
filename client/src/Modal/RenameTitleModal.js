@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import './renameTitleModal.scss'
 
-const RenameTitleModal = ({todoID, updateRenameTitleModalStatus, oldTitle, todobox, updateTodobox}) => {
+const RenameTitleModal = ({todoID, updateRenameTitleModalStatus, oldTitle, todobox, updateTodobox, userName}) => {
 
     const [inputChange, updateInputChange] = useState(oldTitle);
 
@@ -18,7 +18,7 @@ const RenameTitleModal = ({todoID, updateRenameTitleModalStatus, oldTitle, todob
                     title : inputChange
                    }
 
-        axios.put("/todos/"+ id, data)
+        axios.put("/todos/"+ id + "/user/" + userName, data)
         .then( response => {
             console.log(response.data);
             let copyData = [...todobox];

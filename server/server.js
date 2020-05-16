@@ -6,9 +6,11 @@ app.use(express.json());
 
 const {getDB, createObjectId} = require("./db")
 
-app.get('/todos/', (req, res) => {
+// TO GET THE WHOLE DATA FROM THE DATABASE
+app.get('/todos/:user', (req, res) => {
+    let userId = req.params.user;
     const db = getDB();
-    db.collection("todolist")
+    db.collection(userId)
     .find({})
     .toArray()
     .then( data => {
@@ -20,11 +22,14 @@ app.get('/todos/', (req, res) => {
     })
 });
 
-app.get('/todos/:id', (req, res) => {
+// TO GET INDIVIDUAL TODOBOX DATA
+
+app.get('/todos/:id/user/:user', (req, res) => {
     let todoId = req.params.id;
+    let userId = req.params.user;
 
     const db = getDB();
-    db.collection("todolist")
+    db.collection(userId)
     .findOne({_id: createObjectId(todoId)})
     .then( todo => {
         console.log("todo", todo)
@@ -41,13 +46,14 @@ function validate(todos) {
 };
 
 // CREATE A TO DO LIST BOX
-app.post('/todos/', (req, res) => {
+app.post('/todos/:user', (req, res) => {
+    let userId = req.params.user;
     const db = getDB();
     let data = req.body;
     data.data = [];
     if(validate(data) === false) return res.status(400).end();
 
-    db.collection("todolist")
+    db.collection(userId)
     .insertOne(data)
     .then( result => {
         data._id = result.insertedId;
@@ -61,16 +67,18 @@ app.post('/todos/', (req, res) => {
 });
 
 // TO EDIT/MODIFY A TO DO LIST BOX
-app.put('/todos/:id', (req, res) => {
+app.put('/todos/:id/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.id;
+    let userId = req.params.user;
+
     let clientData = req.body;
 
     if (!todoId) {
         return res.status(400).end();
     }
 
-    db.collection("todolist")
+    db.collection(userId)
     .updateOne(
         {_id : createObjectId(todoId)},
         {$set: {title: clientData.title}}
@@ -86,15 +94,16 @@ app.put('/todos/:id', (req, res) => {
 
 // TO REMOVE A TO DO LIST BOX
 
-app.delete('/todos/:id', (req, res) => {
+app.delete('/todos/:id/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.id;
+    let userId = req.params.user;
 
     if (!todoId) {
         return res.status(400).end();
     }
 
-    db.collection("todolist")
+    db.collection(userId)
     .deleteOne({_id: createObjectId(todoId)})
     .then( () => {
         res.status(204).end()
@@ -107,9 +116,10 @@ app.delete('/todos/:id', (req, res) => {
 
 // TO ADD A LIST INSIDE A SPECIFIC TO DO LIST BOX
 
-app.post('/list/:todosid', (req, res) => {
+app.post('/list/:todosid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
+    let userId = req.params.user;
     let clientData = req.body;
    
     let today = new Date();
@@ -124,7 +134,7 @@ app.post('/list/:todosid', (req, res) => {
         return res.status(400).end();
     }
 
-    db.collection("todolist")
+    db.collection(userId)
     .updateOne(
         {_id : createObjectId(todoId)},
         {$push: {data: clientData}}
@@ -140,10 +150,11 @@ app.post('/list/:todosid', (req, res) => {
 
 // TO MODIFY A SPECIFIC LIST INSIDE A SPECIFIC TO DO LIST BOX
 
-app.patch('/todos/:todosid/list/:listid', (req, res) => {
+app.patch('/todos/:todosid/list/:listid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
-    let listid = req.params.listid
+    let listid = req.params.listid;
+    let userId = req.params.user;
 
     let clientData = req.body;
 
@@ -151,7 +162,7 @@ app.patch('/todos/:todosid/list/:listid', (req, res) => {
         return res.status(400).end();
     }
 
-    db.collection("todolist")
+    db.collection(userId)
     .updateOne( 
             {_id : createObjectId(todoId) , "data.id" : listid } , 
                     {$set : {"data.$.todoTitle" : clientData.todoTitle,
@@ -173,10 +184,11 @@ app.patch('/todos/:todosid/list/:listid', (req, res) => {
 
 // TO DELETE A SPECIFIC LIST INSIDE A SPECIFIC TO DO LIST BOX
 
-app.delete('/todos/:todosid/list/:listid', (req, res) => {
+app.delete('/todos/:todosid/list/:listid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
-    let listid = req.params.listid
+    let listid = req.params.listid;
+    let userId = req.params.user;
 
     console.log('todoid ', todoId)
     console.log('listid ',listid)
@@ -185,7 +197,7 @@ app.delete('/todos/:todosid/list/:listid', (req, res) => {
         return res.status(400).end();
     }
 
-    db.collection("todolist")
+    db.collection(userId)
     .updateOne(
         {_id : createObjectId(todoId)},
         { $pull: { data: { id: listid } } },
@@ -203,11 +215,13 @@ app.delete('/todos/:todosid/list/:listid', (req, res) => {
 
 // TO MOVE A SPECIFIC LIST FROM ONE TO DO LIST BOX TO ANOTHER TO DO LIST BOX
 
-app.patch('/todos/:oldid/todos/:newid/list/:listid', (req, res) => {
+app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
     const db = getDB();
     let oldDocId = req.params.oldid;
     let newDocId = req.params.newid;
     let listId = req.params.listid;
+    let userId = req.params.user;
+
     let savedData;
     console.log("LISTID ", listId)
 
@@ -215,7 +229,7 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid', (req, res) => {
         return res.status(400).end();
     }
 
-    db.collection("todolist")
+    db.collection(userId)
    .findOne({ 
         data: {$elemMatch : {id: listId}}
     })
@@ -230,7 +244,7 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid', (req, res) => {
         if (savedData !== null || savedData !== undefined) {
             
             console.log("the saved data to push", savedData)
-            db.collection("todolist")
+            db.collection(userId)
             .updateOne( 
                 {_id : createObjectId(newDocId)}, 
                 {$push: {data: savedData}}
@@ -245,18 +259,18 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid', (req, res) => {
             })
         }
        
-        db.collection("todolist")
+        db.collection(userId)
         .updateOne( 
             {_id : createObjectId(oldDocId)},
             { $pull: { data: { id: listId } } },
             { multi: true }
         )
         .then( () => {
-            //res.status(204).end()
+            res.status(204).end()
             console.log("List item is deleted")
         })
 
-        db.collection("todolist")
+       /*  db.collection(userId)
         .find({})
         .toArray()
         .then( data => {
@@ -265,7 +279,7 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid', (req, res) => {
         })
         .catch( err => {
             res.status(500).end();
-        })
+        }) */
 
     })
 

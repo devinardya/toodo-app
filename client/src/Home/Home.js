@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import logoicon from '../Image/toodo-logo.svg';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import {Link} from 'react-router-dom';
 import './home.scss';
 
 const Home = () => {
+    
     return <HelmetProvider>
                 <Helmet>
                     <title>Welcome to Toodo</title>

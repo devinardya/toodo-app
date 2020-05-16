@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import './removeModal.scss'
 
-const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTitle, todobox, updateTodobox}) => {
+const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTitle, todobox, updateTodobox, userName}) => {
 
     const deleteList = (todoId, listID) => {
         console.log(listID)
         console.log(todoID)
-        axios.delete("/todos/"+todoId+"/list/"+listID)
+        axios.delete("/todos/"+todoId+"/list/"+listID+"/user/"+userName)
         .then(response => {
             console.log(response);
             let copyData = [...todobox];

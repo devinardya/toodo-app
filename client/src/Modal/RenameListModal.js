@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import './renameListModal.scss'
 
-const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitle, listDesc, todobox, updateTodobox}) => {
+const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitle, listDesc, todobox, updateTodobox, userName}) => {
 
     const [titleChange, updateTitleChange] = useState(listTitle);
     const [descChange, updateDescChange] = useState(listDesc)
@@ -24,7 +24,7 @@ const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitl
                     description: descChange
                    }
         
-        axios.patch("/todos/"+todoId+"/list/"+listID, data)
+        axios.patch("/todos/"+todoId+"/list/"+listID+"/user/"+userName, data)
         .then(response => {
             console.log(response);
             let copyData = [...todobox];
