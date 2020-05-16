@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import './deleteListModal.scss'
+import './removeModal.scss'
 
 const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTitle, todobox, updateTodobox}) => {
 
     const deleteList = (todoId, listID) => {
+        console.log(listID)
+        console.log(todoID)
         axios.delete("/todos/"+todoId+"/list/"+listID)
         .then(response => {
             console.log(response);

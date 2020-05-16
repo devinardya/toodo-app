@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import uuid from 'react-uuid';
 import axios from 'axios';
 import './addlistmodal.scss'
 
@@ -22,29 +21,26 @@ const AddListModal = ({ todoID, todobox, updateTodobox, updateAddListModalStatus
 
         e.preventDefault();
 
-        let today = new Date();
-        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        let time = today.getHours() + ":" + today.getMinutes();
-        let dateTime = date+' '+time;
-
         let input = {
             todoTitle : addListInput,
             description : addDescInput,
-            created : dateTime
         }
         axios.post("/list/" + id, input)
         .then(response => {   
             console.log("response after adding data", response);
             let copyData = [...todobox];
             let index = copyData.findIndex(x => x._id === id);
-            input.id = uuid();
+            input.id = response.data.id;
+            input.created = response.data.created;
             copyData[index].data = [...copyData[index].data, input];
             updateTodobox(copyData);
+            console.log(input.id)
+            console.log(id)
           })
-
           updateAddDescInput("");
           updateAddListText("");
           updateAddListModalStatus(false);
+      
     };
 
 

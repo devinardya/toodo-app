@@ -9,11 +9,11 @@ $Montserrat : 'Montserrat', sans-serif;
 $Open-Sans : 'Open Sans', sans-serif;
 
 $color-primary: rgb(240, 240, 240);
-$color-secondary: #406e8eff;
+$color-secondary: #406e8e;
 $color-secondary-light: rgb(255, 255, 255);
 $color-text-title: #ffa84e;
 $color-text-dataTitle : #dd4600;
-$color-text-dataDesc : #737373;
+$color-text-dataDesc : #3a3a3a;
 $color-text-dataDate : #737373;
 
 @mixin flex-column($justify, $align) {
@@ -33,5 +33,90 @@ $color-text-dataDate : #737373;
 .home-block {
     width: 100vw;
     height: 100vh;
-    background: $color-secondary;
+    background-image: linear-gradient(191deg, rgba(64,110,142,1) 50%, rgba(64,110,142,1) 100%), url("../Image/bg-home.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode:multiply;
+    position: relative;
+
+    .home-block-logo {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        width: 140px;
+    }
+
+    @keyframes beforeAnimate {
+        0%   { transform: translateX(0px);}
+        50%  { transform: translateX(-50%);}
+        100% { transform: translateX(0px); }
+    } 
+
+    @keyframes afterAnimate {
+    0%   { transform: translateX(0px);}
+    50%  { transform: translateX(-25%);}
+    75% { transform: translateX(50%); }
+    100% { transform: translateX(0px); }
+    } 
+
+    .home-block-text {
+        font-family: $Montserrat;
+        font-weight: 600;
+        color: #fff;
+        text-align: left;
+        position: absolute;
+        top: 50%;
+        left: 80px;
+        line-height: 50px;
+        font-size: 20px;
+        transform: translateY(-50%);
+    }
+
+    .home-block-link {
+        text-align: left;
+        color: $color-text-dataDesc;
+        text-decoration: none;
+        position: absolute;
+        top: 65%;
+        left: 80px;
+        padding: 15px 40px;
+        background-color:  $color-text-title;
+        border-radius: 30px;
+        font-family: $Open-Sans;
+        font-weight: 600;
+    }
+
+    &::before {
+        display: block;
+        content: "";
+        background: url("../Image/component-graphic2.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        top:0;
+        right:-50%;
+        width: 100%;
+        height: 100%;
+        background-blend-mode:screen;
+        filter: opacity(0.5);
+        animation: beforeAnimate 20s ease-in-out infinite;
+    }
+
+    &::after {
+        display: block;
+        content: "";
+        background: url("../Image/component-graphic.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        top:0;
+        right:-20%;
+        width: 100%;
+        height: 100%;
+        background-blend-mode:screen;
+        filter: opacity(0.3);
+        animation: afterAnimate 20s ease-in-out infinite;
+    }
+
+    
 }

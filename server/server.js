@@ -111,14 +111,14 @@ app.post('/list/:todosid', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
     let clientData = req.body;
-    clientData.id = uuid.v4();
-   /*  let today = new Date();
+   
+    let today = new Date();
     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     let time = today.getHours() + ":" + today.getMinutes();
     let dateTime = date+' '+time;
 
-    
-    clientData.created = dateTime; */
+    clientData.id = uuid.v4();
+    clientData.created = dateTime;
 
     if (!todoId) {
         return res.status(400).end();
@@ -177,6 +177,9 @@ app.delete('/todos/:todosid/list/:listid', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
     let listid = req.params.listid
+
+    console.log('todoid ', todoId)
+    console.log('listid ',listid)
 
     if (!todoId || !listid) {
         return res.status(400).end();

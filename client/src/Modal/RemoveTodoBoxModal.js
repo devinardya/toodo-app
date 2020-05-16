@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './deleteListModal.scss'
+import './removeModal.scss'
 
 const RemoveTodoBoxModal = ({todoID, updateRemoveTodoBoxModalStatus, oldTitle, todobox, updateTodobox}) => {
 

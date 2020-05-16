@@ -5,7 +5,7 @@ import {TiDelete} from 'react-icons/ti';
 import {MdModeEdit} from 'react-icons/md';
 import AddListModal from '../Modal/AddListModal';
 import RenameTitleModal from '../Modal/RenameTitleModal';
-import DeleteListModal from '../Modal/DeleteListModal';
+import RemoveListModal from '../Modal/RemoveListModal';
 import RemoveToDoModal from '../Modal/RemoveTodoBoxModal';
 import RenameListModal from '../Modal/RenameListModal';
 import './board.scss';
@@ -175,7 +175,7 @@ const Board = () => {
                                                     updateTodobox = {updateTodobox}
                                                 />
                         }
-                        { removeOneListModalStatus && <DeleteListModal 
+                        { removeOneListModalStatus && <RemoveListModal 
                                                     todoID = {todoID}
                                                     updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
                                                     listId = {listId}
