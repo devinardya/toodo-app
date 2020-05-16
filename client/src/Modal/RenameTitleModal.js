@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import './renameTitleModal.scss'
 
-const RenameTitleModal = ({todoIndex, updateRenameTitleModalStatus, oldTitle, todobox, updateTodobox}) => {
+const RenameTitleModal = ({todoID, updateRenameTitleModalStatus, oldTitle, todobox, updateTodobox}) => {
 
     const [inputChange, updateInputChange] = useState(oldTitle);
 
@@ -35,7 +35,7 @@ const RenameTitleModal = ({todoIndex, updateRenameTitleModalStatus, oldTitle, to
     }
 
     return <div className ="modal-block-container">
-                <form onSubmit = {(e) => renameTitle(e, todoIndex)}>
+                <form onSubmit = {(e) => renameTitle(e, todoID)}>
                     <h2>Rename Title</h2>
                     <label>Title:</label>
                     <input onChange={renameChange} type="text" value={inputChange}/>

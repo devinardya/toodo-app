@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans:wght@400;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +14,7 @@ $color-secondary: #406e8eff;
 $color-secondary-light: rgb(255, 255, 255);
 $color-text-title: #ffa84e;
 $color-text-dataTitle : #dd4600;
-$color-text-dataDesc : #737373;
+$color-text-dataDesc : #494949;
 $color-text-cancel : #a7a7a7;
 
 @mixin flex-column($justify, $align) {
@@ -40,7 +41,7 @@ $color-text-cancel : #a7a7a7;
     @include flex-column( center, center );
 
     .modal-block-box {
-        width: 45%;
+        width: 50%;
         height: 30%;
         background-color: $color-primary;
         border-radius: 20px;
@@ -51,10 +52,16 @@ $color-text-cancel : #a7a7a7;
 
         h2 {
             margin-bottom: 20px;
+            font-family: $Montserrat;
+            color: $color-text-dataTitle;
+            font-weight: 600;
         }
 
         p {
             margin-bottom: 20px;
+            width:80%;
+            font-family:  $Open-Sans;
+            color: $color-text-dataDesc;
 
             span {
                 color: $color-text-dataTitle;
@@ -78,7 +85,7 @@ $color-text-cancel : #a7a7a7;
     
                 &:hover {
                     cursor: pointer;
-                    background-color: darken($color: $color-text-dataDesc, $amount: 1.5);
+                    background-color: darken($color: $color-text-dataDesc, $amount: 0);
                 }
             }
     

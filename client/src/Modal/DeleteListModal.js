@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './deleteListModal.scss'
 
-const DeleteListModal = ({todoIndex, listId, updateRemoveOneListModalStatus, listTitle, todobox, updateTodobox}) => {
+const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTitle, todobox, updateTodobox}) => {
 
     const deleteList = (todoId, listID) => {
         axios.delete("/todos/"+todoId+"/list/"+listID)
@@ -22,10 +22,10 @@ const DeleteListModal = ({todoIndex, listId, updateRemoveOneListModalStatus, lis
     return <div className ="modal-block-container">
                 <div className = "modal-block-box">
                     <h2>Delete List</h2>
-                    <p>Are you sure you want to delete <span>{listTitle}</span></p>
+                    <p>Are you sure you want to delete <span>{listTitle}</span> ?</p>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button onClick={() => deleteList(todoIndex, listId)}>Delete</button>
+                        <button onClick={() => deleteList(todoID, listId)}>Delete</button>
                     </div>
                 </div>
             </div>

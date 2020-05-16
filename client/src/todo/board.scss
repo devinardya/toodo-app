@@ -117,6 +117,7 @@ $color-text-dataDate : #737373;
                     background: transparent;
                     border: none;
                     font-size: 14px;
+                    color: $color-text-dataDesc;
 
                     &:hover {
                         color: $color-text-dataTitle;
