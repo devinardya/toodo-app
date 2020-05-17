@@ -34,20 +34,68 @@ $color-text-dataDate : #737373;
     background-color: $color-primary;
     height: 100vh;
     width: 100vw;
+    background: rgb(0,97,126);
+    background: linear-gradient(129deg, rgba(0,97,126,1) 0%, rgba(17,196,196,1) 100%);
     @include flex-column(center, center);
 
     .board-block-header {
         height: 10%;
         width: 100vw;
+        @include flex-row( space-between, center );
+
+        .board-header--logo {
+            width: 50%;
+            height: 100%;
+            @include flex-column( center, flex-start );
+
+            .board-logo {
+                padding-left: 40px;
+                padding-top: 20px;
+                width: 160px;
+                transform: translateY(-15%);
+            }
+        }
+
+        .board-header--text {
+            width: 50%;
+            height: 100%;
+            @include flex-row( flex-end, center );
+            color: #fff;
+            font-family: $Open-Sans;
+
+            span {
+                margin: 0 10px;
+                font-weight: 800;
+                color: $color-text-title;
+                font-family: $Open-Sans;
+                font-weight: 700;
+            }
+            
+            button {
+                padding-right: 40px;
+                background: transparent;
+                color:#fff;
+                border:none;
+                font-size: 15px;
+                font-weight: 700;
+                font-family: $Open-Sans;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            
+        }
+        
         
     }
 
     .board-block-main {
         height: 90%;
         width: 100%;
-        background: rgb(0,97,126);
-        background: linear-gradient(129deg, rgba(0,97,126,1) 0%, rgba(17,196,196,1) 100%);
-        padding: 20px;
+        /* background: rgb(0,97,126);
+        background: linear-gradient(129deg, rgba(0,97,126,1) 0%, rgba(17,196,196,1) 100%); */
+        padding: 0 20px 20px 20px;
         overflow: hidden;
         @include flex-row(flex-start, flex-start);
 
@@ -63,24 +111,50 @@ $color-text-dataDate : #737373;
                 margin: 5px;
                 text-align: left;
                 border-radius: 5px;
+                opacity: 0.7;
+
+                &:hover {
+                    opacity: 1;
+                }
 
                 form {
                     width: 100%;
 
                     input {
                         width: 100%;
-                        height: 30px;
+                        height: 40px;
                         padding-left: 5px;
+                        font-size: 14px;
+                        color: $color-text-dataDesc;
+                    }
+
+                    .board-block-main--form-inputError {
+                        font-size: 10px;
+                        color: red;
+                        margin-top: 8px;
+                    }
+
+                    .board-block-main--form-input {
+                        font-size: 10px;
+                        color: $color-text-dataDesc;
+                        margin-top: 8px;
                     }
 
                     button {
-                        margin-top: 10px;
+                        margin-top: 12px;
                         height: 30px;
                         width: 120px;
                         border: none;
                         border-radius: 10px;
-                        background-color: $color-text-dataDate;
+                        background-color: $color-text-title;
                         color: #fff;
+                        font-family: $Open-Sans;
+                        font-weight: 600;
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: $color-text-dataTitle;
+                        }
                     }
                 }
             }
@@ -174,8 +248,8 @@ $color-text-dataDate : #737373;
     
                 ul {
                     list-style-type: none;
-                    overflow-y: scroll;
-                    max-height: 72vh;
+                    overflow-y: auto;
+                    max-height: 75vh;
                     margin-bottom: 10px;
                 }
     

@@ -6,6 +6,8 @@ const AddListModal = ({ todoID, todobox, updateTodobox, updateAddListModalStatus
 
     const [addListInput, updateAddListText] = useState("");
     const [addDescInput, updateAddDescInput] = useState("");
+    const [errorStatus, updateErrorStatus] = useState(false);
+
 
     const onAddListChange = (e) => {
         let data = e.target.value;
@@ -21,25 +23,31 @@ const AddListModal = ({ todoID, todobox, updateTodobox, updateAddListModalStatus
 
         e.preventDefault();
 
-        let input = {
-            todoTitle : addListInput,
-            description : addDescInput,
+
+        if(addDescInput.length !== 0 && addListInput.length !== 0){
+
+            let input = {
+                todoTitle : addListInput,
+                description : addDescInput,
+            }
+            axios.post("/list/" + id + "/user/" + userName, input)
+            .then(response => {   
+                console.log("response after adding data", response.data);
+                let copyData = [...todobox];
+                let index = copyData.findIndex(x => x._id === id);
+                copyData[index].data = [...copyData[index].data, response.data];
+                updateTodobox(copyData);
+            })
+            .catch( err => {
+                console.log(err);
+            })
+
+            updateAddDescInput("");
+            updateAddListText("");
+            updateAddListModalStatus(false);
+        } else {
+            updateErrorStatus(true);
         }
-        axios.post("/list/" + id + "/user/" + userName, input)
-        .then(response => {   
-            console.log("response after adding data", response);
-            let copyData = [...todobox];
-            let index = copyData.findIndex(x => x._id === id);
-            input.id = response.data.id;
-            input.created = response.data.created;
-            copyData[index].data = [...copyData[index].data, input];
-            updateTodobox(copyData);
-            console.log(input.id)
-            console.log(id)
-          })
-          updateAddDescInput("");
-          updateAddListText("");
-          updateAddListModalStatus(false);
       
     };
 
@@ -52,9 +60,9 @@ const AddListModal = ({ todoID, todobox, updateTodobox, updateAddListModalStatus
                 <form onSubmit = {(e) => addNewList(e, todoID)}>
                     <h2>Add new list</h2>
                     <label>Title:</label>
-                    <input onChange={onAddListChange} type="text" value={addListInput}/>
+                    <input onChange={onAddListChange} placeholder= {errorStatus ? "Title is not allowed to be empty" : null} type="text" value={addListInput}/>
                     <label>Description:</label>
-                    <input onChange={onAddDescChange} type="text" value={addDescInput}/>
+                    <input onChange={onAddDescChange} placeholder= {errorStatus ? "Description is not allowed to be empty" : null} type="text" value={addDescInput}/>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
                         <button>Add list</button>

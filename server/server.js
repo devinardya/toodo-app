@@ -2,7 +2,7 @@ const express = require("express");
 const uuid = require("uuid");
 
 const app = express();
-app.use(express.json());
+//app.use(express.json());
 
 app.use((req, res, next) => {
     let start = Date.now();
@@ -14,6 +14,28 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    // Check that Content-Type: application/json
+    if (req.is('json')) {
+      let data = '';
+      req.on('data', chunk => {
+        data += chunk.toString();
+      });
+  
+      req.on('end', () => {
+        try {
+          data = JSON.parse(data);
+          req.body = data;
+          next();
+        } catch(e) {
+          res.status(400).end();
+        }
+      });
+    } else {
+      next();
+    }
+  });
+
 const {getDB, createObjectId} = require("./db")
 
 // TO GET THE WHOLE DATA FROM THE DATABASE
@@ -24,8 +46,8 @@ app.get('/todos/:user', (req, res) => {
     .find({})
     .toArray()
     .then( data => {
-        console.log("Data from server", data)
-        res.send(data);
+        console.log("Data from server", data);
+        res.status(200).send(data);
     })
     .catch( err => {
         res.status(500).end();
@@ -42,11 +64,11 @@ app.get('/todos/:id/user/:user', (req, res) => {
     db.collection(userId)
     .findOne({_id: createObjectId(todoId)})
     .then( todo => {
-        console.log("todo", todo)
-        res.send(todo);
+        console.log("todo", todo);
+        res.status(200).send(todo);
     })
     .catch( e => {
-        console.error(e)
+        console.error(e);
         res.status(500).end();
     })
 });
@@ -71,7 +93,7 @@ app.post('/todos/:user', (req, res) => {
         console.log("Created ", data);
     })
     .catch( e => {
-        console.error(e)
+        console.error(e);
         res.status(500).end();
     })
 });
@@ -94,10 +116,10 @@ app.put('/todos/:id/user/:user', (req, res) => {
         {$set: {title: clientData.title}}
     )
     .then(result => {
-        res.send(result)
+        res.status(200).send(clientData);
     })
     .catch( e => {
-        console.error(e)
+        console.error(e);
         res.status(500).end();
     })
 });
@@ -116,10 +138,10 @@ app.delete('/todos/:id/user/:user', (req, res) => {
     db.collection(userId)
     .deleteOne({_id: createObjectId(todoId)})
     .then( () => {
-        res.status(204).end()
+        res.status(204).end();
     })
     .catch( e => {
-        console.error(e)
+        console.error(e);
         res.status(500).end();
     })
 });
@@ -150,10 +172,10 @@ app.post('/list/:todosid/user/:user', (req, res) => {
         {$push: {data: clientData}}
     )
     .then(result => {
-        res.send(clientData)
+        res.status(201).send(clientData)
     })
     .catch( e => {
-        console.error(e)
+        console.error(e);
         res.status(500).end();
     })
 });
@@ -183,11 +205,11 @@ app.patch('/todos/:todosid/list/:listid/user/:user', (req, res) => {
                     true
             )
     .then(result => {
-        res.send(result)
-        console.log("Edited Array", clientData)
+        res.status(200).send(clientData);
+        console.log("Edited Array", clientData);
     })
     .catch( e => {
-        console.error(e)
+        console.error(e);
         res.status(500).end();
     })
 });
@@ -214,11 +236,11 @@ app.delete('/todos/:todosid/list/:listid/user/:user', (req, res) => {
         { multi: true }
     )
     .then( () => {
-        res.status(204).end()
-        console.log("List item is deleted")
+        res.status(204).end();
+        console.log("List item is deleted");
     })
     .catch( e => {
-        console.error(e)
+        console.error(e);
         res.status(500).end();
     })
 });
@@ -264,7 +286,7 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
                 console.log("Moved Array", savedData)
             })  
             .catch( e => {
-                console.error(e)
+                console.error(e);
                 res.status(500).end();
             })
         }
@@ -276,7 +298,7 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
             { multi: true }
         )
         .then( () => {
-            res.status(204).end()
+            res.status(204).end();
             console.log("List item is deleted")
         })
 
@@ -285,7 +307,7 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
         .toArray()
         .then( data => {
             console.log("Data from server", data)
-            res.send(data);
+            res.status(200).send(data);
         })
         .catch( err => {
             res.status(500).end();

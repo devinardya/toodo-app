@@ -13,6 +13,9 @@ const RemoveTodoBoxModal = ({todoID, updateRemoveTodoBoxModalStatus, oldTitle, t
             updateTodobox(newData);
             updateRemoveTodoBoxModalStatus(false);
         })
+        .catch( err => {
+            console.log(err);
+        })
     };
 
     const cancel = () => {

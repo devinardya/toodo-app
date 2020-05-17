@@ -16,6 +16,9 @@ const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTi
             updateTodobox(copyData);
             updateRemoveOneListModalStatus(false);
         })
+        .catch( err => {
+            console.log(err);
+        })
     }
     const cancel = () => {
         updateRemoveOneListModalStatus(false);

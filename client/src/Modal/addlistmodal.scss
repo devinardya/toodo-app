@@ -73,6 +73,14 @@ $color-text-cancel : #a7a7a7;
             border-left: none;
             border-right: none;
             border-bottom: 2px solid $color-text-title;
+
+            &::placeholder {
+                color: red;
+            }
+
+            &:focus::placeholder {
+                color: transparent;
+            }
         }
 
         .modal-block-buttons {
