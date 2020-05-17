@@ -4,6 +4,16 @@ const uuid = require("uuid");
 const app = express();
 app.use(express.json());
 
+app.use((req, res, next) => {
+    let start = Date.now();
+    res.once('finish', () => {
+        let end = Date.now();
+        let time = end - start;
+        console.log(req.method, req.path, res.statusCode, time + 'ms');
+    })
+    next();
+});
+
 const {getDB, createObjectId} = require("./db")
 
 // TO GET THE WHOLE DATA FROM THE DATABASE
