@@ -18,7 +18,7 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
         axios.patch('/todos/'+todoid+'/todos/'+selectValue+'/list/'+listid+'/user/'+userName)
         .then( response => {
             console.log(response)
-            let copyData = [...todobox];
+            /* let copyData = [...todobox];
             let oldBoxIndex = copyData.findIndex(x => x._id === todoid);
             let listIndex = copyData[oldBoxIndex].data.findIndex(y => y.id === listid);
             let newBoxIndex = copyData.findIndex(z => z._id === selectValue);
@@ -27,8 +27,8 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
             copyData[oldBoxIndex].data = copyData[oldBoxIndex].data.filter(h => h.id !== listid);
             copyData[newBoxIndex].data = [...copyData[newBoxIndex].data, movedData];
 
-            updateTodobox(copyData); 
-            /* updateTodobox(response.data) */
+            updateTodobox(copyData);  */
+            updateTodobox(response.data);
             updateMoveListModalStatus(false);
         })
         .catch( err => {

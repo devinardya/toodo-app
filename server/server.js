@@ -46,7 +46,7 @@ app.get('/todos/:user', (req, res) => {
     .find({})
     .toArray()
     .then( data => {
-        console.log("Data from server", data);
+        console.log("Data from server FIRST TIME", data);
         res.status(200).send(data);
     })
     .catch( err => {
@@ -254,14 +254,53 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
     let listId = req.params.listid;
     let userId = req.params.user;
 
-    let savedData;
-    console.log("LISTID ", listId)
-
     if (!oldDocId || !newDocId || !listId) {
         return res.status(400).end();
     }
 
     db.collection(userId)
+        .findOne({ 
+             data: {$elemMatch : {id: listId}}
+         })
+        .then( result => {
+            let savedData;
+            console.log("the result data", result.data)
+            let index = result.data.findIndex(x => x.id === listId);
+            savedData = result.data[index];
+            console.log("Saved Data", savedData)
+            return savedData;
+        })
+        .then ( response => {
+            db.collection(userId)
+            .updateOne( 
+                {_id : createObjectId(newDocId)}, 
+                {$push: {data: response}}
+            )
+        })
+        .then( () => {
+            db.collection(userId)
+            .updateOne( 
+                {_id : createObjectId(oldDocId)},
+                { $pull: { data: { id: listId } } },
+                { multi: true }
+            )
+        })
+        .then( () => {
+            return db.collection(userId)
+            .find({})
+            .toArray()
+        })
+        .then( data => {
+            console.log("Data from server", data)
+            res.status(200).send(data);
+        })
+        .catch( e => {
+            console.error(e);
+            res.status(500).end();
+        })
+
+
+    /* db.collection(userId)
    .findOne({ 
         data: {$elemMatch : {id: listId}}
     })
@@ -302,7 +341,7 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
                 console.log("List item is deleted")
             })
         }
-   
+   */
 
        /*  db.collection(userId)
         .find({})
@@ -315,7 +354,7 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
             res.status(500).end();
         }) */
 
-    })
+    //}) 
 
 
 });

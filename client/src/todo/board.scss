@@ -208,7 +208,7 @@ $color-text-dataDate : #737373;
                     width: 180px;
                     padding: 5px 15px 10px 15px;
                     z-index: 9999;
-                    background: $color-text-title;
+                    background:  rgb(255, 217, 0);
                     border-radius: 5px;
                     @include flex-column(flex-start, flex-start);
 
@@ -228,7 +228,7 @@ $color-text-dataDate : #737373;
 
                         &:hover {
                             cursor: pointer;
-                            color: rgb(3, 58, 110);
+                            color: rgb(184, 43, 0);
                         }
                     }
 
