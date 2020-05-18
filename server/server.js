@@ -289,18 +289,20 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
                 console.error(e);
                 res.status(500).end();
             })
+
+                
+            db.collection(userId)
+            .updateOne( 
+                {_id : createObjectId(oldDocId)},
+                { $pull: { data: { id: listId } } },
+                { multi: true }
+            )
+            .then( () => {
+                res.status(204).end();
+                console.log("List item is deleted")
+            })
         }
-       
-        db.collection(userId)
-        .updateOne( 
-            {_id : createObjectId(oldDocId)},
-            { $pull: { data: { id: listId } } },
-            { multi: true }
-        )
-        .then( () => {
-            res.status(204).end();
-            console.log("List item is deleted")
-        })
+   
 
        /*  db.collection(userId)
         .find({})
