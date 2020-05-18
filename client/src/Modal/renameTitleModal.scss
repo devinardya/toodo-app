@@ -31,7 +31,7 @@ $color-text-cancel : #a7a7a7;
     align-items: $align;
 }
 
-.modal-block-container {
+.modal-block-container--rename {
     height: 100vh;
     width: 100vw;
     background-color: rgba(225,225,225, 0.75);
@@ -64,7 +64,7 @@ $color-text-cancel : #a7a7a7;
         }
 
         input {
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             width: 80%;
             height: 40px;
             padding-left: 10px;
@@ -73,6 +73,18 @@ $color-text-cancel : #a7a7a7;
             border-left: none;
             border-right: none;
             border-bottom: 2px solid $color-text-title;
+        }
+
+        .board-block-main--form-inputError {
+            font-size: 10px;
+            color: red;
+            margin-bottom: 20px;
+        }
+
+        .board-block-main--form-input {
+            font-size: 10px;
+            margin-bottom: 20px;
+            text-align: left;
         }
 
         .modal-block-buttons {

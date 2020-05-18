@@ -31,6 +31,9 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
             /* updateTodobox(response.data) */
             updateMoveListModalStatus(false);
         })
+        .catch( err => {
+            console.log(err);
+        })
 
     }
 

@@ -5,7 +5,8 @@ import './renameListModal.scss'
 const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitle, listDesc, todobox, updateTodobox, userName}) => {
 
     const [titleChange, updateTitleChange] = useState(listTitle);
-    const [descChange, updateDescChange] = useState(listDesc)
+    const [descChange, updateDescChange] = useState(listDesc);
+    const [errorStatus, updateErrorStatus] = useState(false);
 
     const renameTitleChange = (e) => {
         let input = e.target.value;
@@ -19,23 +20,32 @@ const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitl
 
     const renameListTitle = (e, todoId, listID) => {
         e.preventDefault();
-        let data = {
-                    todoTitle: titleChange,
-                    description: descChange
-                   }
-        
-        axios.patch("/todos/"+todoId+"/list/"+listID+"/user/"+userName, data)
-        .then(response => {
-            console.log(response);
-            let copyData = [...todobox];
-            let findIndex = copyData.findIndex(x => x._id === todoId);
-            let findDataIndex = copyData[findIndex].data.findIndex(y => y.id === listID);
-            copyData[findIndex].data[findDataIndex].todoTitle = titleChange;
-            copyData[findIndex].data[findDataIndex].description = descChange;
-            console.log("copyData before save", copyData);
-            updateTodobox(copyData);
-            updateRenameListModalStatus(false);
-        })
+
+        if(titleChange.length !== 0 && descChange.length !== 0){
+
+            let data = {
+                        todoTitle: titleChange,
+                        description: descChange
+                    }
+            
+            axios.patch("/todos/"+todoId+"/list/"+listID+"/user/"+userName, data)
+            .then(response => {
+                console.log(response);
+                let copyData = [...todobox];
+                let findIndex = copyData.findIndex(x => x._id === todoId);
+                let findDataIndex = copyData[findIndex].data.findIndex(y => y.id === listID);
+                copyData[findIndex].data[findDataIndex].todoTitle = titleChange;
+                copyData[findIndex].data[findDataIndex].description = descChange;
+                console.log("copyData before save", copyData);
+                updateTodobox(copyData);
+                updateRenameListModalStatus(false);
+            })
+            .catch( err => {
+                console.log(err);
+            })
+        } else {
+            updateErrorStatus(true);
+        }
         
     }
 
@@ -46,10 +56,10 @@ const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitl
     return <div className ="modal-block-container">
                 <form onSubmit = {(e) => renameListTitle(e, todoID, listId)}>
                     <h2>Rename Title</h2>
-                    <label>Title:</label>
-                    <input onChange={renameTitleChange} type="text" value={titleChange}/>
-                    <label>Description:</label>
-                    <input onChange={renameDescChange} type="text" value={descChange}/>
+                    <label>New Title:</label>
+                    <input onChange={renameTitleChange} placeholder= {errorStatus ? "Title is not allowed to be empty" : null} type="text" value={titleChange}/>
+                    <label>New Description:</label>
+                    <input onChange={renameDescChange} placeholder= {errorStatus ? "Description is not allowed to be empty" : null} type="text" value={descChange}/>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
                         <button>Rename</button>
