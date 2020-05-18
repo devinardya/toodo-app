@@ -44,9 +44,7 @@ const MainBox = ({todobox, updateTodobox, userName}) => {
    	const activateMenu = (e, id, index) => {
         e.preventDefault();
         let copyData = [...todobox];
-        console.log( "index", index)
         let indexArr = copyData.findIndex( x => x._id === id);
-        console.log("index", indexArr)
         if (indexArr === index){
             updateactiveDropboxID(id);
             updateTodoboxMenu(todoboxMenu ? false : true);

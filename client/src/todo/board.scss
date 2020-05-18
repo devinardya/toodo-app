@@ -180,7 +180,6 @@ $color-text-dataDate : #737373;
                         background: transparent;
                         border: none;
                         z-index: 9999;
-                        
                         color: $color-text-dataDesc;
 
                         &:hover {
@@ -209,13 +208,13 @@ $color-text-dataDate : #737373;
                     width: 180px;
                     padding: 5px 15px 10px 15px;
                     z-index: 9999;
-                    background: rgb(87, 149, 194);
+                    background: $color-text-title;
                     border-radius: 5px;
                     @include flex-column(flex-start, flex-start);
 
                     
                     button {
-                        color: rgb(219, 219, 219);
+                        color: rgb(116, 116, 116);
                         width: 100%;
                         font-size: 14px;
                         line-height: 0px;
@@ -229,7 +228,7 @@ $color-text-dataDate : #737373;
 
                         &:hover {
                             cursor: pointer;
-                            color: #fff;
+                            color: rgb(3, 58, 110);
                         }
                     }
 
