@@ -3,7 +3,9 @@ const uuid = require("uuid");
 
 const app = express();
 //app.use(express.json());
+const {getDB, createObjectId} = require("./db")
 
+// Middleware to logged the method, path, statuscode and amount of time needed
 app.use((req, res, next) => {
     let start = Date.now();
     res.once('finish', () => {
@@ -14,6 +16,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// JSON-Parse middleware - to make sure all data that are received is JSON 
 app.use((req, res, next) => {
     // Check that Content-Type: application/json
     if (req.is('json')) {
@@ -36,7 +39,7 @@ app.use((req, res, next) => {
     }
   });
 
-const {getDB, createObjectId} = require("./db")
+
 
 // TO GET THE WHOLE DATA FROM THE DATABASE
 app.get('/todos/:user', (req, res) => {
@@ -54,7 +57,7 @@ app.get('/todos/:user', (req, res) => {
     })
 });
 
-// TO GET INDIVIDUAL TODOBOX DATA
+/* // TO GET INDIVIDUAL TODOBOX DATA
 
 app.get('/todos/:id/user/:user', (req, res) => {
     let todoId = req.params.id;
@@ -71,7 +74,7 @@ app.get('/todos/:id/user/:user', (req, res) => {
         console.error(e);
         res.status(500).end();
     })
-});
+}); */
 
 function validate(todos) {
     return !!todos.data

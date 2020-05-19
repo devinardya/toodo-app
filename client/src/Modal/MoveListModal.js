@@ -14,27 +14,28 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
  
     const moveOneList = (e, todoid, listid) => {
         e.preventDefault();
+        
+        if(selectValue.length !== 0 && selectValue !== undefined) {
+            axios.patch('/todos/'+todoid+'/todos/'+selectValue+'/list/'+listid+'/user/'+userName)
+            .then( response => {
+                console.log(response)
+                /* let copyData = [...todobox];
+                let oldBoxIndex = copyData.findIndex(x => x._id === todoid);
+                let listIndex = copyData[oldBoxIndex].data.findIndex(y => y.id === listid);
+                let newBoxIndex = copyData.findIndex(z => z._id === selectValue);
+                let movedData = copyData[oldBoxIndex].data[listIndex];
+                
+                copyData[oldBoxIndex].data = copyData[oldBoxIndex].data.filter(h => h.id !== listid);
+                copyData[newBoxIndex].data = [...copyData[newBoxIndex].data, movedData];
 
-        axios.patch('/todos/'+todoid+'/todos/'+selectValue+'/list/'+listid+'/user/'+userName)
-        .then( response => {
-            console.log(response)
-            /* let copyData = [...todobox];
-            let oldBoxIndex = copyData.findIndex(x => x._id === todoid);
-            let listIndex = copyData[oldBoxIndex].data.findIndex(y => y.id === listid);
-            let newBoxIndex = copyData.findIndex(z => z._id === selectValue);
-            let movedData = copyData[oldBoxIndex].data[listIndex];
-            
-            copyData[oldBoxIndex].data = copyData[oldBoxIndex].data.filter(h => h.id !== listid);
-            copyData[newBoxIndex].data = [...copyData[newBoxIndex].data, movedData];
-
-            updateTodobox(copyData);  */
-            updateTodobox(response.data);
-            updateMoveListModalStatus(false);
-        })
-        .catch( err => {
-            console.log(err);
-        })
-
+                updateTodobox(copyData);  */
+                updateTodobox(response.data);
+                updateMoveListModalStatus(false);
+            })
+            .catch( err => {
+                console.log(err);
+            })
+        }
     }
 
     const cancel = () => {
@@ -46,6 +47,7 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
                     <h2>Move list</h2>
                     <p>Which todo box do you want to move <span>{listTitle}</span> ?</p>
                     <select value={selectValue} onChange={handleChange}>
+                        <option value="">--Please choose a new todo box--</option>
                         {todobox.map(todo => {
                             return <option value={todo._id} key={todo._id}>{todo.title}</option>
                         })}
