@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 import './removeModal.scss'
 
 const RemoveTodoBoxModal = ({todoID, updateRemoveTodoBoxModalStatus, oldTitle, todobox, updateTodobox, userName}) => {
@@ -22,16 +23,19 @@ const RemoveTodoBoxModal = ({todoID, updateRemoveTodoBoxModalStatus, oldTitle, t
         updateRemoveTodoBoxModalStatus(false);
     }    
 
-    return <div className ="modal-block-container">
+    return ReactDOM.createPortal(
+            <div className ="modal-block-container">
                 <div className = "modal-block-box">
                     <h2>Delete Todo Box</h2>
-                    <p>Are you sure you want to delete <span>{oldTitle}</span> ?</p>
+                    <p className="modal-block-box--text">Are you sure you want to delete <span>{oldTitle}</span> ?</p>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button onClick={() => removeTodoBox(todoID)}>Delete</button>
+                        <div className="modal-block-remove" onClick={() => removeTodoBox(todoID)}>Delete</div>
                     </div>
                 </div>
-            </div>
+            </div>,
+		document.body
+	);
 };
 
 export default RemoveTodoBoxModal;

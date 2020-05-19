@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 import './moveListModal.scss'
 
 const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, todobox, updateTodobox, userName}) => {
@@ -42,7 +43,8 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
         updateMoveListModalStatus(false);
     }
 
-    return <div className ="modal-block-container">
+    return ReactDOM.createPortal(
+            <div className ="modal-block-container">
                 <form onSubmit={(e) => moveOneList(e, todoID, listId)}>
                     <h2>Move list</h2>
                     <p>Please choose a new todo box for <span>{listTitle}</span>.</p>
@@ -58,10 +60,12 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
                     </select>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button>Move list</button>
+                        <div className="modal-block-move">Move list</div>
                     </div>
                 </form>
-            </div>
+            </div>,
+		document.body
+	);
 };
 
 export default MoveListModal;
