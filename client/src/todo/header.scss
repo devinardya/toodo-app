@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:wght@400;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+$Montserrat : 'Montserrat', sans-serif;
+$Open-Sans : 'Open Sans', sans-serif;
+
+$color-primary: rgb(240, 240, 240);
+$color-secondary: #406e8eff;
+$color-secondary-light: rgb(255, 255, 255);
+$color-text-title: #ffa84e;
+$color-text-dataTitle : #dd4600;
+$color-text-dataDesc : #737373;
+$color-text-dataDate : #737373;
+
+@mixin flex-column($justify, $align) {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin flex-row($justify, $align) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+.board-block-header {
+    height: 10%;
+    width: 100vw;
+    @include flex-row( space-between, center );
+
+    .board-header--logo {
+        width: 50%;
+        height: 100%;
+        @include flex-column( center, flex-start );
+
+        .board-logo {
+            padding-left: 60px;
+            padding-top: 20px;
+            width: 180px;
+            transform: translateY(-15%);
+        }
+    }
+
+    .board-header--text {
+        width: 50%;
+        height: 100%;
+        @include flex-row( flex-end, center );
+        color: #fff;
+        font-family: $Open-Sans;
+
+        .board-header--info {
+            @include flex-row( flex-end, center );
+            padding: 10px 40px;
+            margin-right: 50px;
+            border-radius: 30px;
+            background-color: $color-primary;
+            z-index: 9999999;
+
+            .board-header-link {
+                color: $color-text-dataTitle;
+                font-size: 16px;
+                font-weight: 700;
+                font-family: $Open-Sans;
+                text-decoration: none;
+    
+                &:hover {
+                    cursor: pointer;
+                    color: #000000;
+                }
+            }
+
+            h4 {
+                color: $color-text-dataTitle
+            }
+
+            span {
+                margin: 0 10px;
+                font-weight: 800;
+                color: $color-text-title;
+                font-family: $Open-Sans;
+                font-weight: 700;
+            }
+            
+            button {
+                background: transparent;
+                color: $color-text-dataDesc;
+                border:none;
+                font-size: 15px;
+                font-weight: 700;
+                font-family: $Open-Sans;
+
+                &:hover {
+                    cursor: pointer;
+                    color: #363636;
+                }
+            }
+
+        }
+        
+    }
+    
+    
+}

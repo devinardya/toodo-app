@@ -60,6 +60,7 @@ const Board = ({location}) => {
                         <Header 
                             userName = {userName}
                             logout = {logout}
+                            initialPage = "board"
                         />
                         <MainBox 
                             todobox = {todobox}

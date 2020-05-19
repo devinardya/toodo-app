@@ -42,8 +42,8 @@ $color-text-dataDate : #737373;
     .home-block-logo {
         position: absolute;
         top: 40px;
-        left: 40px;
-        width: 140px;
+        left: 60px;
+        width: 160px;
     }
 
     .home-login-button {
@@ -57,10 +57,10 @@ $color-text-dataDate : #737373;
     } 
 
     @keyframes afterAnimate {
-    0%   { transform: translateX(0px);}
-    50%  { transform: translateX(-25%);}
-    75% { transform: translateX(50%); }
-    100% { transform: translateX(0px); }
+        0%   { transform: translateX(0px);}
+        50%  { transform: translateX(-25%);}
+        75% { transform: translateX(50%); }
+        100% { transform: translateX(0px); }
     } 
 
     .home-block-text {

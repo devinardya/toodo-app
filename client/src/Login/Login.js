@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { Redirect } from 'react-router-dom';
 import { MdCheckCircle, MdCancel } from "react-icons/md";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+import Header from '../todo/Header';
 import './login.scss';
 
 const Login = () => {
@@ -81,19 +83,29 @@ const Login = () => {
         //console.log("this is trueeee")
     }
 
-    return <div className="login-block">
-                <div className="login-block--box">
-                    <h2>LOGIN</h2>
-                    <form onSubmit={getSubmit}>
-                        <input onChange={onChange} style={newcolor} placeholder="username" value={username} type="text"/>
-                        <div className = "block__loginPage--form--authorization">
-                             <p className="block__loginPage--form--authorization__warning" style={warncolor} > {validateIcon1} username have to be between 1 to 12 characters without empty space.</p>
-                             <p className="block__loginPage--form--authorization__warning" style={warncolor2} > {validateIcon2} username can only contains uppercase, lowercase, hypen (-), underscore (_), and numbers.</p>
-                         </div>
-                        <button>Log in</button>
-                    </form>
+    return <HelmetProvider>
+                <Helmet>
+                    <title>Welcome to Toodo | Login</title>
+                </Helmet>
+                <div className="login-block">
+                    <Header 
+                        initialPage = "login"
+                     />
+                    <div className="login-block--box">
+                    <div className="login-block--form">
+                        <h2>LOGIN</h2>
+                        <form onSubmit={getSubmit}>
+                            <input onChange={onChange} style={newcolor} placeholder="username" value={username} type="text"/>
+                            <div className = "block__loginPage--form--authorization">
+                                <p className="block__loginPage--form--authorization__warning" style={warncolor} > {validateIcon1} username have to be between 1 to 12 characters without empty space.</p>
+                                <p className="block__loginPage--form--authorization__warning" style={warncolor2} > {validateIcon2} username can only contains uppercase, lowercase, hypen (-), underscore (_), and numbers.</p>
+                            </div>
+                            <button>Log in</button>
+                        </form>
+                     </div>
+                    </div>
                 </div>
-           </div>
+           </HelmetProvider>
 }
 
 export default Login;

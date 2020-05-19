@@ -38,64 +38,9 @@ $color-text-dataDate : #737373;
     background: linear-gradient(129deg, rgba(0,97,126,1) 0%, rgba(17,196,196,1) 100%);
     @include flex-column(center, center);
 
-    .board-block-header {
-        height: 10%;
-        width: 100vw;
-        @include flex-row( space-between, center );
-
-        .board-header--logo {
-            width: 50%;
-            height: 100%;
-            @include flex-column( center, flex-start );
-
-            .board-logo {
-                padding-left: 40px;
-                padding-top: 20px;
-                width: 160px;
-                transform: translateY(-15%);
-            }
-        }
-
-        .board-header--text {
-            width: 50%;
-            height: 100%;
-            @include flex-row( flex-end, center );
-            color: #fff;
-            font-family: $Open-Sans;
-
-            span {
-                margin: 0 10px;
-                font-weight: 800;
-                color: $color-text-title;
-                font-family: $Open-Sans;
-                font-weight: 700;
-            }
-            
-            button {
-                padding-right: 40px;
-                background: transparent;
-                color:#fff;
-                border:none;
-                font-size: 15px;
-                font-weight: 700;
-                font-family: $Open-Sans;
-
-                &:hover {
-                    cursor: pointer;
-                    color: $color-text-title;
-                }
-            }
-            
-        }
-        
-        
-    }
-
     .board-block-main {
         height: 90%;
         width: 100%;
-        /* background: rgb(0,97,126);
-        background: linear-gradient(129deg, rgba(0,97,126,1) 0%, rgba(17,196,196,1) 100%); */
         padding: 0 20px 20px 20px;
         overflow: hidden;
         @include flex-row(flex-start, flex-start);
@@ -220,7 +165,7 @@ $color-text-dataDate : #737373;
                     
                     button {
                         color: rgb(87, 87, 87);
-                        background-color: rgb(80, 203, 207);
+                        background-color: rgb(182, 221, 223);
                         width: 100%;
                         font-size: 14px;
                         line-height: 0px;
@@ -234,7 +179,8 @@ $color-text-dataDate : #737373;
 
                         &:hover {
                             cursor: pointer;
-                            color: rgb(255, 255, 255);
+                            color: $color-text-dataTitle;
+                            background-color: rgb(203, 228, 230);
                         }
                     }
 

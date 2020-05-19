@@ -1,5 +1,5 @@
 import React from 'react';
-import logoicon from '../Image/toodo-logo.svg';
+import logoicon from '../Image/toodo-logo2.svg';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import {Link} from 'react-router-dom';
 import './home.scss';

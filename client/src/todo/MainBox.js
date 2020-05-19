@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useCallback, useEffect} from 'react';
 import {IoMdMenu, IoIosAddCircle} from 'react-icons/io';
 import {TiDelete, TiArrowForward} from 'react-icons/ti';
 import {MdModeEdit} from 'react-icons/md';
@@ -26,6 +26,9 @@ const MainBox = ({todobox, updateTodobox, userName}) => {
     const [oldTitle, updateOldTitle] = useState("");
     const [todoboxMenu, updateTodoboxMenu] = useState(false);
     const [activeDropboxID, updateactiveDropboxID] = useState("");
+    const nodeDropdown = useRef();
+
+    
     
 
     const removeTodoBox = (id, title) => {
@@ -50,6 +53,28 @@ const MainBox = ({todobox, updateTodobox, userName}) => {
             updateTodoboxMenu(todoboxMenu ? false : true);
         }
     };
+
+    const handleClickOutside = useCallback((e) => {
+		if (nodeDropdown.current.contains(e.target)) {
+			// inside click
+			return;
+		}
+		// outside click 
+		//updateTodoboxMenu(todoboxMenu ? false : true);
+	}, [todoboxMenu]);
+
+	useEffect(() => {
+		//this document.addEventListerner can only be used inside a useEffect
+		if (todoboxMenu) {
+			document.addEventListener("mousedown", handleClickOutside);
+		} else {
+			document.removeEventListener("mousedown", handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [todoboxMenu, handleClickOutside]);
 
     const activateRename = (id, title) => {
         updatetodoID(id);
@@ -88,21 +113,21 @@ const MainBox = ({todobox, updateTodobox, userName}) => {
                     {todobox.map( (todo, index) => {
                         return ( <div className="board-block-main--eachbox" key={todo._id}>
                                     <h4>{todo.title}</h4>
-                                <div className="title-menu-button">
-                                        <button onClick={ (e) => activateMenu(e, todo._id, index)} >
-                                            <IoMdMenu size="18px" />
-                                        </button>
-                                        {activeDropboxID === todo._id && todoboxMenu ? 
-                                            <div className="board-main-dropdown-active">
-                                                <button onClick={() => removeTodoBox(todo._id, todo.title)}><TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>Remove</button>
-                                                <button onClick={() => activateRename(todo._id, todo.title)}><MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>Rename</button>
-                                            </div>
-                                        :
-                                            null
-                                        } 
-                                </div>
+                                    <div className="title-menu-button" ref={nodeDropdown}>
+                                            <button onClick={ (e) => activateMenu(e, todo._id, index)} >
+                                                <IoMdMenu size="18px" />
+                                            </button>
+                                            {activeDropboxID === todo._id && todoboxMenu ? 
+                                                <div className="board-main-dropdown-active">
+                                                    <button onClick={() => removeTodoBox(todo._id, todo.title)}><TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>Remove</button>
+                                                    <button onClick={() => activateRename(todo._id, todo.title)}><MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>Rename</button>
+                                                </div>
+                                            :
+                                                null
+                                            } 
+                                    </div>
                                     <ul>
-                                    {todo.data.map( (x, idx) => {
+                                    {todo.data.map( (x) => {
                                         return <li className="board-block-main--list" key={x.id}>
                                                     <p className="list-title">{x.todoTitle}</p>
                                                     <p className="list-desc">{x.description}</p>
