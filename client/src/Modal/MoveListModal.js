@@ -45,11 +45,15 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
     return <div className ="modal-block-container">
                 <form onSubmit={(e) => moveOneList(e, todoID, listId)}>
                     <h2>Move list</h2>
-                    <p>Which todo box do you want to move <span>{listTitle}</span> ?</p>
+                    <p>Please choose a new todo box for <span>{listTitle}</span>.</p>
                     <select value={selectValue} onChange={handleChange}>
-                        <option value="">--Please choose a new todo box--</option>
+                        <option value="">---- Todo box list ----</option>
                         {todobox.map(todo => {
-                            return <option value={todo._id} key={todo._id}>{todo.title}</option>
+                            if(todo._id !== todoID) {
+                                return <option value={todo._id} key={todo._id}>{todo.title}</option>
+                            } else {
+                                return null;
+                            }
                         })}
                     </select>
                     <div className="modal-block-buttons">

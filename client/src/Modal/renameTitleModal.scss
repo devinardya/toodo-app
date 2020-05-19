@@ -61,6 +61,11 @@ $color-text-cancel : #a7a7a7;
             font-family: $Open-Sans;
             margin-bottom: 5px;
             color: $color-text-dataDesc;
+            align-self: flex-start;
+            padding-left: 10.5%;
+            font-size: 13px;
+            font-weight: 600;
+            color: $color-text-dataTitle;
         }
 
         input {

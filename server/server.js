@@ -299,7 +299,7 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
         })
         .catch( e => {
             console.error(e);
-            res.status(500).end();
+            res.status(400).end();
         })
 
 

@@ -55,10 +55,10 @@ const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitl
 
     return <div className ="modal-block-container">
                 <form onSubmit = {(e) => renameListTitle(e, todoID, listId)}>
-                    <h2>Rename Title</h2>
-                    <label>New Title:</label>
+                    <h2>Edit List</h2>
+                    <label>New list title</label>
                     <input onChange={renameTitleChange} placeholder= {errorStatus ? "Title is not allowed to be empty" : null} type="text" value={titleChange}/>
-                    <label>New Description:</label>
+                    <label>New list description</label>
                     <input onChange={renameDescChange} placeholder= {errorStatus ? "Description is not allowed to be empty" : null} type="text" value={descChange}/>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
