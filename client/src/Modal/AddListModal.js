@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 import './addlistmodal.scss'
 
 const AddListModal = ({ todoID, todobox, updateTodobox, updateAddListModalStatus, userName}) => {
@@ -56,7 +57,8 @@ const AddListModal = ({ todoID, todobox, updateTodobox, updateAddListModalStatus
         updateAddListModalStatus(false);
     }
 
-    return <div className ="modal-block-container">
+    return ReactDOM.createPortal(
+            <div className ="modal-block-container">
                 <form onSubmit = {(e) => addNewList(e, todoID)}>
                     <h2>Add new list</h2>
                     <label>Title:</label>
@@ -68,7 +70,9 @@ const AddListModal = ({ todoID, todobox, updateTodobox, updateAddListModalStatus
                         <button>Add list</button>
                     </div>
                 </form>
-            </div>
+            </div>,
+		document.body
+	);
 };
 
 export default AddListModal;

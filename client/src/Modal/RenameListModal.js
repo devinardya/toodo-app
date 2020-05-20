@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 import './renameListModal.scss'
 
 const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitle, listDesc, todobox, updateTodobox, userName}) => {
@@ -53,7 +54,8 @@ const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitl
         updateRenameListModalStatus(false);
     }
 
-    return <div className ="modal-block-container">
+    return ReactDOM.createPortal(
+            <div className ="modal-block-container">
                 <form onSubmit = {(e) => renameListTitle(e, todoID, listId)}>
                     <h2>Edit List</h2>
                     <label>New list title</label>
@@ -62,10 +64,12 @@ const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitl
                     <input onChange={renameDescChange} placeholder= {errorStatus ? "Description is not allowed to be empty" : null} type="text" value={descChange}/>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button>Rename</button>
+                        <button className="modal-block-rename">Rename</button>
                     </div>
                 </form>
-            </div>
+            </div>,
+		document.body
+	);
 };
 
 export default RenameTitleModal;

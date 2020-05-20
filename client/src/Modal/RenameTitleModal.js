@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 import './renameTitleModal.scss'
 
 const RenameTitleModal = ({todoID, updateRenameTitleModalStatus, oldTitle, todobox, updateTodobox, userName}) => {
@@ -49,7 +50,8 @@ const RenameTitleModal = ({todoID, updateRenameTitleModalStatus, oldTitle, todob
         updateRenameTitleModalStatus(false);
     }
 
-    return <div className ="modal-block-container--rename">
+    return ReactDOM.createPortal(
+            <div className ="modal-block-container--rename">
                 <form onSubmit = {(e) => renameTitle(e, todoID)}>
                     <h2>Rename Title</h2>
                     <label>New Title</label>
@@ -57,10 +59,12 @@ const RenameTitleModal = ({todoID, updateRenameTitleModalStatus, oldTitle, todob
                     {renameBoxInputError ? <p className="board-block-main--form-inputError">Title is not allowed to be longer than 20 characters</p> : <p className="board-block-main--form-input">Title length is minimun 1 character and maximum 20 characters</p>}
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button>Rename</button>
+                        <button className="modal-block-rename">Rename</button>
                     </div>
                 </form>
-            </div>
+            </div>,
+		document.body
+	);
 };
 
 export default RenameTitleModal;

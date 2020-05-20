@@ -11,26 +11,31 @@ app.use((req, res, next) => {
     res.once('finish', () => {
         let end = Date.now();
         let time = end - start;
-        console.log(req.method, req.path, res.statusCode, time + 'ms');
+        console.log("method",req.method, ",path", req.path, ",status code", res.statusCode, ", created in", time + 'ms');
     })
     next();
 });
 
 // JSON-Parse middleware - to make sure all data that are received is JSON 
 app.use((req, res, next) => {
-    // Check that Content-Type: application/json
+    // Check that the incoming data is JSON
     if (req.is('json')) {
       let data = '';
+      // listening to the incoming stream of data and saving the chuck.toString to the data variable
       req.on('data', chunk => {
+        console.log("chunk", chunk.toString());
         data += chunk.toString();
       });
-  
+      // when data reading are done, then listen to event end where the server try to parse the data
       req.on('end', () => {
+         // when JSON data are not corrupted, then parse it and set it as the req.body.
+         // after that finish the middleware and continue to the next one of run the http request.
         try {
           data = JSON.parse(data);
+          console.log("data after parse", data);
           req.body = data;
           next();
-        } catch(e) {
+        } catch(e) { // if the JSON data is not acceptable, then send error message and end the data process
           res.status(400).end();
         }
       });
@@ -274,14 +279,14 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
             return savedData;
         })
         .then ( response => {
-            db.collection(userId)
+            return db.collection(userId)
             .updateOne( 
                 {_id : createObjectId(newDocId)}, 
                 {$push: {data: response}}
             )
         })
         .then( () => {
-            db.collection(userId)
+            return db.collection(userId)
             .updateOne( 
                 {_id : createObjectId(oldDocId)},
                 { $pull: { data: { id: listId } } },

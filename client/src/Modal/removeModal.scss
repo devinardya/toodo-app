@@ -39,12 +39,14 @@ $color-text-cancel : #a7a7a7;
     top: 0;
     left: 0;
     @include flex-column( center, center );
+    z-index: 9999999999;
 
     .modal-block-box {
         width: 50%;
-        height: 30%;
+        height: 40%;
         background-color: $color-primary;
         border-radius: 20px;
+        text-align: center;
         @include flex-column(center, center);
         -webkit-box-shadow: -1px 2px 31px 9px rgba(181,181,181,1);
         -moz-box-shadow: -1px 2px 31px 9px rgba(181,181,181,1);
@@ -57,7 +59,7 @@ $color-text-cancel : #a7a7a7;
             font-weight: 600;
         }
 
-        p {
+        .modal-block-box--text {
             margin-bottom: 20px;
             width:80%;
             font-family:  $Open-Sans;
@@ -71,6 +73,7 @@ $color-text-cancel : #a7a7a7;
 
         .modal-block-buttons {
             @include flex-row(center,center );
+            text-align: center;
     
             .modal-block-cancel {
                 margin-top: 10px;
@@ -89,7 +92,7 @@ $color-text-cancel : #a7a7a7;
                 }
             }
     
-            button {
+            .modal-block-remove {
                 margin-top: 10px;
                 padding: 10px 25px;
                 border-radius: 10px;

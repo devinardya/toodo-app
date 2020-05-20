@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 import './removeModal.scss'
 
 const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTitle, todobox, updateTodobox, userName}) => {
@@ -24,16 +25,19 @@ const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTi
         updateRemoveOneListModalStatus(false);
     }    
 
-    return <div className ="modal-block-container">
+    return ReactDOM.createPortal(
+            <div className ="modal-block-container">
                 <div className = "modal-block-box">
                     <h2>Delete List</h2>
-                    <p>Remove <span>{listTitle}</span> from the todo list box ?</p>
+                    <p className="modal-block-box--text">Remove <span>{listTitle}</span> from the todo list box ?</p>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button onClick={() => deleteList(todoID, listId)}>Remove</button>
+                        <button className="modal-block-remove" onClick={() => deleteList(todoID, listId)}>Remove</button>
                     </div>
                 </div>
-            </div>
+            </div>,
+		document.body
+	);
 };
 
 export default DeleteListModal;

@@ -39,6 +39,7 @@ $color-text-cancel : #a7a7a7;
     top: 0;
     left: 0;
     @include flex-column( center, center );
+    z-index: 9999999999;
 
     form {
         width: 45%;
@@ -94,6 +95,7 @@ $color-text-cancel : #a7a7a7;
 
         .modal-block-buttons {
             @include flex-row(center,center );
+            text-align: center;
 
             .modal-block-cancel {
                 margin-top: 10px;
@@ -112,7 +114,7 @@ $color-text-cancel : #a7a7a7;
                 }
             }
     
-            button {
+            .modal-block-rename {
                 margin-top: 10px;
                 padding: 10px 25px;
                 border-radius: 10px;

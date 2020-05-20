@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 import './moveListModal.scss'
 
 const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, todobox, updateTodobox, userName}) => {
@@ -19,7 +20,7 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
             axios.patch('/todos/'+todoid+'/todos/'+selectValue+'/list/'+listid+'/user/'+userName)
             .then( response => {
                 console.log(response)
-                /* let copyData = [...todobox];
+                let copyData = [...todobox];
                 let oldBoxIndex = copyData.findIndex(x => x._id === todoid);
                 let listIndex = copyData[oldBoxIndex].data.findIndex(y => y.id === listid);
                 let newBoxIndex = copyData.findIndex(z => z._id === selectValue);
@@ -28,8 +29,8 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
                 copyData[oldBoxIndex].data = copyData[oldBoxIndex].data.filter(h => h.id !== listid);
                 copyData[newBoxIndex].data = [...copyData[newBoxIndex].data, movedData];
 
-                updateTodobox(copyData);  */
-                updateTodobox(response.data);
+                updateTodobox(copyData); 
+                //updateTodobox(response.data);
                 updateMoveListModalStatus(false);
             })
             .catch( err => {
@@ -42,7 +43,8 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
         updateMoveListModalStatus(false);
     }
 
-    return <div className ="modal-block-container">
+    return ReactDOM.createPortal(
+            <div className ="modal-block-container">
                 <form onSubmit={(e) => moveOneList(e, todoID, listId)}>
                     <h2>Move list</h2>
                     <p>Please choose a new todo box for <span>{listTitle}</span>.</p>
@@ -58,10 +60,12 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
                     </select>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button>Move list</button>
+                        <button className="modal-block-move">Move list</button>
                     </div>
                 </form>
-            </div>
+            </div>,
+		document.body
+	);
 };
 
 export default MoveListModal;
