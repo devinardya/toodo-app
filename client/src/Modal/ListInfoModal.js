@@ -80,11 +80,14 @@ const ListInfoModal = ({
             <div className ="modal-block-container--listinfo">
                 <div className="modal-block-container--listinfo-box">
                     <div className="modal-block-container--listinfo-box__titleInfo">
-                        <h3><IoIosList style={{position: "relative", top:"2px", marginRight:"10px"}}/>{todo.title}</h3>
-                        <p>in list <span>{x.todoTitle}</span></p>
+                        <h3><IoIosList style={{position: "relative", top:"2px", marginRight:"10px"}}/>{x.todoTitle}</h3>
+                        <p>in todo box <span>{todo.title}</span></p>
                     </div>
                     <div className="modal-block-container--listinfo-box__descInfo">
-                        <h3><IoMdList style={{position: "relative", top:"2px", marginRight:"10px"}}/>Description <span onClick={editDescription}><MdModeEdit /></span></h3>
+                        <h3><IoMdList style={{position: "relative", top:"2px", marginRight:"10px"}}/>
+                            Description 
+                            {x.description.length !== 0 ?<span onClick={editDescription}><MdModeEdit style={{position: "relative", top:"3px", left:"10px"}} /></span>: null }
+                        </h3>
                         {editDescBox || x.description.length === 0 ? 
                         <form onSubmit={(e) => renameDescList(e, todo._id, x.id )}>
                             <input onChange={inputChange} type="text" value={descChange} placeholder={x.description.length === 0 ? "Add a more detailed description" : null} />

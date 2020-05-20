@@ -137,6 +137,10 @@ $color-button-cancel : #008a94;
                             font-size: 14px;
                             color: $color-text-dataDesc;
 
+                            &::placeholder {
+                                font-size: 12px;
+                            }
+
                             &:focus::placeholder {
                                 color: transparent;
                             }

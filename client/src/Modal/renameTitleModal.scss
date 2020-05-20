@@ -46,7 +46,7 @@ $color-text-cancel : #a7a7a7;
         height: 40%;
         background-color: $color-primary;
         border-radius: 20px;
-        @include flex-column(center, center);
+        @include flex-column(flex-start, center);
 
         h2 {
             margin-bottom: 20px;
@@ -58,7 +58,7 @@ $color-text-cancel : #a7a7a7;
         label {
             font-family: $Open-Sans;
             margin-bottom: 5px;
-            color: $color-text-dataDesc;
+            color:#008a94;
             align-self: flex-start;
             padding-left: 10.5%;
             font-size: 13px;

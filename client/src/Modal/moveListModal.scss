@@ -51,8 +51,10 @@ $color-text-cancel : #a7a7a7;
 
         h2 {
             font-family: $Montserrat;
-            color: $color-text-dataTitle;
+            color: #008a94;
             font-weight: 600;
+            align-self: flex-start;
+            padding-left: 10.5%;
         }
 
         p {

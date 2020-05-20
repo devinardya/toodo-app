@@ -44,10 +44,10 @@ $color-button-cancel : #008a94;
     
     .modal-block-container--listinfo-box {
         width: 45%;
-        height: 45%;
+        height: 47%;
         background-color: $color-primary;
         border-radius: 10px;
-        @include flex-column(center, flex-start);
+        @include flex-column(flex-start, flex-start);
         padding: 40px;
         position: relative;
        
