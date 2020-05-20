@@ -6,22 +6,19 @@ import './removeModal.scss'
 const RemoveTodoBoxModal = ({todoID, updateRemoveTodoBoxModalStatus, oldTitle, todobox, updateTodobox, userName}) => {
 
     const removeTodoBox = (id) => {
-        let source = axios.CancelToken.source();
-
-        axios.delete("/todos/" + id+"/user/"+userName, {
-            cancelToken: source.token
-          })
+      
+        axios.delete("/todos/" + id+"/user/"+userName)
         .then(response => {
             console.log("RESPONSE", response)
             let copy = [...todobox];
             let newData = copy.filter(x => x._id !== id)
             updateTodobox(newData);
             updateRemoveTodoBoxModalStatus(false);
-            source.cancel('Operation canceled by the user.'); 
         })
-        .catch( err => {
+        .catch(err => {
             console.log(err);
-        })
+          }); 
+          
     };
 
     const cancel = () => {
@@ -31,11 +28,11 @@ const RemoveTodoBoxModal = ({todoID, updateRemoveTodoBoxModalStatus, oldTitle, t
     return ReactDOM.createPortal(
             <div className ="modal-block-container">
                 <div className = "modal-block-box">
-                    <h2>Delete Todo Box</h2>
+                    <h2>Remove Todo Box</h2>
                     <p className="modal-block-box--text">Are you sure you want to delete <span>{oldTitle}</span> ?</p>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button className="modal-block-remove" onClick={() => removeTodoBox(todoID)}>Delete</button>
+                        <button className="modal-block-remove" onClick={() => removeTodoBox(todoID)}>Remove</button>
                     </div>
                 </div>
             </div>,

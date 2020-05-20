@@ -1,8 +1,6 @@
 const express = require("express");
 const uuid = require("uuid");
-
 const app = express();
-//app.use(express.json());
 const {getDB, createObjectId} = require("./db")
 
 // Middleware to logged the method, path, statuscode and amount of time needed
@@ -62,24 +60,6 @@ app.get('/todos/:user', (req, res) => {
     })
 });
 
-/* // TO GET INDIVIDUAL TODOBOX DATA
-
-app.get('/todos/:id/user/:user', (req, res) => {
-    let todoId = req.params.id;
-    let userId = req.params.user;
-
-    const db = getDB();
-    db.collection(userId)
-    .findOne({_id: createObjectId(todoId)})
-    .then( todo => {
-        console.log("todo", todo);
-        res.status(200).send(todo);
-    })
-    .catch( e => {
-        console.error(e);
-        res.status(500).end();
-    })
-}); */
 
 function validate(todos) {
     return !!todos.data
@@ -152,6 +132,7 @@ app.delete('/todos/:id/user/:user', (req, res) => {
         console.error(e);
         res.status(500).end();
     })
+    
 });
 
 // TO ADD A LIST INSIDE A SPECIFIC TO DO LIST BOX
@@ -306,65 +287,6 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
             console.error(e);
             res.status(400).end();
         })
-
-
-    /* db.collection(userId)
-   .findOne({ 
-        data: {$elemMatch : {id: listId}}
-    })
-    .then(result=> {
-        
-        console.log("the result data", result.data)
-        let index = result.data.findIndex(x => x.id === listId);
-        savedData = result.data[index];
-        console.log("Saved Data", savedData)
-
-       
-        if (savedData !== null || savedData !== undefined) {
-            
-            console.log("the saved data to push", savedData)
-            db.collection(userId)
-            .updateOne( 
-                {_id : createObjectId(newDocId)}, 
-                {$push: {data: savedData}}
-            )
-            .then(result => {
-                //res.send(result)
-                console.log("Moved Array", savedData)
-            })  
-            .catch( e => {
-                console.error(e);
-                res.status(500).end();
-            })
-
-                
-            db.collection(userId)
-            .updateOne( 
-                {_id : createObjectId(oldDocId)},
-                { $pull: { data: { id: listId } } },
-                { multi: true }
-            )
-            .then( () => {
-                res.status(204).end();
-                console.log("List item is deleted")
-            })
-        }
-   */
-
-       /*  db.collection(userId)
-        .find({})
-        .toArray()
-        .then( data => {
-            console.log("Data from server", data)
-            res.status(200).send(data);
-        })
-        .catch( err => {
-            res.status(500).end();
-        }) */
-
-    //}) 
-
-
 });
 
 

@@ -29,16 +29,6 @@ const Board = ({location}) => {
         });
 
         return () => {
-          axios.get("/todos/", {
-            cancelToken: source.token
-          })
-          .catch(function (thrown) {
-            if (axios.isCancel(thrown)) {
-              console.log('Request canceled', thrown.message);
-            } else {
-              // handle error
-            }
-          }); 
           source.cancel('Operation canceled by the user.'); 
       }
 

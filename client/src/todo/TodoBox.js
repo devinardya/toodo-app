@@ -1,8 +1,8 @@
 import React, {useState, useRef, useCallback, useEffect} from 'react';
-import {IoMdMenu, IoIosAddCircle} from 'react-icons/io';
+import {IoMdMenu, IoIosAddCircle, IoMdClose} from 'react-icons/io';
 import {TiDelete} from 'react-icons/ti';
 import {MdModeEdit} from 'react-icons/md';
-import AddListModal from '../Modal/AddListModal';
+import axios from 'axios';
 import RenameTitleModal from '../Modal/RenameTitleModal';
 import RemoveToDoModal from '../Modal/RemoveTodoBoxModal';
 import ListBox from './ListBox';
@@ -14,24 +14,57 @@ const TodoBox = ({
     updateTodobox,
 }) => {
 
-    const [addListModalStatus, updateAddListModalStatus] = useState(false);
     const [renameTitleModalStatus, updateRenameTitleModalStatus] = useState(false);
     const [removeTodoBoxModalStatus, updateRemoveTodoBoxModalStatus] = useState(false);
     const [todoboxMenu, updateTodoboxMenu] = useState(false);
+    const [addListFormActive, updateAddListFormActive] = useState(false);
+    const [addListInput, updateAddListText] = useState("");
     const nodeDropdown = useRef();
 
+    const onAddListChange = (e) => {
+        let data = e.target.value;
+        updateAddListText(data);
+    };
 
     const removeTodoBox = () => {
         updateRemoveTodoBoxModalStatus(true);
     };
 
-    const addListModalActive = () => {
-        updateAddListModalStatus(true);
-    }
-
     const activateRename = () => {
         updateRenameTitleModalStatus(true);
     }
+
+    const addListActive = () => {
+        updateAddListFormActive(true);
+    }
+
+    const addNewList = (e, id) => {
+
+        e.preventDefault();
+
+
+        if(addListInput.length !== 0){
+
+            let input = {
+                todoTitle : addListInput,
+                description : "",
+            }
+            axios.post("/list/" + id + "/user/" + userName, input)
+            .then(response => {   
+                console.log("response after adding data", response.data);
+                let copyData = [...todobox];
+                let index = copyData.findIndex(x => x._id === id);
+                copyData[index].data = [...copyData[index].data, response.data];
+                updateTodobox(copyData);
+                updateAddListFormActive(false);
+            })
+            .catch( err => {
+                console.log(err);
+            })
+
+            updateAddListText("");
+        } 
+    };
 
    
     const activateMenu = useCallback( () => {
@@ -66,9 +99,10 @@ const TodoBox = ({
 	} else {
 		dropdownClass = 'board-main-dropdown';
     }
-
- 
     
+    const cancel = () => {
+        updateAddListFormActive(false);
+    }
 
     return <div className="board-block-main--eachbox">
                 <div className="title-menu-button" >
@@ -115,15 +149,21 @@ const TodoBox = ({
                 }
                 </ul>
                 <div>
-                    <button className="board-block-main-addButton" onClick={() => addListModalActive()}><IoIosAddCircle style={{position:"relative", top: "2px", marginRight:"10px"}}/>Add new list</button>
-                    { addListModalStatus && <AddListModal 
-                            todobox = {todobox}
-                            updateTodobox = {updateTodobox}
-                            todoID = {todo._id}
-                            updateAddListModalStatus = {updateAddListModalStatus}
-                            userName = {userName}
-                        />
+                    {addListFormActive ? 
+                        <form className="board-block-addform" onSubmit = {(e) => addNewList(e, todo._id)} >
+                            <div className="board-block-inputbox">
+                                <input onChange={onAddListChange} placeholder="Enter title for this list..." type="text" value={addListInput}/>
+                            </div>
+                            <div className="board-block-formbutton">
+                                <button className="board-block-main-addList">Add List</button>
+                                <div className="board-block-main-cancel" onClick={cancel}><IoMdClose /></div>
+                            </div>
+                        </form>
+                        : 
+                        <button className="board-block-main-addButton" onClick={() => addListActive()}><IoIosAddCircle style={{position:"relative", top: "2px", marginRight:"10px"}}/>Add new list</button>
                     }
+                    
+                    
                 </div>
             </div>
             
