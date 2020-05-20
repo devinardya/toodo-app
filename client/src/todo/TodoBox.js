@@ -63,7 +63,6 @@ const TodoBox = ({
             })
 
             updateAddListText("");
-            //updateAddListModalStatus(false);
         } 
     };
 
@@ -150,27 +149,16 @@ const TodoBox = ({
                 }
                 </ul>
                 <div>
-                   {/*  <button className="board-block-main-addButton" onClick={() => addListModalActive()}><IoIosAddCircle style={{position:"relative", top: "2px", marginRight:"10px"}}/>Add new list</button>
-                    { addListModalStatus && <AddListModal 
-                            todobox = {todobox}
-                            updateTodobox = {updateTodobox}
-                            todoID = {todo._id}
-                            updateAddListModalStatus = {updateAddListModalStatus}
-                            userName = {userName}
-                        />
-                    } */}
                     {addListFormActive ? 
-                        <>
-                            <form className="board-block-addform" onSubmit = {(e) => addNewList(e, todo._id)} >
-                                <div className="board-block-inputbox">
-                                    <input onChange={onAddListChange} placeholder="Enter title for this list..." type="text" value={addListInput}/>
-                                </div>
-                                <div className="board-block-formbutton">
-                                    <button className="board-block-main-addList">Add List</button>
-                                    <div className="board-block-main-cancel" onClick={cancel}><IoMdClose /></div>
-                                </div>
-                            </form>
-                        </>
+                        <form className="board-block-addform" onSubmit = {(e) => addNewList(e, todo._id)} >
+                            <div className="board-block-inputbox">
+                                <input onChange={onAddListChange} placeholder="Enter title for this list..." type="text" value={addListInput}/>
+                            </div>
+                            <div className="board-block-formbutton">
+                                <button className="board-block-main-addList">Add List</button>
+                                <div className="board-block-main-cancel" onClick={cancel}><IoMdClose /></div>
+                            </div>
+                        </form>
                         : 
                         <button className="board-block-main-addButton" onClick={() => addListActive()}><IoIosAddCircle style={{position:"relative", top: "2px", marginRight:"10px"}}/>Add new list</button>
                     }
