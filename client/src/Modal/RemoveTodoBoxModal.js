@@ -6,22 +6,19 @@ import './removeModal.scss'
 const RemoveTodoBoxModal = ({todoID, updateRemoveTodoBoxModalStatus, oldTitle, todobox, updateTodobox, userName}) => {
 
     const removeTodoBox = (id) => {
-        let source = axios.CancelToken.source();
-
-        axios.delete("/todos/" + id+"/user/"+userName, {
-            cancelToken: source.token
-          })
+      
+        axios.delete("/todos/" + id+"/user/"+userName)
         .then(response => {
             console.log("RESPONSE", response)
             let copy = [...todobox];
             let newData = copy.filter(x => x._id !== id)
             updateTodobox(newData);
             updateRemoveTodoBoxModalStatus(false);
-            source.cancel('Operation canceled by the user.'); 
         })
-        .catch( err => {
+        .catch(err => {
             console.log(err);
-        })
+          }); 
+          
     };
 
     const cancel = () => {

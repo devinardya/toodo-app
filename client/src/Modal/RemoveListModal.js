@@ -6,11 +6,10 @@ import './removeModal.scss'
 const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTitle, todobox, updateTodobox, userName}) => {
 
     const deleteList = (todoId, listID) => {
-        console.log(listID)
-        console.log(todoID)
+     
         axios.delete("/todos/"+todoId+"/list/"+listID+"/user/"+userName)
         .then(response => {
-            console.log(response);
+            console.log("response data", response);
             let copyData = [...todobox];
             let findIndex = copyData.findIndex(x => x._id === todoId);
             copyData[findIndex].data = copyData[findIndex].data.filter(y => y.id !== listID);
