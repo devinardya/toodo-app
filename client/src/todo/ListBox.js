@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
+import {IoMdList} from 'react-icons/io';
 import {TiDelete, TiArrowForward} from 'react-icons/ti';
 import {MdModeEdit} from 'react-icons/md';
 import RemoveListModal from '../Modal/RemoveListModal';
 import RenameListModal from '../Modal/RenameListModal';
 import MoveListModal from '../Modal/MoveListModal';
+import ListInfoModal from '../Modal/ListInfoModal';
 
 const ListBox = ({
     todobox,
@@ -16,6 +18,7 @@ const ListBox = ({
     const [removeOneListModalStatus, updateRemoveOneListModalStatus] = useState(false);
     const [renameListModalStatus, updateRenameListModalStatus] = useState(false);
     const [moveListModalStatus, updateMoveListModalStatus] = useState(false);
+    const [listInfoModalStatus, updateListInfoModalStatus] = useState(false);
 
     const deleteOneList = () => {
         updateRemoveOneListModalStatus(true);
@@ -29,9 +32,21 @@ const ListBox = ({
         updateMoveListModalStatus(true);
     }
 
+    const showInfoModal = () => {
+        updateListInfoModalStatus(true);
+    }
+
     return <li className="board-block-main--list">
-                <p className="list-title">{x.todoTitle}</p>
-                <p className="list-desc">{x.description}</p>
+                <p className="list-title" onClick={showInfoModal}>{x.todoTitle}</p>
+                {x.description.length > 0 ? <span className="list-desc" onClick={showInfoModal}><IoMdList /></span> : null}
+                {listInfoModalStatus && <ListInfoModal 
+                    todobox = {todobox}
+                    todo = {todo}
+                    userName = {userName}
+                    updateTodobox = {updateTodobox}
+                    x = {x}
+                    updateListInfoModalStatus = {updateListInfoModalStatus}
+                />}
                 
                 <div className = "board-block-main--list--buttons">
                     <p className="list-date">{x.created}</p>

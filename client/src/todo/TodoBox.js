@@ -1,5 +1,5 @@
 import React, {useState, useRef, useCallback, useEffect} from 'react';
-import {IoMdMenu, IoIosAddCircle} from 'react-icons/io';
+import {IoMdMenu, IoIosAddCircle, IoMdClose} from 'react-icons/io';
 import {TiDelete} from 'react-icons/ti';
 import {MdModeEdit} from 'react-icons/md';
 import axios from 'axios';
@@ -165,14 +165,15 @@ const TodoBox = ({
                     } */}
                     {addListFormActive ? 
                         <>
-                        <div className="board-block-addform">
-                            <form onSubmit = {(e) => addNewList(e, todo._id)} >
-                                <input onChange={onAddListChange} placeholder="Enter title for this list..." type="text" value={addListInput}/>
-                                <button className="board-block-main-addList">Add List</button>
+                            <form className="board-block-addform" onSubmit = {(e) => addNewList(e, todo._id)} >
+                                <div className="board-block-inputbox">
+                                    <input onChange={onAddListChange} placeholder="Enter title for this list..." type="text" value={addListInput}/>
+                                </div>
+                                <div className="board-block-formbutton">
+                                    <button className="board-block-main-addList">Add List</button>
+                                    <div className="board-block-main-cancel" onClick={cancel}><IoMdClose /></div>
+                                </div>
                             </form>
-                            
-                        </div>
-                        <button className="board-block-main-cancel" onClick={cancel}>Cancel</button>
                         </>
                         : 
                         <button className="board-block-main-addButton" onClick={() => addListActive()}><IoIosAddCircle style={{position:"relative", top: "2px", marginRight:"10px"}}/>Add new list</button>
