@@ -59,7 +59,7 @@ const RenameTitleModal = ({todoID, updateRenameTitleModalStatus, oldTitle, todob
                     {renameBoxInputError ? <p className="board-block-main--form-inputError">Title is not allowed to be longer than 20 characters</p> : <p className="board-block-main--form-input">Title length is minimun 1 character and maximum 20 characters</p>}
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <div className="modal-block-rename">Rename</div>
+                        <button className="modal-block-rename">Rename</button>
                     </div>
                 </form>
             </div>,

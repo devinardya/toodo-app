@@ -27,6 +27,21 @@ const Board = ({location}) => {
         .catch((error) => {
              console.log(error);
         });
+
+        return () => {
+          axios.get("/todos/", {
+            cancelToken: source.token
+          })
+          .catch(function (thrown) {
+            if (axios.isCancel(thrown)) {
+              console.log('Request canceled', thrown.message);
+            } else {
+              // handle error
+            }
+          }); 
+          source.cancel('Operation canceled by the user.'); 
+      }
+
     }, [userName]);
 
     
@@ -54,7 +69,7 @@ const Board = ({location}) => {
 
     return <HelmetProvider>
                 <Helmet>
-                    <title>Board - {userName}</title>
+                    <title>Toodo - {userName}</title>
                 </Helmet>
                     <div className ="board-container-block">
                         <Header 

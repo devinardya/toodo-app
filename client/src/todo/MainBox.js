@@ -5,20 +5,18 @@ import TodoBox from './TodoBox';
 const MainBox = ({todobox, updateTodobox, userName}) => {
 
 
-    let printData = todobox.map( (todo, index) => {
-        return <TodoBox 
-                    key={todo._id}
-                    todobox = {todobox}
-                    todo = {todo}
-                    index = {index}
-                    updateTodobox = {updateTodobox}
-                    userName = {userName}
-                />
-    })
-
     return <main className="board-block-main">
                 <div className="board-block-boxes">
-                    {printData}
+                {todobox.map( (todo) => {
+                    return <TodoBox 
+                        key={todo._id}
+                        todobox = {todobox}
+                        todo = {todo}
+                        updateTodobox = {updateTodobox}
+                        userName = {userName}
+                    />
+                    })
+                }
                     {todobox.length <= 4 ?
                         <AddBoxForm 
                             todobox = {todobox}

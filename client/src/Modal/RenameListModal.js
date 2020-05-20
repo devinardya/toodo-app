@@ -64,7 +64,7 @@ const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitl
                     <input onChange={renameDescChange} placeholder= {errorStatus ? "Description is not allowed to be empty" : null} type="text" value={descChange}/>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <div className="modal-block-rename">Rename</div>
+                        <button className="modal-block-rename">Rename</button>
                     </div>
                 </form>
             </div>,

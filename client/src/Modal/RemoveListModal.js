@@ -32,7 +32,7 @@ const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTi
                     <p className="modal-block-box--text">Remove <span>{listTitle}</span> from the todo list box ?</p>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <div className="modal-block-remove" onClick={() => deleteList(todoID, listId)}>Remove</div>
+                        <button className="modal-block-remove" onClick={() => deleteList(todoID, listId)}>Remove</button>
                     </div>
                 </div>
             </div>,
