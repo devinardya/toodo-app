@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {IoMdClose} from 'react-icons/io';
+import {IoMdClose, IoIosList, IoMdList} from 'react-icons/io';
 import {MdModeEdit} from 'react-icons/md';
 import ReactDOM from 'react-dom';
 import './listInfoModal.scss'
@@ -80,11 +80,11 @@ const ListInfoModal = ({
             <div className ="modal-block-container--listinfo">
                 <div className="modal-block-container--listinfo-box">
                     <div className="modal-block-container--listinfo-box__titleInfo">
-                        <h3>{todo.title}</h3>
+                        <h3><IoIosList style={{position: "relative", top:"2px", marginRight:"10px"}}/>{todo.title}</h3>
                         <p>in list <span>{x.todoTitle}</span></p>
                     </div>
                     <div className="modal-block-container--listinfo-box__descInfo">
-                        <h3>Description <span onClick={editDescription}><MdModeEdit /></span></h3>
+                        <h3><IoMdList style={{position: "relative", top:"2px", marginRight:"10px"}}/>Description <span onClick={editDescription}><MdModeEdit /></span></h3>
                         {editDescBox || x.description.length === 0 ? 
                         <form onSubmit={(e) => renameDescList(e, todo._id, x.id )}>
                             <input onChange={inputChange} type="text" value={descChange} placeholder={x.description.length === 0 ? "Add a more detailed description" : null} />

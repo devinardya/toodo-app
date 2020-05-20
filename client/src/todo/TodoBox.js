@@ -65,7 +65,6 @@ const TodoBox = ({
             updateAddListText("");
             //updateAddListModalStatus(false);
         } 
-      
     };
 
    
@@ -105,9 +104,6 @@ const TodoBox = ({
     const cancel = () => {
         updateAddListFormActive(false);
     }
-
- 
-    
 
     return <div className="board-block-main--eachbox">
                 <div className="title-menu-button" >
