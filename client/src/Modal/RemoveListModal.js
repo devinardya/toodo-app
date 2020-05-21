@@ -23,22 +23,25 @@ const DeleteListModal = ({
             let copyData = [...todobox];
             let findIndex = copyData.findIndex(x => x._id === todoId);
             copyData[findIndex].data = copyData[findIndex].data.filter(y => y.id !== listID);
-            updateTodobox(copyData);
+
             updateRemoveOneListModalStatus(false);
             if(initialPage === "listInfoModal") {
                 updateStyleChange(false);
             }
+
+            updateTodobox(copyData);
         })
         .catch( err => {
             console.log(err);
         })
-    }
+    };
+
     const cancel = () => {
         updateRemoveOneListModalStatus(false);
         if(initialPage === "listInfoModal") {
             updateStyleChange(false);
         }
-    }    
+    };
 
     return ReactDOM.createPortal(
             <div className ="modal-block-container">

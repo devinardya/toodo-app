@@ -22,7 +22,7 @@ const RenameTitleModal = ({
     const renameTitleChange = (e) => {
         let input = e.target.value;
         updateTitleChange(input)
-    }
+    };
 
     const renameListTitle = (e, todoId, listID) => {
         e.preventDefault();
@@ -42,12 +42,14 @@ const RenameTitleModal = ({
                 let findDataIndex = copyData[findIndex].data.findIndex(y => y.id === listID);
                 copyData[findIndex].data[findDataIndex].todoTitle = response.data.todoTitle;
                 console.log("copyData before save", copyData);
-                updateTodobox(copyData);
+                
                 updateRenameListModalStatus(false);
                 if(initialPage === "listInfoModal") {
                     updateRenameListModalStatus(false);
                     updateStyleChange(false);
                 }
+
+                updateTodobox(copyData);
                 
             })
             .catch( err => {
@@ -57,7 +59,7 @@ const RenameTitleModal = ({
             updateErrorStatus(true);
         }
         
-    }
+    };
 
     const cancel = () => {
         updateRenameListModalStatus(false);
@@ -65,7 +67,7 @@ const RenameTitleModal = ({
             updateRenameListModalStatus(false);
             updateStyleChange(false);
         }
-    }
+    };
 
     return ReactDOM.createPortal(
             <div className ="modal-block-container">

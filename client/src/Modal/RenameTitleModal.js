@@ -25,7 +25,7 @@ const RenameTitleModal = ({
         } else {
             updateRenameBoxInputError(false);
         }
-    }
+    };
 
     const renameTitle = (e, id) => {
         e.preventDefault();
@@ -42,8 +42,9 @@ const RenameTitleModal = ({
                 let index = copyData.findIndex( x => x._id === id);
                 copyData[index].title = response.data.title;
                 console.log("copyData before save", copyData);
-                updateTodobox(copyData);
+
                 updateRenameTitleModalStatus(false);
+                updateTodobox(copyData);
             })
             .catch( err => {
                 console.log(err);
@@ -51,11 +52,11 @@ const RenameTitleModal = ({
         } else {
             updateErrorStatus(true);
         }
-    }
+    };
 
     const cancel = () => {
         updateRenameTitleModalStatus(false);
-    }
+    };
 
     return ReactDOM.createPortal(
             <div className ="modal-block-container--rename">

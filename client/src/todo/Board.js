@@ -22,7 +22,7 @@ const Board = ({location}) => {
           })
         .then(response => {   
             console.log(response.data);
-            updateTodobox(response.data)
+            updateTodobox(response.data);
         })
         .catch((error) => {
              console.log(error);

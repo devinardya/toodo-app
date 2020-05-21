@@ -32,11 +32,11 @@ const TodoBox = ({
 
     const activateRename = () => {
         updateRenameTitleModalStatus(true);
-    }
+    };
 
     const addListActive = () => {
         updateAddListFormActive(true);
-    }
+    };
 
     const addNewList = (e, id) => {
 
@@ -98,11 +98,11 @@ const TodoBox = ({
 		dropdownClass = 'board-main-dropdown active';
 	} else {
 		dropdownClass = 'board-main-dropdown';
-    }
+    };
     
     const cancel = () => {
         updateAddListFormActive(false);
-    }
+    };
 
     return <div className="board-block-main--eachbox">
                 <div className="title-menu-button" >
@@ -112,7 +112,10 @@ const TodoBox = ({
                             <IoMdMenu size="18px" />
                         </button>
                         <div className= {dropdownClass}>
-                            <button onClick={() => removeTodoBox()}><TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>Remove</button>
+                            <button onClick={() => removeTodoBox()}>
+                                <TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
+                                Remove
+                            </button>
                             { removeTodoBoxModalStatus && <RemoveToDoModal 
                                 todobox = {todobox}
                                 updateTodobox = {updateTodobox}
@@ -122,7 +125,10 @@ const TodoBox = ({
                                 userName = {userName}
                             />
                             }
-                            <button onClick={() => activateRename()}><MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>Rename</button>
+                            <button onClick={() => activateRename()}>
+                                <MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
+                                Rename
+                            </button>
                             { renameTitleModalStatus && <RenameTitleModal 
                                 todoID = {todo._id}
                                 updateRenameTitleModalStatus = {updateRenameTitleModalStatus}
@@ -160,17 +166,13 @@ const TodoBox = ({
                             </div>
                         </form>
                         : 
-                        <button className="board-block-main-addButton" onClick={() => addListActive()}><IoIosAddCircle style={{position:"relative", top: "2px", marginRight:"10px"}}/>Add new list</button>
+                        <button className="board-block-main-addButton" onClick={() => addListActive()}>
+                            <IoIosAddCircle style={{position:"relative", top: "2px", marginRight:"10px"}}/>
+                            Add new list
+                        </button>
                     }
-                    
-                    
                 </div>
-            </div>
-            
-            
-       
-           
-            
+            </div>         
 };
 
 export default TodoBox;

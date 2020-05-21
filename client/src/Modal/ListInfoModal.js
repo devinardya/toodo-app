@@ -26,17 +26,17 @@ const ListInfoModal = ({
 
     const editDescription = () => {
         updateDescBox(true);
-    }
+    };
 
     const editTitle = () => {
         updateRenameListModalStatus(true); 
         updateStyleChange(true);
-    }
+    };
 
     const inputChange = (e) => {
         let input = e.target.value;
         updateDescChange(input);
-    }
+    };
 
     const renameDescList = (e, todoId, listID) => {
         e.preventDefault();
@@ -52,7 +52,7 @@ const ListInfoModal = ({
             let copyData = [...todobox];
             let findIndex = copyData.findIndex(x => x._id === todoId);
             let findDataIndex = copyData[findIndex].data.findIndex(y => y.id === listID);
-            copyData[findIndex].data[findDataIndex].description = descChange;
+            copyData[findIndex].data[findDataIndex].description = response.data.description;
             console.log("copyData before save", copyData);
             updateTodobox(copyData);
             updateDescBox(false);
@@ -61,24 +61,25 @@ const ListInfoModal = ({
             console.log(err);
         })
         
-    }
+    };
 
     const deleteList = () => {
         updateRemoveOneListModalStatus(true);
         updateStyleChange(true);
-    }
+    };
 
     const cancel = () => {
         updateDescBox(false);
-    }
+    };
+
     const exitModal = () => {
         updateListInfoModalStatus(false);
-    }
+    };
 
     const moveList = () => {
         updateMoveListModalStatus(true);
         updateStyleChange(true);
-    }
+    };
 
     let styleClass;
     if(!styleChange) {

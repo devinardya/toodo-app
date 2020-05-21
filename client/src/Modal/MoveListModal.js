@@ -30,24 +30,26 @@ const MoveListModal = ({
             axios.patch('/todos/'+todoid+'/todos/'+selectValue+'/list/'+listid+'/user/'+userName)
             .then( response => {
                 console.log(response.data)
-                updateTodobox(response.data);
+                
                 updateMoveListModalStatus(false);
                 if(initialPage === "listInfoModal") {
                     updateStyleChange(false);
                 }
+
+                updateTodobox(response.data);
             })
             .catch( err => {
                 console.log(err);
             })
         }
-    }
+    };
 
     const cancel = () => {
         updateMoveListModalStatus(false);
         if(initialPage === "listInfoModal") {
             updateStyleChange(false);
         }
-    }
+    };
 
     return ReactDOM.createPortal(
             <div className ="modal-block-container">

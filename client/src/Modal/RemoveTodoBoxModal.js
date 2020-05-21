@@ -16,11 +16,12 @@ const RemoveTodoBoxModal = ({
       
         axios.delete("/todos/" + id+"/user/"+userName)
         .then(response => {
-            console.log("RESPONSE", response)
+            console.log("RESPONSE", response);
             let copy = [...todobox];
-            let newData = copy.filter(x => x._id !== id)
-            updateTodobox(newData);
+            let newData = copy.filter(x => x._id !== id);
+
             updateRemoveTodoBoxModalStatus(false);
+            updateTodobox(newData);
         })
         .catch(err => {
             console.log(err);
@@ -30,7 +31,7 @@ const RemoveTodoBoxModal = ({
 
     const cancel = () => {
         updateRemoveTodoBoxModalStatus(false);
-    }    
+    }; 
 
     return ReactDOM.createPortal(
             <div className ="modal-block-container">
