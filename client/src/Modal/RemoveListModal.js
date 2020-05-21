@@ -3,7 +3,17 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import './removeModal.scss'
 
-const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTitle, todobox, updateTodobox, userName}) => {
+const DeleteListModal = ({
+    todoID, 
+    listId, 
+    updateRemoveOneListModalStatus, 
+    listTitle, 
+    todobox, 
+    updateTodobox, 
+    userName, 
+    updateStyleChange,
+    initialPage,
+}) => {
 
     const deleteList = (todoId, listID) => {
      
@@ -15,6 +25,9 @@ const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTi
             copyData[findIndex].data = copyData[findIndex].data.filter(y => y.id !== listID);
             updateTodobox(copyData);
             updateRemoveOneListModalStatus(false);
+            if(initialPage === "listInfoModal") {
+                updateStyleChange(false);
+            }
         })
         .catch( err => {
             console.log(err);
@@ -22,6 +35,9 @@ const DeleteListModal = ({todoID, listId, updateRemoveOneListModalStatus, listTi
     }
     const cancel = () => {
         updateRemoveOneListModalStatus(false);
+        if(initialPage === "listInfoModal") {
+            updateStyleChange(false);
+        }
     }    
 
     return ReactDOM.createPortal(

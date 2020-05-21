@@ -56,6 +56,14 @@ $color-button-cancel : #008a94;
             margin-bottom: 30px;
             h3 {
                 color: $color-button-cancel;
+
+                span {
+                    color: $color-text-dataDesc;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
             }
 
             p {
@@ -145,25 +153,47 @@ $color-button-cancel : #008a94;
                 padding: 5px 20px 20px 10px;
                 border: none;
                 font-size: 14px;
-                background-color: #dddddd;
+                background-color: #ebebeb;
             }
         }
 
-        .modal-block-container--listinfo-box__removeList {
-            margin-top: 40px;
-            padding: 10px 25px;
-            border: none;
-            background-color: rgb(197, 99, 99);
-            border-radius: 5px;
-            color: $color-primary;
-            font-size: 12px;
-            font-weight: 600;
+        .modal-block-container--listinfo-box__optionButtons {
 
-            &:hover {
-                background-color: rgb(163, 37, 37);
-                cursor: pointer;
+            .modal-block-container--listinfo-box__removeList {
+                margin-top: 40px;
+                padding: 10px 25px;
+                border: none;
+                background-color: rgb(197, 99, 99);
+                border-radius: 5px;
+                color: $color-primary;
+                font-size: 12px;
+                font-weight: 600;
+    
+                &:hover {
+                    background-color: rgb(163, 37, 37);
+                    cursor: pointer;
+                }
+            }
+
+            .modal-block-container--listinfo-box__moveList {
+                margin-top: 40px;
+                margin-left: 20px;
+                padding: 10px 25px;
+                border: none;
+                background-color: $color-text-title;
+                border-radius: 5px;
+                color: $color-primary;
+                font-size: 12px;
+                font-weight: 600;
+    
+                &:hover {
+                    background-color: #f58b00;
+                    cursor: pointer;
+                }
             }
         }
+
+        
 
         .exitInfoModal {
             width: 40px;
@@ -189,4 +219,8 @@ $color-button-cancel : #008a94;
             
         }
     }
+}
+
+.modal-block-container--listinfo.modalActive {
+    display: none;
 }

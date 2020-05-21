@@ -3,7 +3,17 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import './moveListModal.scss'
 
-const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, todobox, updateTodobox, userName}) => {
+const MoveListModal = ({
+    todoID, 
+    listId, 
+    listTitle, 
+    updateMoveListModalStatus, 
+    todobox, 
+    updateTodobox, 
+    userName,
+    initialPage,
+    updateStyleChange,
+}) => {
 
     const [selectValue, updateSelectValue] = useState("");
 
@@ -19,19 +29,12 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
         if(selectValue.length !== 0 && selectValue !== undefined) {
             axios.patch('/todos/'+todoid+'/todos/'+selectValue+'/list/'+listid+'/user/'+userName)
             .then( response => {
-                console.log(response)
-                let copyData = [...todobox];
-                let oldBoxIndex = copyData.findIndex(x => x._id === todoid);
-                let listIndex = copyData[oldBoxIndex].data.findIndex(y => y.id === listid);
-                let newBoxIndex = copyData.findIndex(z => z._id === selectValue);
-                let movedData = copyData[oldBoxIndex].data[listIndex];
-                
-                copyData[oldBoxIndex].data = copyData[oldBoxIndex].data.filter(h => h.id !== listid);
-                copyData[newBoxIndex].data = [...copyData[newBoxIndex].data, movedData];
-
-                updateTodobox(copyData); 
-                //updateTodobox(response.data);
+                console.log(response.data)
+                updateTodobox(response.data);
                 updateMoveListModalStatus(false);
+                if(initialPage === "listInfoModal") {
+                    updateStyleChange(false);
+                }
             })
             .catch( err => {
                 console.log(err);
@@ -41,6 +44,9 @@ const MoveListModal = ({todoID, listId, listTitle, updateMoveListModalStatus, to
 
     const cancel = () => {
         updateMoveListModalStatus(false);
+        if(initialPage === "listInfoModal") {
+            updateStyleChange(false);
+        }
     }
 
     return ReactDOM.createPortal(

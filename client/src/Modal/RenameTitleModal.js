@@ -3,7 +3,14 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import './renameTitleModal.scss'
 
-const RenameTitleModal = ({todoID, updateRenameTitleModalStatus, oldTitle, todobox, updateTodobox, userName}) => {
+const RenameTitleModal = ({
+    todoID, 
+    updateRenameTitleModalStatus, 
+    oldTitle, 
+    todobox, 
+    updateTodobox, 
+    userName
+}) => {
 
     const [inputChange, updateInputChange] = useState(oldTitle);
     const [errorStatus, updateErrorStatus] = useState(false);

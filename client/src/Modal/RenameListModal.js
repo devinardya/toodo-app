@@ -3,7 +3,18 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import './renameListModal.scss'
 
-const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitle, listDesc, todobox, updateTodobox, userName}) => {
+const RenameTitleModal = ({
+    todoID, 
+    listId, 
+    updateRenameListModalStatus, 
+    listTitle, 
+    listDesc, 
+    todobox, 
+    updateTodobox, 
+    userName, 
+    updateStyleChange,
+    initialPage,
+}) => {
 
     const [titleChange, updateTitleChange] = useState(listTitle);
     const [errorStatus, updateErrorStatus] = useState(false);
@@ -29,10 +40,15 @@ const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitl
                 let copyData = [...todobox];
                 let findIndex = copyData.findIndex(x => x._id === todoId);
                 let findDataIndex = copyData[findIndex].data.findIndex(y => y.id === listID);
-                copyData[findIndex].data[findDataIndex].todoTitle = titleChange;
+                copyData[findIndex].data[findDataIndex].todoTitle = response.data.todoTitle;
                 console.log("copyData before save", copyData);
                 updateTodobox(copyData);
                 updateRenameListModalStatus(false);
+                if(initialPage === "listInfoModal") {
+                    updateRenameListModalStatus(false);
+                    updateStyleChange(false);
+                }
+                
             })
             .catch( err => {
                 console.log(err);
@@ -45,6 +61,10 @@ const RenameTitleModal = ({todoID, listId, updateRenameListModalStatus, listTitl
 
     const cancel = () => {
         updateRenameListModalStatus(false);
+        if(initialPage === "listInfoModal") {
+            updateRenameListModalStatus(false);
+            updateStyleChange(false);
+        }
     }
 
     return ReactDOM.createPortal(

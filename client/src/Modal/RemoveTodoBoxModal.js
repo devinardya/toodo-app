@@ -3,7 +3,14 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import './removeModal.scss'
 
-const RemoveTodoBoxModal = ({todoID, updateRemoveTodoBoxModalStatus, oldTitle, todobox, updateTodobox, userName}) => {
+const RemoveTodoBoxModal = ({
+    todoID, 
+    updateRemoveTodoBoxModalStatus, 
+    oldTitle, 
+    todobox, 
+    updateTodobox, 
+    userName
+}) => {
 
     const removeTodoBox = (id) => {
       

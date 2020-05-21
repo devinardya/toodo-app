@@ -3,6 +3,9 @@ import axios from 'axios';
 import {IoMdClose, IoIosList, IoMdList} from 'react-icons/io';
 import {MdModeEdit} from 'react-icons/md';
 import ReactDOM from 'react-dom';
+import RenameListModal from '../Modal/RenameListModal';
+import RemoveListModal from '../Modal/RemoveListModal';
+import MoveListModal from '../Modal/MoveListModal';
 import './listInfoModal.scss'
 
 const ListInfoModal = ({
@@ -15,10 +18,19 @@ const ListInfoModal = ({
 }) => {
 
     const [editDescBox, updateDescBox] = useState(false);
-    const [descChange, updateDescChange] = useState(x.description)
+    const [descChange, updateDescChange] = useState(x.description);
+    const [renameListModalStatus, updateRenameListModalStatus] = useState(false);
+    const [removeOneListModalStatus, updateRemoveOneListModalStatus] = useState(false);
+    const [moveListModalStatus, updateMoveListModalStatus] = useState(false);
+    const [styleChange, updateStyleChange] = useState(false);
 
     const editDescription = () => {
         updateDescBox(true);
+    }
+
+    const editTitle = () => {
+        updateRenameListModalStatus(true); 
+        updateStyleChange(true);
     }
 
     const inputChange = (e) => {
@@ -40,7 +52,6 @@ const ListInfoModal = ({
             let copyData = [...todobox];
             let findIndex = copyData.findIndex(x => x._id === todoId);
             let findDataIndex = copyData[findIndex].data.findIndex(y => y.id === listID);
-            //copyData[findIndex].data[findDataIndex].todoTitle = titleChange;
             copyData[findIndex].data[findDataIndex].description = descChange;
             console.log("copyData before save", copyData);
             updateTodobox(copyData);
@@ -52,20 +63,9 @@ const ListInfoModal = ({
         
     }
 
-    const deleteList = (todoId, listID) => {
-     
-        axios.delete("/todos/"+todoId+"/list/"+listID+"/user/"+userName)
-        .then(response => {
-            console.log("response data", response);
-            let copyData = [...todobox];
-            let findIndex = copyData.findIndex(x => x._id === todoId);
-            copyData[findIndex].data = copyData[findIndex].data.filter(y => y.id !== listID);
-            updateTodobox(copyData);
-            updateListInfoModalStatus(false);
-        })
-        .catch( err => {
-            console.log(err);
-        })
+    const deleteList = () => {
+        updateRemoveOneListModalStatus(true);
+        updateStyleChange(true);
     }
 
     const cancel = () => {
@@ -75,12 +75,40 @@ const ListInfoModal = ({
         updateListInfoModalStatus(false);
     }
 
+    const moveList = () => {
+        updateMoveListModalStatus(true);
+        updateStyleChange(true);
+    }
+
+    let styleClass;
+    if(!styleChange) {
+        styleClass = "modal-block-container--listinfo"
+    } else {
+        styleClass = "modal-block-container--listinfo modalActive"
+    }
+
 
     return ReactDOM.createPortal(
-            <div className ="modal-block-container--listinfo">
+            <div className ={styleClass}>
                 <div className="modal-block-container--listinfo-box">
                     <div className="modal-block-container--listinfo-box__titleInfo">
-                        <h3><IoIosList style={{position: "relative", top:"2px", marginRight:"10px"}}/>{x.todoTitle}</h3>
+                        <h3><IoIosList style={{position: "relative", top:"2px", marginRight:"10px"}}/>
+                            {x.todoTitle}
+                            <span onClick={editTitle}><MdModeEdit style={{position: "relative", top:"3px", left:"10px"}} /></span>
+                        </h3>
+                        { renameListModalStatus && <RenameListModal 
+                            todoID = {todo._id}
+                            listId = {x.id}
+                            updateRenameListModalStatus = {updateRenameListModalStatus}
+                            listTitle = {x.todoTitle}
+                            listDesc = {x.description}
+                            todobox = {todobox}
+                            updateTodobox = {updateTodobox}
+                            userName = {userName}
+                            updateStyleChange = {updateStyleChange}
+                            initialPage = "listInfoModal"
+                        />
+                        }
                         <p>in todo box <span>{todo.title}</span></p>
                     </div>
                     <div className="modal-block-container--listinfo-box__descInfo">
@@ -102,7 +130,34 @@ const ListInfoModal = ({
                         </div>
                         }
                     </div>
-                    <button onClick={() => deleteList(todo._id, x.id)} className="modal-block-container--listinfo-box__removeList">Remove list</button>
+                    <div className="modal-block-container--listinfo-box__optionButtons">
+                        <button onClick={deleteList} className="modal-block-container--listinfo-box__removeList">Remove list</button>
+                        {removeOneListModalStatus && <RemoveListModal 
+                                todoID = {todo._id}
+                                updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
+                                listId = {x.id}
+                                listTitle = {x.todoTitle}
+                                todobox = {todobox}
+                                updateTodobox = {updateTodobox}
+                                userName = {userName}
+                                updateStyleChange = {updateStyleChange}
+                                initialPage = "listInfoModal"
+                            />
+                            }
+                        <button onClick={moveList} className="modal-block-container--listinfo-box__moveList">Move list</button>
+                        {moveListModalStatus && <MoveListModal 
+                                todoID = {todo._id}
+                                listId = {x.id}
+                                listTitle = {x.todoTitle}
+                                updateMoveListModalStatus = {updateMoveListModalStatus}
+                                todobox = {todobox}
+                                updateTodobox = {updateTodobox}
+                                userName = {userName}
+                                updateStyleChange = {updateStyleChange}
+                                initialPage = "listInfoModal"
+                            />
+                            }
+                    </div>
                     <div className="exitInfoModal" onClick={exitModal}>
                         <span><IoMdClose/></span>
                     </div>

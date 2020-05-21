@@ -59,6 +59,7 @@ $color-text-cancel : #a7a7a7;
 
         p {
             width:80%;
+            text-align: left;
             font-family: $Open-Sans;
             color: $color-text-dataDesc;
 
@@ -69,9 +70,10 @@ $color-text-cancel : #a7a7a7;
         }
 
         select {
+            align-self: start;
             width: 250px;
             height: 40px;
-            margin: 30px 0;
+            margin: 30px 0 30px 10.5%;
 
             option {
                 font-family: $Open-Sans;
