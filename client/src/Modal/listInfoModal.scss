@@ -158,36 +158,52 @@ $color-button-cancel : #008a94;
         }
 
         .modal-block-container--listinfo-box__optionButtons {
+            align-self: flex-start;
 
             .modal-block-container--listinfo-box__removeList {
                 margin-top: 40px;
-                padding: 10px 25px;
+                padding: 10px 10px;
                 border: none;
-                background-color: rgb(197, 99, 99);
+                background-color: transparent;
                 border-radius: 5px;
-                color: $color-primary;
+                color: $color-text-dataDesc;
                 font-size: 12px;
                 font-weight: 600;
     
                 &:hover {
-                    background-color: rgb(163, 37, 37);
+                    color: rgb(163, 37, 37);
                     cursor: pointer;
                 }
             }
 
             .modal-block-container--listinfo-box__moveList {
                 margin-top: 40px;
-                margin-left: 20px;
-                padding: 10px 25px;
+                padding: 10px 10px;
                 border: none;
-                background-color: $color-text-title;
+                background-color:transparent;
                 border-radius: 5px;
-                color: $color-primary;
+                color: $color-text-dataDesc;
                 font-size: 12px;
                 font-weight: 600;
     
                 &:hover {
-                    background-color: #f58b00;
+                    color: #f58b00;
+                    cursor: pointer;
+                }
+            }
+
+            .modal-block-container--listinfo-box__closeModal {
+                margin-top: 40px;
+                padding: 10px 10px;
+                border: none;
+                background-color:transparent;
+                border-radius: 5px;
+                color: $color-text-dataDesc;
+                font-size: 12px;
+                font-weight: 600;
+    
+                &:hover {
+                    color: $color-secondary;
                     cursor: pointer;
                 }
             }

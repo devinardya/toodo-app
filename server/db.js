@@ -21,6 +21,7 @@ client.connect();  */
 
 dotenv.config({path: './config.env'})
 
+<<<<<<< HEAD
 
 const uri = process.env.DATABASE.replace(
     '<PASSWORD>',
@@ -40,6 +41,8 @@ try {
 }
 
 const dbName = process.env.DB_NAME || 'toodo';
+=======
+>>>>>>> master
 
 module.exports = {
    getClient : function() {

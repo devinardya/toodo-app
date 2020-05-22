@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {IoMdClose, IoIosList, IoMdList} from 'react-icons/io';
+import {TiDelete, TiArrowForward} from 'react-icons/ti';
 import {MdModeEdit} from 'react-icons/md';
 import ReactDOM from 'react-dom';
 import RenameListModal from '../Modal/RenameListModal';
@@ -120,7 +121,7 @@ const ListInfoModal = ({
                         </h3>
                         {editDescBox || x.description.length === 0 ? 
                         <form onSubmit={(e) => renameDescList(e, todo._id, x.id )}>
-                            <input onChange={inputChange} type="text" value={descChange} placeholder={x.description.length === 0 ? "Add a more detailed description" : null} />
+                            <input onChange={inputChange} type="text" value={descChange} placeholder={x.description.length === 0 ? "Add a more detailed description..." : null} />
                             <div className="modal-block-container--listinfo-box__descInfo--formbuttons">
                                 <button>Save</button>
                                 {x.description.length !== 0 ? <div className="board-block-main-cancel" onClick={cancel}><IoMdClose /></div> : null}
@@ -133,7 +134,10 @@ const ListInfoModal = ({
                         }
                     </div>
                     <div className="modal-block-container--listinfo-box__optionButtons">
-                        <button onClick={deleteList} className="modal-block-container--listinfo-box__removeList">Remove list</button>
+                        <button onClick={deleteList} className="modal-block-container--listinfo-box__removeList">
+                            <TiDelete size="16px" style={{marginRight: "3px", position: "relative", top:"3px"}}/>   
+                            Remove item
+                        </button>
                         {removeOneListModalStatus && <RemoveListModal 
                                 todoID = {todo._id}
                                 updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
@@ -146,7 +150,10 @@ const ListInfoModal = ({
                                 initialPage = "listInfoModal"
                             />
                             }
-                        <button onClick={moveList} className="modal-block-container--listinfo-box__moveList">Move list</button>
+                        <button onClick={moveList} className="modal-block-container--listinfo-box__moveList">
+                        <TiArrowForward size="16px" style={{marginRight: "3px", position: "relative", top:"3px"}}/>
+                            Move item
+                        </button>
                         {moveListModalStatus && <MoveListModal 
                                 todoID = {todo._id}
                                 listId = {x.id}
@@ -159,6 +166,10 @@ const ListInfoModal = ({
                                 initialPage = "listInfoModal"
                             />
                             }
+                        <button onClick={exitModal} className="modal-block-container--listinfo-box__closeModal">
+                            <IoMdClose size="16px" style={{marginRight: "3px", position: "relative", top:"3px"}}/>
+                            Close
+                        </button>
                     </div>
                     <div className="exitInfoModal" onClick={exitModal}>
                         <span><IoMdClose/></span>

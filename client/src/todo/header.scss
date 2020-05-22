@@ -51,7 +51,7 @@ $color-text-dataDate : #737373;
     .board-header--logo.login {
         .board-logo {
             position: absolute;
-            top: 5px;
+            top: 20px;
             left: 0px;
             width: 220px;
         }
@@ -68,6 +68,7 @@ $color-text-dataDate : #737373;
             @include flex-row( flex-end, center );
             padding: 10px 40px;
             margin-right: 50px;
+            margin-top: 20px;
             border-radius: 30px;
             background-color: $color-primary;
             z-index: 9999;
