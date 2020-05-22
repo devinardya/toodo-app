@@ -48,6 +48,15 @@ $color-text-dataDate : #737373;
         }
     }
 
+    .board-header--logo.login {
+        .board-logo {
+            position: absolute;
+            top: 5px;
+            left: 0px;
+            width: 220px;
+        }
+    }
+
     .board-header--text {
         width: 50%;
         height: 100%;

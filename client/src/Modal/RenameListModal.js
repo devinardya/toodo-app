@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import './renameListModal.scss'
+import './renameListModal.scss';
+let url = "https://lit-peak-62083.herokuapp.com"
 
 const RenameTitleModal = ({
     todoID, 
@@ -34,7 +35,7 @@ const RenameTitleModal = ({
                         description: listDesc
                     }
             
-            axios.patch("/todos/"+todoId+"/list/"+listID+"/user/"+userName, data)
+            axios.patch(url+"/todos/"+todoId+"/list/"+listID+"/user/"+userName, data)
             .then(response => {
                 console.log(response);
                 let copyData = [...todobox];

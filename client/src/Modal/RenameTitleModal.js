@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import './renameTitleModal.scss'
+import './renameTitleModal.scss';
+let url = "https://lit-peak-62083.herokuapp.com"
 
 const RenameTitleModal = ({
     todoID, 
@@ -35,7 +36,7 @@ const RenameTitleModal = ({
                         title : inputChange
                     }
 
-            axios.put("/todos/"+ id + "/user/" + userName, data)
+            axios.put(url+"/todos/"+ id + "/user/" + userName, data)
             .then( response => {
                 console.log(response);
                 let copyData = [...todobox];

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import './moveListModal.scss'
+import './moveListModal.scss';
+let url = "https://lit-peak-62083.herokuapp.com"
 
 const MoveListModal = ({
     todoID, 
@@ -27,7 +28,7 @@ const MoveListModal = ({
         e.preventDefault();
         
         if(selectValue.length !== 0 && selectValue !== undefined) {
-            axios.patch('/todos/'+todoid+'/todos/'+selectValue+'/list/'+listid+'/user/'+userName)
+            axios.patch(url+'/todos/'+todoid+'/todos/'+selectValue+'/list/'+listid+'/user/'+userName)
             .then( response => {
                 console.log(response.data)
                 

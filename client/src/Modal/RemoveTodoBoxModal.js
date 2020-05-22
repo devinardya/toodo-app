@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import './removeModal.scss'
+import './removeModal.scss';
+let url = "https://lit-peak-62083.herokuapp.com"
 
 const RemoveTodoBoxModal = ({
     todoID, 
@@ -14,7 +15,7 @@ const RemoveTodoBoxModal = ({
 
     const removeTodoBox = (id) => {
       
-        axios.delete("/todos/" + id+"/user/"+userName)
+        axios.delete(url+"/todos/" + id+"/user/"+userName)
         .then(response => {
             console.log("RESPONSE", response);
             let copy = [...todobox];

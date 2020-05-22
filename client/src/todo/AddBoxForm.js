@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+let url = "https://lit-peak-62083.herokuapp.com"
 
 const AddBoxForm = ({userName, todobox, updateTodobox}) => {
 
@@ -25,7 +26,7 @@ const AddBoxForm = ({userName, todobox, updateTodobox}) => {
                 title : inputAddTodoBox
             }
 
-            axios.post("/todos/"+userName, input)
+            axios.post(url+"/todos/"+userName, input)
             .then(response => {   
                 console.log(response);
                //updateTodobox(response.data)

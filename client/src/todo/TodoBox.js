@@ -6,6 +6,7 @@ import axios from 'axios';
 import RenameTitleModal from '../Modal/RenameTitleModal';
 import RemoveToDoModal from '../Modal/RemoveTodoBoxModal';
 import ListBox from './ListBox';
+let url = "https://lit-peak-62083.herokuapp.com"
 
 const TodoBox = ({
     todobox,
@@ -49,7 +50,7 @@ const TodoBox = ({
                 todoTitle : addListInput,
                 description : "",
             }
-            axios.post("/list/" + id + "/user/" + userName, input)
+            axios.post(url+"/list/" + id + "/user/" + userName, input)
             .then(response => {   
                 console.log("response after adding data", response.data);
                 let copyData = [...todobox];

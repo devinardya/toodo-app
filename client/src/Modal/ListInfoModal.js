@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 import RenameListModal from '../Modal/RenameListModal';
 import RemoveListModal from '../Modal/RemoveListModal';
 import MoveListModal from '../Modal/MoveListModal';
-import './listInfoModal.scss'
+import './listInfoModal.scss';
+let url = "https://lit-peak-62083.herokuapp.com"
 
 const ListInfoModal = ({
     todobox,
@@ -46,7 +47,7 @@ const ListInfoModal = ({
                     description: descChange
                 }
         
-        axios.patch("/todos/"+todoId+"/list/"+listID+"/user/"+userName, data)
+        axios.patch(url+"/todos/"+todoId+"/list/"+listID+"/user/"+userName, data)
         .then(response => {
             console.log(response);
             let copyData = [...todobox];
@@ -110,7 +111,7 @@ const ListInfoModal = ({
                             initialPage = "listInfoModal"
                         />
                         }
-                        <p>in todo box <span>{todo.title}</span></p>
+                        <p>in todo list <span>{todo.title}</span></p>
                     </div>
                     <div className="modal-block-container--listinfo-box__descInfo">
                         <h3><IoMdList style={{position: "relative", top:"2px", marginRight:"10px"}}/>

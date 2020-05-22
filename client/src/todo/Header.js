@@ -23,7 +23,7 @@ const Header = ({userName, logout, initialPage}) => {
                         </header>
     } else if (initialPage === "login") {
         renderHeader = <header className="board-block-header">
-                            <div className="board-header--logo">
+                            <div className="board-header--logo login">
                                 <figure className="board-logo">
                                     <img src={logoicon} alt="toodo logo" />
                                 </figure>

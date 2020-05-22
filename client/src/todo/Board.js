@@ -6,18 +6,19 @@ import Header from './Header';
 import MainBox from './MainBox'
 import './board.scss';
 
+let url = "https://lit-peak-62083.herokuapp.com"
+
 const Board = ({location}) => {
 
     const [todobox, updateTodobox] = useState([]);
     const [pageStatus, updatePageStatus] = useState(false);
     let userName = location.state.user;
-    
 
     useEffect( () => {
 
         let source = axios.CancelToken.source();
 
-        axios.get("/todos/"+userName, {
+        axios.get(url+"/todos/"+userName, {
             cancelToken: source.token
           })
         .then(response => {   

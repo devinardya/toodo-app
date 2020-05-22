@@ -2,13 +2,14 @@ const express = require("express");
 const uuid = require("uuid");
 const app = express();
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const {getDB, createObjectId} = require("./db")
 dotenv.config({path: './config.env'});
 
 const port = process.env.PORT || 8090;
 
-
+app.use(cors());
 // Middleware to logged the method, path, statuscode and amount of time needed
 app.use((req, res, next) => {
     let start = Date.now();
@@ -47,7 +48,6 @@ app.use((req, res, next) => {
       next();
     }
   });
-
 
 
 // TO GET THE WHOLE DATA FROM THE DATABASE
