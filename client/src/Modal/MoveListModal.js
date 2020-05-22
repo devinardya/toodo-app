@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
+import {MdExpandMore} from 'react-icons/md';
 import './moveListModal.scss';
+
 let url = "https://lit-peak-62083.herokuapp.com"
 
 const MoveListModal = ({
@@ -57,16 +59,19 @@ const MoveListModal = ({
                 <form onSubmit={(e) => moveOneList(e, todoID, listId)}>
                     <h2>Move Item</h2>
                     <p>Please choose a new todo list for <span>{listTitle}</span>.</p>
-                    <select value={selectValue} onChange={handleChange}>
-                        <option value="">---- Todo list ----</option>
-                        {todobox.map(todo => {
-                            if(todo._id !== todoID) {
-                                return <option value={todo._id} key={todo._id}>{todo.title}</option>
-                            } else {
-                                return null;
-                            }
-                        })}
-                    </select>
+                    <div className="select-container">
+                        <select value={selectValue} onChange={handleChange}>
+                            <option value="">---- Todo list ----</option>
+                            {todobox.map(todo => {
+                                if(todo._id !== todoID) {
+                                    return <option value={todo._id} key={todo._id}>{todo.title}</option>
+                                } else {
+                                    return null;
+                                }
+                            })}
+                        </select>
+                        <MdExpandMore className="select-icon" />
+                    </div>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
                         <button className="modal-block-move">Move</button>
