@@ -43,9 +43,10 @@ $color-text-cancel : #a7a7a7;
 
     .modal-block-box {
         width: 50%;
-        height: 40%;
+        height: auto;
         background-color: $color-primary;
         border-radius: 20px;
+        padding: 60px 40px;
         text-align: center;
         @include flex-column(center, center);
 
