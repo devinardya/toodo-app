@@ -43,7 +43,7 @@ $color-button-cancel : #008a94;
     .board-block-main {
         height: 90%;
         width: 100%;
-        padding: 0 20px 20px 20px;
+        padding: 20px;
         overflow: hidden;
         @include flex-row(flex-start, flex-start);
 
@@ -269,7 +269,7 @@ $color-button-cancel : #008a94;
                 ul {
                     list-style-type: none;
                     overflow-y: auto;
-                    max-height: 75vh;
+                    max-height: 65vh;
                 }
     
                 .board-block-main--list {

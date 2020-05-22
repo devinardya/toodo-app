@@ -140,6 +140,7 @@ const ListInfoModal = ({
                         </button>
                         {removeOneListModalStatus && <RemoveListModal 
                                 todoID = {todo._id}
+                                todoTitle = {todo.title}
                                 updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
                                 listId = {x.id}
                                 listTitle = {x.todoTitle}

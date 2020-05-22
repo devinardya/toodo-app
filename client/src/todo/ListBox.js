@@ -62,6 +62,7 @@ const ListBox = ({
                             todobox = {todobox}
                             updateTodobox = {updateTodobox}
                             userName = {userName}
+                            todoTitle = {todo.title}
                         />
                         }
                         <button onClick={() => renameOneList()}>
