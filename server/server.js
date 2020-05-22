@@ -1,7 +1,13 @@
 const express = require("express");
 const uuid = require("uuid");
 const app = express();
+const dotenv = require('dotenv');
+
 const {getDB, createObjectId} = require("./db")
+dotenv.config({path: './config.env'});
+
+const port = process.env.PORT || 8090;
+
 
 // Middleware to logged the method, path, statuscode and amount of time needed
 app.use((req, res, next) => {
@@ -290,6 +296,6 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
 });
 
 
-app.listen(8090, () => {
-    console.log("Started server at 8090")
+app.listen(port, () => {
+    console.log("Started server at ", port)
 });
