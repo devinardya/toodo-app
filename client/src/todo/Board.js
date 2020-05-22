@@ -31,6 +31,7 @@ const Board = ({location}) => {
         return () => {
           source.cancel('Operation canceled by the user.'); 
       }
+ 
 
     }, [userName]);
 

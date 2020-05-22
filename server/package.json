@@ -15,5 +15,8 @@
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.15",
     "uuid": "^8.0.0"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }
