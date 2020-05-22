@@ -56,13 +56,13 @@ const ListBox = ({
                         </button>
                         { removeOneListModalStatus && <RemoveListModal 
                             todoID = {todo._id}
+                            todoTitle = {todo.title}
                             updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
                             listId = {x.id}
                             listTitle = {x.todoTitle}
                             todobox = {todobox}
                             updateTodobox = {updateTodobox}
                             userName = {userName}
-                            todoTitle = {todo.title}
                         />
                         }
                         <button onClick={() => renameOneList()}>

@@ -38,7 +38,7 @@ $color-text-dataDate : #737373;
     .board-header--logo {
         width: 50%;
         height: 100%;
-        @include flex-column( center, flex-start );
+        @include flex-column( center, flex-start);
 
         .board-logo {
             padding-left: 60px;
@@ -49,12 +49,11 @@ $color-text-dataDate : #737373;
     }
 
     .board-header--logo.login {
-        .board-logo {
-            position: absolute;
-            top: 20px;
-            left: 0px;
-            width: 220px;
-        }
+        @include flex-column( flex-end, flex-start);
+       .board-logo {
+           width: 210px;
+           
+       }
     }
 
     .board-header--text {
@@ -70,6 +69,7 @@ $color-text-dataDate : #737373;
             margin-right: 50px;
             margin-top: 20px;
             border-radius: 30px;
+            margin-top: 20px;
             background-color: $color-primary;
             z-index: 9999;
 

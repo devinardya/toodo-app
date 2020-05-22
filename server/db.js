@@ -4,24 +4,8 @@ const mongoose = require('mongoose');
 const MongoClient = mongo.MongoClient;
 const ObjectId = mongo.ObjectId;
 
-/* dotenv.config({path: './config.env'})
-
-// Connection URL
-const url = 'mongodb://localhost:27017';
-console.log("URL", url)
-
-// Database Name
-const dbName = process.env.DB_NAME || 'toodo';
-
-// Create a new MongoClient
-const client = new MongoClient(url, { useUnifiedTopology: true });
-client.connect();  */
-
-
-
 dotenv.config({path: './config.env'})
 
-<<<<<<< HEAD
 
 const uri = process.env.DATABASE.replace(
     '<PASSWORD>',
@@ -41,8 +25,6 @@ try {
 }
 
 const dbName = process.env.DB_NAME || 'toodo';
-=======
->>>>>>> master
 
 module.exports = {
    getClient : function() {
