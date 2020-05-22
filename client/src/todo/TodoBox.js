@@ -158,7 +158,7 @@ const TodoBox = ({
                     {addListFormActive ? 
                         <form className="board-block-addform" onSubmit = {(e) => addNewList(e, todo._id)} >
                             <div className="board-block-inputbox">
-                                <input onChange={onAddListChange} placeholder="Enter title for this list..." type="text" value={addListInput}/>
+                                <input onChange={onAddListChange} placeholder="Enter title for this item..." type="text" value={addListInput}/>
                             </div>
                             <div className="board-block-formbutton">
                                 <button className="board-block-main-addList">Add List</button>
@@ -168,7 +168,7 @@ const TodoBox = ({
                         : 
                         <button className="board-block-main-addButton" onClick={() => addListActive()}>
                             <IoIosAddCircle style={{position:"relative", top: "2px", marginRight:"10px"}}/>
-                            Add new list
+                            Add new item
                         </button>
                     }
                 </div>
