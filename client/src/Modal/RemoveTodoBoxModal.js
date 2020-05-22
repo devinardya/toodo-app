@@ -36,7 +36,7 @@ const RemoveTodoBoxModal = ({
     return ReactDOM.createPortal(
             <div className ="modal-block-container">
                 <div className = "modal-block-box">
-                    <h2>Remove Todo Box</h2>
+                    <h2>Remove Todo List</h2>
                     <p className="modal-block-box--text">Are you sure you want to delete <span>{oldTitle}</span> ?</p>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>

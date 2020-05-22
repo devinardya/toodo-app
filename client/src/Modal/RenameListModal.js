@@ -72,12 +72,12 @@ const RenameTitleModal = ({
     return ReactDOM.createPortal(
             <div className ="modal-block-container">
                 <form onSubmit = {(e) => renameListTitle(e, todoID, listId)}>
-                    <h2>Edit List</h2>
-                    <label>New list title</label>
+                    <h2>Edit Item</h2>
+                    <label>New item title</label>
                     <input onChange={renameTitleChange} placeholder= {errorStatus ? "Title is not allowed to be empty" : null} type="text" value={titleChange}/>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button className="modal-block-rename">Rename</button>
+                        <button className="modal-block-rename">Save</button>
                     </div>
                 </form>
             </div>,

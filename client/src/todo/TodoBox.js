@@ -161,7 +161,7 @@ const TodoBox = ({
                                 <input onChange={onAddListChange} placeholder="Enter title for this item..." type="text" value={addListInput}/>
                             </div>
                             <div className="board-block-formbutton">
-                                <button className="board-block-main-addList">Add List</button>
+                                <button className="board-block-main-addList">Add Item</button>
                                 <div className="board-block-main-cancel" onClick={cancel}><IoMdClose /></div>
                             </div>
                         </form>

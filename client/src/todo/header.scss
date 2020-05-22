@@ -38,7 +38,7 @@ $color-text-dataDate : #737373;
     .board-header--logo {
         width: 50%;
         height: 100%;
-        @include flex-column( center, flex-start );
+        @include flex-column( center, flex-start);
 
         .board-logo {
             padding-left: 60px;
@@ -46,6 +46,14 @@ $color-text-dataDate : #737373;
             width: 180px;
             transform: translateY(-15%);
         }
+    }
+
+    .board-header--logo.login {
+        @include flex-column( flex-end, flex-start);
+       .board-logo {
+           width: 210px;
+           
+       }
     }
 
     .board-header--text {
@@ -60,6 +68,7 @@ $color-text-dataDate : #737373;
             padding: 10px 40px;
             margin-right: 50px;
             border-radius: 30px;
+            margin-top: 20px;
             background-color: $color-primary;
             z-index: 9999;
 

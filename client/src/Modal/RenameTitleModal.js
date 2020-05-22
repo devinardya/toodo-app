@@ -61,13 +61,13 @@ const RenameTitleModal = ({
     return ReactDOM.createPortal(
             <div className ="modal-block-container--rename">
                 <form onSubmit = {(e) => renameTitle(e, todoID)}>
-                    <h2>Rename Title</h2>
+                    <h2>Rename Todo List Title</h2>
                     <label>New Title</label>
                     <input onChange={renameChange} placeholder= {errorStatus ? "Title is not allowed to be empty" : null} type="text" value={inputChange} style={ renameBoxInputError ? { color : "red"} : {color : "#737373"}} />
                     {renameBoxInputError ? <p className="board-block-main--form-inputError">Title is not allowed to be longer than 20 characters</p> : <p className="board-block-main--form-input">Title length is minimun 1 character and maximum 20 characters</p>}
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button className="modal-block-rename">Rename</button>
+                        <button className="modal-block-rename">Save</button>
                     </div>
                 </form>
             </div>,

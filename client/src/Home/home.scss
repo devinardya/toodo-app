@@ -38,6 +38,7 @@ $color-text-dataDate : #737373;
     background-size: cover;
     background-blend-mode:multiply;
     position: relative;
+    overflow: hidden;
 
     .home-block-logo {
         position: absolute;

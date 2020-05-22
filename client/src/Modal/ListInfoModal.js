@@ -111,7 +111,7 @@ const ListInfoModal = ({
                             initialPage = "listInfoModal"
                         />
                         }
-                        <p>in todo box <span>{todo.title}</span></p>
+                        <p>in todo list <span>{todo.title}</span></p>
                     </div>
                     <div className="modal-block-container--listinfo-box__descInfo">
                         <h3><IoMdList style={{position: "relative", top:"2px", marginRight:"10px"}}/>
@@ -141,6 +141,7 @@ const ListInfoModal = ({
                                 todoID = {todo._id}
                                 updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
                                 listId = {x.id}
+                                todoTitle = {todo.title}
                                 listTitle = {x.todoTitle}
                                 todobox = {todobox}
                                 updateTodobox = {updateTodobox}

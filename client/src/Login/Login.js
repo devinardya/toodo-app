@@ -97,7 +97,7 @@ const Login = () => {
                         <form onSubmit={getSubmit}>
                             <input onChange={onChange} style={newcolor} placeholder="username" value={username} type="text"/>
                             <div className = "block__loginPage--form--authorization">
-                                <p className="block__loginPage--form--authorization__warning" style={warncolor} > {validateIcon1} username have to be between 1 to 12 characters without empty space.</p>
+                                <p className="block__loginPage--form--authorization__warning" style={warncolor} > {validateIcon1} username is case-sensitive and have to be between 1 to 12 characters without empty space.</p>
                                 <p className="block__loginPage--form--authorization__warning" style={warncolor2} > {validateIcon2} username can only contains uppercase, lowercase, hypen (-), underscore (_), and numbers.</p>
                             </div>
                             <button>Log in</button>

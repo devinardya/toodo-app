@@ -44,7 +44,7 @@ $color-button-cancel : #008a94;
     
     .modal-block-container--listinfo-box {
         width: 45%;
-        height: 47%;
+        height: auto;
         background-color: $color-primary;
         border-radius: 10px;
         @include flex-column(flex-start, flex-start);

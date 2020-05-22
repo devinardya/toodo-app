@@ -39,6 +39,8 @@ $color-text-dataDate : #737373;
     width: 100vw;
     background: linear-gradient(129deg, rgba(0,97,126,1) 0%, rgba(17,196,196,1) 100%);
     @include flex-column( center, center );
+    position: relative;
+    overflow: hidden;
 
     &::before {
         display: block;
@@ -94,7 +96,7 @@ $color-text-dataDate : #737373;
                 font-family: $Montserrat;
                 color: $color-primary;
                 margin-bottom: 40px;
-                font-size: 50px;
+                font-size: 43px;
                 padding-left: 5px;
             }
 
@@ -132,16 +134,19 @@ $color-text-dataDate : #737373;
                 button {
                     width: 100px;
                     height: 30px;
-                    margin-top: 20px;
+                    margin-top: 30px;
                     border: none;
                     background-color: $color-text-title;
-                    color: #fff;
+                    color: rgb(41, 41, 41);
                     border-radius: 10px;
                     font-size: 14px;
-                    padding-bottom: 5px;
+                    padding: 5px;
+                    font-weight: 600;
 
                     &:hover {
                         cursor: pointer;
+                        background-color: $color-text-dataTitle;
+                        color: #fff;
                     }
                 }
             }
@@ -149,19 +154,23 @@ $color-text-dataDate : #737373;
             .block__loginPage--form--authorization {
                 width: 70%;
                 text-align: left;
-                line-height: 16px;
+                line-height: 20px;
                 font-family: $Open-Sans;
                 font-weight: 600;
 
                     .block__loginPage--form--authorization__warning {
                         color: white;
-                        font-size: 12px;
+                        font-size: 14px;
                         position: relative;
                         padding-left: 15px;
+                        
+                        &:nth-child(2) {
+                            margin-top: 12px;
+                        }
 
                     .icons {
                         position: absolute;
-                        top: 2px;
+                        top: 5px;
                         left: -5px;
                     }
                 }

@@ -54,10 +54,10 @@ const MoveListModal = ({
     return ReactDOM.createPortal(
             <div className ="modal-block-container">
                 <form onSubmit={(e) => moveOneList(e, todoID, listId)}>
-                    <h2>Move list</h2>
-                    <p>Please choose a new todo box for <span>{listTitle}</span>.</p>
+                    <h2>Move Item</h2>
+                    <p>Please choose a new todo list for <span>{listTitle}</span>.</p>
                     <select value={selectValue} onChange={handleChange}>
-                        <option value="">---- Todo box list ----</option>
+                        <option value="">---- Todo list ----</option>
                         {todobox.map(todo => {
                             if(todo._id !== todoID) {
                                 return <option value={todo._id} key={todo._id}>{todo.title}</option>
@@ -68,7 +68,7 @@ const MoveListModal = ({
                     </select>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button className="modal-block-move">Move list</button>
+                        <button className="modal-block-move">Move</button>
                     </div>
                 </form>
             </div>,

@@ -46,7 +46,7 @@ $color-text-cancel : #a7a7a7;
         height: 40%;
         background-color: $color-primary;
         border-radius: 20px;
-        @include flex-column(flex-start, center);
+        @include flex-column(center, center);
 
         h2 {
             margin-bottom: 20px;

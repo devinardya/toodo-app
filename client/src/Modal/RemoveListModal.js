@@ -13,6 +13,7 @@ const DeleteListModal = ({
     userName, 
     updateStyleChange,
     initialPage,
+    todoTitle,
 }) => {
 
     const deleteList = (todoId, listID) => {
@@ -46,8 +47,8 @@ const DeleteListModal = ({
     return ReactDOM.createPortal(
             <div className ="modal-block-container">
                 <div className = "modal-block-box">
-                    <h2>Delete List</h2>
-                    <p className="modal-block-box--text">Remove <span>{listTitle}</span> from the todo list box ?</p>
+                    <h2>Remove Item</h2>
+                    <p className="modal-block-box--text">Remove <span>{listTitle}</span> from <span>{todoTitle}</span> todo list ?</p>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
                         <button className="modal-block-remove" onClick={() => deleteList(todoID, listId)}>Remove</button>
