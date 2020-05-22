@@ -119,6 +119,7 @@ $color-button-cancel : #008a94;
                 border-radius: 5px;
 
                 .board-block-addform {
+                    margin-top: 10px;
 
                     .board-block-inputbox {
                         background-color: $color-secondary-light;
@@ -135,6 +136,7 @@ $color-button-cancel : #008a94;
                         input {
                             border: none;
                             font-size: 14px;
+                            width: 100%;
                             color: $color-text-dataDesc;
 
                             &::placeholder {

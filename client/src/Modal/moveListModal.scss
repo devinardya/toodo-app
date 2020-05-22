@@ -43,7 +43,8 @@ $color-text-cancel : #a7a7a7;
 
     form {
         width: 45%;
-        height: 40%;
+        height: auto;
+        padding: 60px 40px;
         background-color: $color-primary;
         border-radius: 20px;
         @include flex-column(center, center);
