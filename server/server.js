@@ -25,7 +25,7 @@ app.use((req, res, next) => {
     // Check that the incoming data is JSON
     if (req.is('json')) {
       let data = '';
-      // listening to the incoming stream of data and saving the chuck.toString to the data variable
+      // listening to the incoming stream of data and saving the chuck.toString to the "data" variable
       req.on('data', chunk => {
         console.log("chunk", chunk.toString());
         data += chunk.toString();
@@ -33,7 +33,7 @@ app.use((req, res, next) => {
       // when data reading are done, then listen to event end where the server try to parse the data
       req.on('end', () => {
          // when JSON data are not corrupted, then parse it and set it as the req.body.
-         // after that finish the middleware and continue to the next one of run the http request.
+         // finish the middleware and continue to the next one or run the http request.
         try {
           data = JSON.parse(data);
           console.log("data after parse", data);
@@ -67,11 +67,12 @@ app.get('/todos/:user', (req, res) => {
 });
 
 
+// CREATE A TO DO LIST BOX
 function validate(todos) {
     return !!todos.data
 };
 
-// CREATE A TO DO LIST BOX
+
 app.post('/todos/:user', (req, res) => {
     let userId = req.params.user;
     const db = getDB();
@@ -100,7 +101,7 @@ app.put('/todos/:id/user/:user', (req, res) => {
 
     let clientData = req.body;
 
-    if (!todoId) {
+    if (!todoId || !userId) {
         return res.status(400).end();
     }
 
@@ -125,7 +126,7 @@ app.delete('/todos/:id/user/:user', (req, res) => {
     let todoId = req.params.id;
     let userId = req.params.user;
 
-    if (!todoId) {
+    if (!todoId || !userId) {
         return res.status(400).end();
     }
 
@@ -152,7 +153,7 @@ app.post('/list/:todosid/user/:user', (req, res) => {
     let today = new Date();
     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     let time = today.getHours() + ":" + today.getMinutes();
-    let dateTime = date+', '+time;
+    let dateTime = date+' at '+time;
 
     clientData.id = uuid.v4();
     clientData.created = dateTime;
@@ -175,6 +176,36 @@ app.post('/list/:todosid/user/:user', (req, res) => {
     })
 });
 
+// TO CLEAR ALL ITEMS INSIDE A SPECIFIC TO DO LIST BOX
+
+app.patch('/todos/:todosid/user/:user', (req, res) => {
+    const db = getDB();
+    let todoId = req.params.todosid;
+    let userId = req.params.user;
+
+    console.log('todoid ', todoId)
+   
+
+    if (!todoId || !userId) {
+        return res.status(400).end();
+    }
+
+    db.collection(userId)
+    .updateOne(
+        {_id : createObjectId(todoId)},
+        { "$set": {"data": []}  },
+        { multi: true }
+    )
+    .then( () => {
+        res.status(204).end();
+        console.log("List item is deleted");
+    })
+    .catch( e => {
+        console.error(e);
+        res.status(500).end();
+    })
+});
+
 // TO MODIFY A SPECIFIC LIST INSIDE A SPECIFIC TO DO LIST BOX
 
 app.patch('/todos/:todosid/list/:listid/user/:user', (req, res) => {
@@ -185,7 +216,7 @@ app.patch('/todos/:todosid/list/:listid/user/:user', (req, res) => {
 
     let clientData = req.body;
 
-    if (!todoId || !listid) {
+    if (!todoId || !listid || !userId) {
         return res.status(400).end();
     }
 
@@ -220,7 +251,7 @@ app.delete('/todos/:todosid/list/:listid/user/:user', (req, res) => {
     console.log('todoid ', todoId)
     console.log('listid ',listid)
 
-    if (!todoId || !listid) {
+    if (!todoId || !listid || !userId) {
         return res.status(400).end();
     }
 
@@ -240,6 +271,7 @@ app.delete('/todos/:todosid/list/:listid/user/:user', (req, res) => {
     })
 });
 
+
 // TO MOVE A SPECIFIC LIST FROM ONE TO DO LIST BOX TO ANOTHER TO DO LIST BOX
 
 app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
@@ -249,7 +281,7 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
     let listId = req.params.listid;
     let userId = req.params.user;
 
-    if (!oldDocId || !newDocId || !listId) {
+    if (!oldDocId || !newDocId || !listId || !userId) {
         return res.status(400).end();
     }
 

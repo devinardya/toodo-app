@@ -22,6 +22,7 @@ const ListBox = ({
     const [ItemMenuStatus, updateItemMenuStatus] = useState(false);
     const itemMenu = useRef();
 
+
     const deleteOneList = () => {
         updateRemoveOneListModalStatus(true);
     };
@@ -40,6 +41,7 @@ const ListBox = ({
 
     const activateItemMenu = useCallback( () => {
         updateItemMenuStatus(ItemMenuStatus ? false : true);
+        
     }, [ItemMenuStatus]);
 
     const handleClickOutside = useCallback((e) => {
@@ -89,7 +91,7 @@ const ListBox = ({
                             <button onClick={activateItemMenu} >
                                 <IoIosMore size="18px" />
                             </button>
-                            <div className= {dropdownItemClass}>
+                            <div className= {dropdownItemClass} >
                                 <button onClick={() => deleteOneList()}>
                                     <TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
                                 </button>
@@ -119,7 +121,7 @@ const ListBox = ({
                                 />
                                 }
                                 <button onClick={() => moveOneList()}>
-                                    <TiArrowForward size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
+                                    <TiArrowForward size="18px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
                                 </button>
                                 { moveListModalStatus && <MoveListModal 
                                     todoID = {todo._id}

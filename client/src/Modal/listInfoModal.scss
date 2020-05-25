@@ -192,7 +192,7 @@ $color-button-cancel : #008a94;
         }
 
         .modal-block-container--listinfo-box__optionButtons {
-            align-self: flex-start;
+            @include flex-column(flex-start, flex-start);
             width: calc(25% - 10px);
             padding-left: 10px;
 

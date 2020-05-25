@@ -1,10 +1,11 @@
 import React, {useState, useRef, useCallback, useEffect} from 'react';
 import {IoMdMenu, IoIosAddCircle, IoMdClose} from 'react-icons/io';
 import {TiDelete} from 'react-icons/ti';
-import {MdModeEdit} from 'react-icons/md';
+import {MdModeEdit, MdDelete} from 'react-icons/md';
 import axios from 'axios';
 import RenameTitleModal from '../Modal/RenameTitleModal';
 import RemoveToDoModal from '../Modal/RemoveTodoBoxModal';
+import ClearListItems from '../Modal/ClearAllItems';
 import ListBox from './ListBox';
 
 const TodoBox = ({
@@ -18,6 +19,7 @@ const TodoBox = ({
     const [removeTodoBoxModalStatus, updateRemoveTodoBoxModalStatus] = useState(false);
     const [todoboxMenu, updateTodoboxMenu] = useState(false);
     const [addListFormActive, updateAddListFormActive] = useState(false);
+    const [clearAllItemsStatus, updateClearItemsStatus] = useState(false);
     const [addListInput, updateAddListText] = useState("");
     const nodeDropdown = useRef();
 
@@ -37,6 +39,10 @@ const TodoBox = ({
     const addListActive = () => {
         updateAddListFormActive(true);
     };
+
+    const clearAllItems = () => {
+        updateClearItemsStatus(true);
+    }
 
     const addNewList = (e, id) => {
 
@@ -114,7 +120,7 @@ const TodoBox = ({
                         <div className= {dropdownClass}>
                             <button onClick={() => removeTodoBox()}>
                                 <TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
-                                Remove
+                                Remove list
                             </button>
                             { removeTodoBoxModalStatus && <RemoveToDoModal 
                                 todobox = {todobox}
@@ -127,7 +133,7 @@ const TodoBox = ({
                             }
                             <button onClick={() => activateRename()}>
                                 <MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
-                                Rename
+                                Rename list
                             </button>
                             { renameTitleModalStatus && <RenameTitleModal 
                                 todoID = {todo._id}
@@ -136,6 +142,19 @@ const TodoBox = ({
                                 todobox = {todobox}
                                 updateTodobox = {updateTodobox}
                                 userName = {userName}
+                            />
+                            }
+                            <button onClick={() => clearAllItems()}>
+                                <MdDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
+                                Clear all items
+                            </button>
+                            { clearAllItemsStatus && <ClearListItems 
+                                todoID = {todo._id}
+                                updateClearItemsStatus = {updateClearItemsStatus}
+                                oldTitle = {todo.title}
+                                updateTodobox = {updateTodobox}
+                                userName = {userName}
+                                todobox = {todobox}
                             />
                             }
                         </div>
