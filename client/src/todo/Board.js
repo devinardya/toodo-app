@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import MainBox from './MainBox'
-import './board.scss';
+import '../index.scss';
 
 const Board = ({location}) => {
 

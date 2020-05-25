@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import './renameTitleModal.scss'
+import '../index.scss';
 
 const RenameTitleModal = ({
     todoID, 

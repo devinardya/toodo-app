@@ -1,36 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans:wght@400;600&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-$Montserrat : 'Montserrat', sans-serif;
-$Open-Sans : 'Open Sans', sans-serif;
-
-$color-primary: rgb(240, 240, 240);
-$color-secondary: #406e8eff;
-$color-secondary-light: rgb(255, 255, 255);
-$color-text-title: #ffa84e;
-$color-text-dataTitle : #dd4600;
-$color-text-dataDesc : #494949;
-$color-text-cancel : #a7a7a7;
-
-@mixin flex-column($justify, $align) {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: $justify;
-    align-items: $align;
-}
-
-@mixin flex-row($justify, $align) {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: $justify;
-    align-items: $align;
-}
-
 .modal-block-container {
     height: 100vh;
     width: 100vw;
@@ -39,40 +6,50 @@ $color-text-cancel : #a7a7a7;
     top: 0;
     left: 0;
     @include flex-column( center, center );
-    z-index: 9999999999;
-
-    .modal-block-box {
-        width: 50%;
+    
+    form {
+        width: 45%;
         height: auto;
+        padding: 60px 40px;
         background-color: $color-primary;
         border-radius: 20px;
-        padding: 60px 40px;
-        text-align: center;
         @include flex-column(center, center);
 
         h2 {
             margin-bottom: 20px;
             font-family: $Montserrat;
-            color: $color-text-dataTitle;
+            color: #008a94;
+            font-weight: 600;
+            
+        }
+
+        label {
+            font-family: $Open-Sans;
+            margin-bottom: 8px;
+            color: #008a94;
+            align-self: flex-start;
+            padding-left: 10.5%;
+            font-size: 13px;
             font-weight: 600;
         }
 
-        .modal-block-box--text {
+        input {
             margin-bottom: 20px;
-            width:80%;
-            font-family:  $Open-Sans;
+            width: 80%;
+            height: 40px;
+            padding-left: 10px;
+            font-size: 16px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 2px solid $color-text-title;
             color: $color-text-dataDesc;
-
-            span {
-                color: $color-text-dataTitle;
-                font-weight: 600;
-            }
         }
 
         .modal-block-buttons {
             @include flex-row(center,center );
             text-align: center;
-    
+
             .modal-block-cancel {
                 margin-top: 10px;
                 padding: 10px 25px;
@@ -86,11 +63,11 @@ $color-text-cancel : #a7a7a7;
     
                 &:hover {
                     cursor: pointer;
-                    background-color: darken($color: $color-text-dataDesc, $amount: 0);
+                    background-color: darken($color: $color-text-dataDesc, $amount: 1.5);
                 }
             }
     
-            .modal-block-remove {
+            .modal-block-rename {
                 margin-top: 10px;
                 padding: 10px 25px;
                 border-radius: 10px;
@@ -106,5 +83,7 @@ $color-text-cancel : #a7a7a7;
                 }
             }
         }
+
+       
     }
 }

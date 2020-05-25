@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { MdCheckCircle, MdCancel } from "react-icons/md";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Header from '../todo/Header';
-import './login.scss';
+import '../index.scss';
 
 const Login = () => {
 

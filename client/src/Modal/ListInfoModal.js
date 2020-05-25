@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import RenameListModal from '../Modal/RenameListModal';
 import RemoveListModal from '../Modal/RemoveListModal';
 import MoveListModal from '../Modal/MoveListModal';
-import './listInfoModal.scss'
+import '../index.scss';
 
 const ListInfoModal = ({
     todobox,

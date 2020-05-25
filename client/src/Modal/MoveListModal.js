@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import {MdExpandMore} from 'react-icons/md';
-import './moveListModal.scss'
+import '../index.scss';
 
 const MoveListModal = ({
     todoID, 

@@ -36,7 +36,6 @@ app.use((req, res, next) => {
          // finish the middleware and continue to the next one or run the http request.
         try {
           data = JSON.parse(data);
-          console.log("data after parse", data);
           req.body = data;
           next();
         } catch(e) { // if the JSON data is not acceptable, then send error message and end the data process
