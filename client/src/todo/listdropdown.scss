@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:wght@400;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+$Montserrat : 'Montserrat', sans-serif;
+$Open-Sans : 'Open Sans', sans-serif;
+
+$color-primary: rgb(240, 240, 240);
+$color-secondary: #406e8e;
+$color-secondary-light: rgb(255, 255, 255);
+$color-text-title: #ffa84e;
+$color-text-dataTitle : #dd4600;
+$color-text-dataDesc : #737373;
+$color-text-dataDate : #737373;
+$color-button-cancel : #008a94;
+
+@mixin flex-column($justify, $align) {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin flex-row($justify, $align) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+.board-block-main--list--buttons__part.active {
+    @include flex-column(flex-start, flex-start); 
+}
+
+.board-block-main--list--buttons__part {
+    display: none;
+    top:0px;
+    left: 0;
+    width: 180px;
+    padding:10px;
+    background:  rgb(255, 255, 255);
+    border-radius: 5px;
+    position: absolute;
+    -webkit-box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
+    -moz-box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
+    box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
+
+    button {
+        color: rgb(87, 87, 87);
+        background-color: rgb(182, 221, 223);
+        width: 100%;
+        font-size: 14px;
+        line-height: 0px;
+        text-align: left;
+        padding: 10px 15px 15px 15px;
+        margin-bottom: 5px;
+
+        &:last-of-type {
+            margin-bottom: 0px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            color: $color-text-dataTitle;
+            background-color: rgb(203, 228, 230);
+        }
+    }
+}
