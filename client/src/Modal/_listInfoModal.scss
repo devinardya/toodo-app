@@ -14,7 +14,7 @@
         background-color: $color-primary;
         border-radius: 10px;
         @include flex-row(flex-start, flex-start);
-        padding: 60px 40px;
+        padding: 60px 40px 60px 60px;
         position: relative;
 
         .modal-block-container--listinfo-box-contain {

@@ -97,7 +97,7 @@ const ListBox = ({
                             <button onClick={activateItemMenu} >
                                 <IoIosMore size="18px" />
                             </button>
-                            <div className= {dropdownItemClass} style={{position:"fixed", top:height+25, left:width}}>
+                            <div className= {dropdownItemClass} style={{position:"fixed", top:height+25, left:width-135}}>
                                 <button onClick={() => deleteOneList()}>
                                     <TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"4px"}}/>
                                     Delete item

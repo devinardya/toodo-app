@@ -6,6 +6,11 @@
     box-sizing: border-box;
   }
 
+input:focus {
+    outline: none;
+}
+
+
 $Montserrat : 'Montserrat', sans-serif;
 $Open-Sans : 'Open Sans', sans-serif;
 
