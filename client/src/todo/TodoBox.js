@@ -141,20 +141,22 @@ const TodoBox = ({
                         </div>
                     </div>
                 </div>
-                <ul>
-                {todo.data.map( (x) => {
-                        return <ListBox 
-                                    key = {x.id}
-                                    todobox = {todobox}
-                                    todo = {todo}
-                                    userName = {userName}
-                                    updateTodobox = {updateTodobox}
-                                    x = {x}
-                                />
-                     })
-                }
-                </ul>
-                <div>
+                <span>
+                    <ul>
+                    {todo.data.map( (x) => {
+                            return <ListBox 
+                                        key = {x.id}
+                                        todobox = {todobox}
+                                        todo = {todo}
+                                        userName = {userName}
+                                        updateTodobox = {updateTodobox}
+                                        x = {x}
+                                    />
+                        })
+                    }
+                    </ul>
+                </span>
+                <div className="addMenu-Button">
                     {addListFormActive ? 
                         <form className="board-block-addform" onSubmit = {(e) => addNewList(e, todo._id)} >
                             <div className="board-block-inputbox">

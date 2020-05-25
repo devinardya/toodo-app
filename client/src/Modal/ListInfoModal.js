@@ -177,7 +177,7 @@ const ListInfoModal = ({
                                 />
                                 }
                             <button onClick={exitModal} className="modal-block-container--listinfo-box__closeModal">
-                                <IoMdClose size="16px" style={{marginRight: "3px", position: "relative", top:"3px"}}/>
+                                <IoMdClose size="16px" style={{marginRight: "3px", position: "relative", top:"0px"}}/>
                                 Close
                             </button>
                         </div>

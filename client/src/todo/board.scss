@@ -118,75 +118,75 @@ $color-button-cancel : #008a94;
                 text-align: left;
                 border-radius: 5px;
 
-                .board-block-addform {
-                    margin-top: 10px;
-
-                    .board-block-inputbox {
-                        background-color: $color-secondary-light;
-                        margin-bottom: 10px;
-                        padding: 10px 10px;
-                        text-align: left;
-                        line-height: 18px;
-                        font-family: $Open-Sans;
-                        -webkit-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
-                        -moz-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
-                        box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
-
-
-                        input {
-                            border: none;
-                            font-size: 14px;
-                            width: 100%;
-                            color: $color-text-dataDesc;
-
-                            &::placeholder {
-                                font-size: 12px;
-                            }
-
-                            &:focus::placeholder {
-                                color: transparent;
-                            }
-                        }
-
-                    }
-
-                    .board-block-formbutton {
-                        width: 100%;
-                        @include flex-row(flex-start, center);
-
-                        .board-block-main-addList {
-                            padding: 8px 15px;
-                            background-color: $color-button-cancel;
-                            border-radius: 5px;
-                            color: $color-primary;
+                .addMenu-Button {
+                    margin-bottom: 10px;
+                    .board-block-addform {
+                        margin-top: 10px;
+    
+                        .board-block-inputbox {
+                            background-color: $color-secondary-light;
+                            margin-bottom: 10px;
+                            padding: 10px 10px;
+                            text-align: left;
+                            line-height: 18px;
                             font-family: $Open-Sans;
-                            font-size: 12px;
-                            font-weight: 600;
-                            border: none;
-
-                            &:hover {
-                                cursor: pointer;
-                                background-color: #006a72;
+                            -webkit-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
+                            -moz-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
+                            box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
+    
+    
+                            input {
+                                border: none;
+                                font-size: 14px;
+                                width: 100%;
+                                color: $color-text-dataDesc;
+    
+                                &::placeholder {
+                                    font-size: 12px;
+                                }
+    
+                                &:focus::placeholder {
+                                    color: transparent;
+                                }
                             }
+    
                         }
-
-                        .board-block-main-cancel {
-                            font-size: 24px;
-                            color: $color-text-dataDesc;
-                            position: relative;
-                            top: 3px;
-                            margin-left: 5px;
-
-                            &:hover {
-                                cursor: pointer;
-                                color: $color-text-dataTitle;
+    
+                        .board-block-formbutton {
+                            width: 100%;
+                            @include flex-row(flex-start, center);
+    
+                            .board-block-main-addList {
+                                padding: 8px 15px;
+                                background-color: $color-button-cancel;
+                                border-radius: 5px;
+                                color: $color-primary;
+                                font-family: $Open-Sans;
+                                font-size: 12px;
+                                font-weight: 600;
+                                border: none;
+    
+                                &:hover {
+                                    cursor: pointer;
+                                    background-color: #006a72;
+                                }
+                            }
+    
+                            .board-block-main-cancel {
+                                font-size: 24px;
+                                color: $color-text-dataDesc;
+                                position: relative;
+                                top: 3px;
+                                margin-left: 5px;
+    
+                                &:hover {
+                                    cursor: pointer;
+                                    color: $color-text-dataTitle;
+                                }
                             }
                         }
                     }
-
                 }
-
-               
 
                 .title-menu-button {
                     @include flex-row( space-between, center );
@@ -267,118 +267,128 @@ $color-button-cancel : #008a94;
                     font-size: 16px;
                     margin-bottom: 10px;
                 }
-    
-                ul {
-                    list-style-type: none;
-                    overflow-y: auto;
-                    max-height: 65vh;
-                    z-index: 10;
-                    overflow: visible;
-                }
-    
-                .board-block-main--list {
-                    background-color: $color-secondary-light;
-                    margin-bottom: 10px;
-                    padding: 10px 10px;
-                    text-align: left;
-                    line-height: 18px;
-                    font-family: $Open-Sans;
-                    -webkit-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
-                    -moz-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
-                    box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
 
-                    .board-block-main--list__menu {
-                        @include flex-row(space-between, center);
+                span {
+                    position: relative;
+
+                    ul {
+                        list-style-type: none;
+                        overflow-x: visible;
+                        overflow-y: auto;
+                        max-height: 65vh;
                         width: 100%;
-                        position: relative;
 
-                        .board-block-main--list__info {
-                            width:85%;
-                            @include flex-column(center,flex-start);
-
-                            .list-title {
-                                font-size: 14px;
-                                color: $color-text-dataTitle;
-                                font-weight: 600;
+                        .board-block-main--list {
+                            background-color: $color-secondary-light;
+                            margin-bottom: 10px;
+                            padding: 10px 10px;
+                            text-align: left;
+                            line-height: 18px;
+                            font-family: $Open-Sans;
+                            -webkit-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
+                            -moz-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
+                            box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
         
-                                &:hover {
-                                    cursor: pointer;
-                                }
-                            }
-
-                            .list-desc {
-                                width: 20%;
-                                font-size: 15px;
-                                color: $color-text-dataDesc;
-                                padding-top: 10px;
+                            .board-block-main--list__menu {
+                                @include flex-row(space-between, center);
+                                width: 100%;
+                                position: relative;
         
-                                &:hover {
-                                    cursor: pointer;
-                                }
-                            }
-                        }
-
-                        .item-menu-dropbox {
-                            width: 15%;
-                            text-align: right;
-                            align-self: flex-end;
-                            @include flex-row(flex-end, flex-end);
-                            position: relative;
-
-                            button {
-                                border: none;
-                                background-color: transparent;
-
-                                &:hover {
-                                    cursor: pointer;
-                                    color: $color-text-dataTitle;
-                                }
-                            }
-                            
-    
-                            .board-block-main--list--buttons__part.active {
-                                @include flex-column(flex-start, flex-start);
-                                
-                            }
-
-                            .board-block-main--list--buttons__part {
-                                display: none;
-                                top:25px;
-                                right: -160px;
-                                width: 180px;
-                                padding:10px;
-                                z-index: 99999;
-                                background:  rgb(255, 255, 255);
-                                border-radius: 5px;
-                                position: absolute;
-                                -webkit-box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
-                                -moz-box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
-                                box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
-
-                                button {
-                                    color: rgb(87, 87, 87);
-                                    background-color: rgb(182, 221, 223);
-                                    width: 100%;
-                                    font-size: 14px;
-                                    line-height: 0px;
-                                    text-align: left;
-                                    padding: 10px 15px 15px 15px;
-                                    margin-bottom: 5px;
-            
-                                    &:last-of-type {
-                                        margin-bottom: 0px;
-                                    }
-            
-                                    &:hover {
-                                        cursor: pointer;
+                                .board-block-main--list__info {
+                                    width:85%;
+                                    @include flex-column(center,flex-start);
+        
+                                    .list-title {
+                                        font-size: 14px;
                                         color: $color-text-dataTitle;
-                                        background-color: rgb(203, 228, 230);
+                                        font-weight: 600;
+                
+                                        &:hover {
+                                            cursor: pointer;
+                                        }
+                                    }
+        
+                                    .list-desc {
+                                        width: 20%;
+                                        font-size: 15px;
+                                        color: $color-text-dataDesc;
+                                        padding-top: 10px;
+                
+                                        &:hover {
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+        
+                                .item-menu-dropbox {
+                                    width: 15%;
+                                    text-align: right;
+                                    align-self: flex-end;
+                                    @include flex-row(flex-end, flex-end);
+                                    position: relative;
+        
+                                    button {
+                                        border: none;
+                                        background-color: transparent;
+        
+                                        &:hover {
+                                            cursor: pointer;
+                                            color: $color-text-dataTitle;
+                                        }
+                                    }
+                                    
+            
+                                    .board-block-main--list--buttons__part.active {
+                                        display: flex;
+                                    }
+        
+                                    .board-block-main--list--buttons__part {
+                                        display: none;
+                                        top:-21px;
+                                        right: 30px;
+                                        padding:10px;
+                                        z-index: 999999;
+                                        background:  rgb(255, 255, 255);
+                                        border-radius: 5px;
+                                        position: absolute;
+                                        -webkit-box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
+                                        -moz-box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
+                                        box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
+        
+                                        button {
+                                            color: rgb(87, 87, 87);
+                                            background-color: rgb(182, 221, 223);
+                                            font-size: 14px;
+                                            line-height: 0px;
+                                            text-align: left;
+                                            padding: 10px 10px 15px 15px;
+                                            margin-right: 5px;
+                    
+                                            &:last-of-type {
+                                                color: rgb(87, 87, 87);
+                                                background-color: rgb(182, 221, 223);
+                                                font-size: 14px;
+                                                line-height: 0px;
+                                                text-align: left;
+                                                margin-right: 0;
+                                                padding: 5px 5px 15px 15px;
+                                            }
+                    
+                                            &:hover {
+                                                cursor: pointer;
+                                                color: $color-text-dataTitle;
+                                                background-color: rgb(203, 228, 230);
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+
                 }
+    
+                
             }
         }
 

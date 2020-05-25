@@ -91,8 +91,7 @@ const ListBox = ({
                             </button>
                             <div className= {dropdownItemClass}>
                                 <button onClick={() => deleteOneList()}>
-                                    <TiDelete size="16px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
-                                    Remove item
+                                    <TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
                                 </button>
                                 { removeOneListModalStatus && <RemoveListModal 
                                     todoID = {todo._id}
@@ -106,8 +105,7 @@ const ListBox = ({
                                 />
                                 }
                                 <button onClick={() => renameOneList()}>
-                                    <MdModeEdit size="16px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
-                                    Edit item
+                                    <MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
                                 </button>
                                 { renameListModalStatus && <RenameListModal 
                                     todoID = {todo._id}
@@ -121,8 +119,7 @@ const ListBox = ({
                                 />
                                 }
                                 <button onClick={() => moveOneList()}>
-                                    <TiArrowForward size="16px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
-                                    Move item
+                                    <TiArrowForward size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
                                 </button>
                                 { moveListModalStatus && <MoveListModal 
                                     todoID = {todo._id}
