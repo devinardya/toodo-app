@@ -43,136 +43,166 @@ $color-button-cancel : #008a94;
     z-index: 99999;
     
     .modal-block-container--listinfo-box {
-        width: 45%;
+        width: 50%;
         height: auto;
         background-color: $color-primary;
         border-radius: 10px;
-        @include flex-column(flex-start, flex-start);
+        @include flex-row(flex-start, flex-start);
         padding: 60px 40px;
         position: relative;
+
+        .modal-block-container--listinfo-box-contain {
+            @include flex-column(flex-start, flex-start);
+            width: 75%;
+            height: auto;
        
-        .modal-block-container--listinfo-box__titleInfo {
-            color: $color-text-dataDesc;
-            margin-bottom: 30px;
-            h3 {
-                color: $color-button-cancel;
+            .modal-block-container--listinfo-box__titleInfo {
+                color: $color-text-dataDesc;
+                margin-bottom: 30px;
+                h3 {
+                    color: $color-button-cancel;
 
-                span {
-                    color: $color-text-dataDesc;
+                    span {
+                        color: $color-text-dataDesc;
 
-                    &:hover {
-                        cursor: pointer;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                p {
+                    font-size: 13px;
+                    margin-top: 5px;
+                    padding-left: 30px;
+
+                    span {
+                        color: $color-text-dataTitle;
                     }
                 }
             }
 
-            p {
-                font-size: 13px;
-                margin-top: 5px;
-                padding-left: 30px;
-
-                span {
-                    color: $color-text-dataTitle;
-                }
-            }
-        }
-
-        .modal-block-container--listinfo-box__descInfo {
-            color: $color-text-dataDesc;
-            width: 100%;
-
-            h3 {
-                color: $color-button-cancel;
-                span {
-                    color: $color-text-dataDesc;
-
-                    &:hover {
-                        cursor: pointer;
+            .modal-block-container--listinfo-box__descInfo {
+                color: $color-text-dataDesc;
+                width: 100%;
+                height: 140px;
+                margin-bottom: 30px;
+    
+                h3 {
+                    color: $color-button-cancel;
+                    span {
+                        color: $color-text-dataDesc;
+    
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
                 }
-            }
-
-            p {
-                margin-top: 5px;
-            }
-
-            form {
-                input {
+    
+                p {
+                    margin-top: 5px;
+                }
+    
+                form {
+                    input {
+                        margin-top: 10px;
+                        width: 95%;
+                        height: auto;
+                        padding: 10px 20px 30px 10px;
+                        border: none;
+                        font-size: 14px;
+    
+                        &:focus::placeholder {
+                            color: transparent;
+                        }
+                    }
+    
+                    .modal-block-container--listinfo-box__descInfo--formbuttons {
+    
+                        @include flex-row(flex-start, center);
+    
+                        button {
+                            margin-top: 10px;
+                            padding: 10px 25px;
+                            border: none;
+                            background-color: $color-button-cancel;
+                            border-radius: 5px;
+                            color: $color-primary;
+                            font-size: 12px;
+                            font-weight: 600;
+    
+                            &:hover {
+                                cursor: pointer;
+                                background-color: #006a72;
+                            }
+                        }
+    
+                        .board-block-main-cancel {
+                            font-size: 24px;
+                            color: $color-text-dataDesc;
+                            position: relative;
+                            top: 8px;
+                            margin-left: 8px;
+    
+                            &:hover {
+                                cursor: pointer;
+                                color: $color-text-dataTitle;
+                            }
+                        }
+    
+                    }
+    
+                }
+    
+                .modal-block-container--listinfo-box__descInfo--text {
                     margin-top: 10px;
                     width: 100%;
-                    height: auto;
-                    padding: 10px 20px 30px 10px;
+                    height: 60px;
+                    padding: 5px 20px 20px 10px;
                     border: none;
                     font-size: 14px;
-
-                    &:focus::placeholder {
-                        color: transparent;
+                    color: $color-text-dataDesc;
+    
+                    span {
+                        height: 50px;
                     }
                 }
-
-                .modal-block-container--listinfo-box__descInfo--formbuttons {
-
-                    @include flex-row(flex-start, center);
-
-                    button {
-                        margin-top: 10px;
-                        padding: 10px 25px;
-                        border: none;
-                        background-color: $color-button-cancel;
-                        border-radius: 5px;
-                        color: $color-primary;
-                        font-size: 12px;
-                        font-weight: 600;
-
-                        &:hover {
-                            cursor: pointer;
-                            background-color: #006a72;
-                        }
-                    }
-
-                    .board-block-main-cancel {
-                        font-size: 24px;
-                        color: $color-text-dataDesc;
-                        position: relative;
-                        top: 8px;
-                        margin-left: 8px;
-
-                        &:hover {
-                            cursor: pointer;
-                            color: $color-text-dataTitle;
-                        }
-                    }
-
-                }
-
             }
 
-            .modal-block-container--listinfo-box__descInfo--text {
-                margin-top: 10px;
+            .modal-block-container--listinfo-box__activityInfo {
+                color: $color-text-dataDesc;
                 width: 100%;
-                height: 60px;
-                padding: 5px 20px 20px 10px;
-                border: none;
-                font-size: 14px;
-                background-color: #ebebeb;
-
-                span {
-                    height: 50px;
+    
+                h3 {
+                    color: $color-button-cancel;
                 }
+
+                p {
+                    margin-top: 8px;
+                    font-size: 14px;
+                    padding-left: 30px;
+
+                    span {
+                        font-weight: 600;
+                        color: $color-button-cancel;
+                    }
+                }
+
             }
         }
 
         .modal-block-container--listinfo-box__optionButtons {
             align-self: flex-start;
+            width: calc(25% - 10px);
+            padding-left: 10px;
 
             .modal-block-container--listinfo-box__removeList {
-                margin-top: 40px;
-                padding: 0px 10px;
+                
                 border: none;
                 background-color: transparent;
                 border-radius: 5px;
                 color: $color-text-dataDesc;
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: 600;
     
                 &:hover {
@@ -182,13 +212,13 @@ $color-button-cancel : #008a94;
             }
 
             .modal-block-container--listinfo-box__moveList {
-                margin-top: 40px;
-                padding: 10px 10px;
+                margin-top: 10px;
+                padding: 10px 0px;
                 border: none;
                 background-color:transparent;
                 border-radius: 5px;
                 color: $color-text-dataDesc;
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: 600;
     
                 &:hover {
@@ -198,13 +228,12 @@ $color-button-cancel : #008a94;
             }
 
             .modal-block-container--listinfo-box__closeModal {
-                margin-top: 40px;
-                padding: 10px 10px;
+                padding: 10px 0px;
                 border: none;
                 background-color:transparent;
                 border-radius: 5px;
                 color: $color-text-dataDesc;
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: 600;
     
                 &:hover {
@@ -213,8 +242,6 @@ $color-button-cancel : #008a94;
                 }
             }
         }
-
-        
 
         .exitInfoModal {
             width: 40px;

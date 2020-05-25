@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {IoMdClose, IoIosList, IoMdList} from 'react-icons/io';
+import {IoMdClose, IoIosList, IoMdList, IoMdInformationCircleOutline} from 'react-icons/io';
 import {TiDelete, TiArrowForward} from 'react-icons/ti';
 import {MdModeEdit} from 'react-icons/md';
 import ReactDOM from 'react-dom';
@@ -93,84 +93,94 @@ const ListInfoModal = ({
     return ReactDOM.createPortal(
             <div className ={styleClass}>
                 <div className="modal-block-container--listinfo-box">
-                    <div className="modal-block-container--listinfo-box__titleInfo">
-                        <h3><IoIosList style={{position: "relative", top:"2px", marginRight:"10px"}}/>
-                            {x.todoTitle}
-                            <span onClick={editTitle}><MdModeEdit style={{position: "relative", top:"3px", left:"10px"}} /></span>
-                        </h3>
-                        { renameListModalStatus && <RenameListModal 
-                            todoID = {todo._id}
-                            listId = {x.id}
-                            updateRenameListModalStatus = {updateRenameListModalStatus}
-                            listTitle = {x.todoTitle}
-                            listDesc = {x.description}
-                            todobox = {todobox}
-                            updateTodobox = {updateTodobox}
-                            userName = {userName}
-                            updateStyleChange = {updateStyleChange}
-                            initialPage = "listInfoModal"
-                        />
-                        }
-                        <p>in todo list <span>{todo.title}</span></p>
-                    </div>
-                    <div className="modal-block-container--listinfo-box__descInfo">
-                        <h3><IoMdList style={{position: "relative", top:"2px", marginRight:"10px"}}/>
-                            Description 
-                            {x.description.length !== 0 ?<span onClick={editDescription}><MdModeEdit style={{position: "relative", top:"3px", left:"10px"}} /></span>: null }
-                        </h3>
-                        {editDescBox || x.description.length === 0 ? 
-                        <form onSubmit={(e) => renameDescList(e, todo._id, x.id )}>
-                            <input onChange={inputChange} type="text" value={descChange} placeholder={x.description.length === 0 ? "Add a more detailed description..." : null} />
-                            <div className="modal-block-container--listinfo-box__descInfo--formbuttons">
-                                <button>Save</button>
-                                {x.description.length !== 0 ? <div className="board-block-main-cancel" onClick={cancel}><IoMdClose /></div> : null}
-                            </div>
-                        </form>
-                        : 
-                        <div className="modal-block-container--listinfo-box__descInfo--text" onClick={editDescription}>
-                            <p>{x.description}</p>
+                    <div className="modal-block-container--listinfo-box-contain">
+                        <div className="modal-block-container--listinfo-box__titleInfo">
+                            <h3><IoIosList style={{position: "relative", top:"2px", marginRight:"10px"}}/>
+                                {x.todoTitle}
+                                <span onClick={editTitle}><MdModeEdit style={{position: "relative", top:"3px", left:"10px"}} /></span>
+                            </h3>
+                            { renameListModalStatus && <RenameListModal 
+                                todoID = {todo._id}
+                                listId = {x.id}
+                                updateRenameListModalStatus = {updateRenameListModalStatus}
+                                listTitle = {x.todoTitle}
+                                listDesc = {x.description}
+                                todobox = {todobox}
+                                updateTodobox = {updateTodobox}
+                                userName = {userName}
+                                updateStyleChange = {updateStyleChange}
+                                initialPage = "listInfoModal"
+                            />
+                            }
+                            <p>in list <span>{todo.title}</span></p>
                         </div>
-                        }
-                    </div>
-                    <div className="modal-block-container--listinfo-box__optionButtons">
-                        <button onClick={deleteList} className="modal-block-container--listinfo-box__removeList">
-                            <TiDelete size="16px" style={{marginRight: "3px", position: "relative", top:"3px"}}/>   
-                            Remove item
-                        </button>
-                        {removeOneListModalStatus && <RemoveListModal 
-                                todoID = {todo._id}
-                                updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
-                                listId = {x.id}
-                                todoTitle = {todo.title}
-                                listTitle = {x.todoTitle}
-                                todobox = {todobox}
-                                updateTodobox = {updateTodobox}
-                                userName = {userName}
-                                updateStyleChange = {updateStyleChange}
-                                initialPage = "listInfoModal"
-                            />
+                    
+                        <div className="modal-block-container--listinfo-box__descInfo">
+                            <h3><IoMdList style={{position: "relative", top:"2px", marginRight:"10px"}}/>
+                                Description 
+                                {x.description.length !== 0 ?<span onClick={editDescription}><MdModeEdit style={{position: "relative", top:"3px", left:"10px"}} /></span>: null }
+                            </h3>
+                            {editDescBox || x.description.length === 0 ? 
+                            <form onSubmit={(e) => renameDescList(e, todo._id, x.id )}>
+                                <input onChange={inputChange} type="text" value={descChange} placeholder={x.description.length === 0 ? "Add a more detailed description..." : null} />
+                                <div className="modal-block-container--listinfo-box__descInfo--formbuttons">
+                                    <button>Save</button>
+                                    {x.description.length !== 0 ? <div className="board-block-main-cancel" onClick={cancel}><IoMdClose /></div> : null}
+                                </div>
+                            </form>
+                            : 
+                            <div className="modal-block-container--listinfo-box__descInfo--text" onClick={editDescription}>
+                                <p>{x.description}</p>
+                            </div>
                             }
-                        <button onClick={moveList} className="modal-block-container--listinfo-box__moveList">
-                        <TiArrowForward size="16px" style={{marginRight: "3px", position: "relative", top:"3px"}}/>
-                            Move item
-                        </button>
-                        {moveListModalStatus && <MoveListModal 
-                                todoID = {todo._id}
-                                listId = {x.id}
-                                listTitle = {x.todoTitle}
-                                updateMoveListModalStatus = {updateMoveListModalStatus}
-                                todobox = {todobox}
-                                updateTodobox = {updateTodobox}
-                                userName = {userName}
-                                updateStyleChange = {updateStyleChange}
-                                initialPage = "listInfoModal"
-                            />
-                            }
-                        <button onClick={exitModal} className="modal-block-container--listinfo-box__closeModal">
-                            <IoMdClose size="16px" style={{marginRight: "3px", position: "relative", top:"3px"}}/>
-                            Close
-                        </button>
+                        </div>
+                        <div className="modal-block-container--listinfo-box__activityInfo">
+                            <h3><IoMdInformationCircleOutline style={{position: "relative", top:"2px", marginRight:"10px"}}/>
+                                Information
+                            </h3>
+                            <p><span>{userName}</span> added this item to {todo.title} </p>
+                            <p>{x.created}</p>
+                        </div>
                     </div>
+                        <div className="modal-block-container--listinfo-box__optionButtons">
+                            <button onClick={deleteList} className="modal-block-container--listinfo-box__removeList">
+                                <TiDelete size="16px" style={{marginRight: "3px", position: "relative", top:"3px"}}/>   
+                                Remove item
+                            </button>
+                            {removeOneListModalStatus && <RemoveListModal 
+                                    todoID = {todo._id}
+                                    updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
+                                    listId = {x.id}
+                                    todoTitle = {todo.title}
+                                    listTitle = {x.todoTitle}
+                                    todobox = {todobox}
+                                    updateTodobox = {updateTodobox}
+                                    userName = {userName}
+                                    updateStyleChange = {updateStyleChange}
+                                    initialPage = "listInfoModal"
+                                />
+                                }
+                            <button onClick={moveList} className="modal-block-container--listinfo-box__moveList">
+                            <TiArrowForward size="16px" style={{marginRight: "3px", position: "relative", top:"3px"}}/>
+                                Move item
+                            </button>
+                            {moveListModalStatus && <MoveListModal 
+                                    todoID = {todo._id}
+                                    listId = {x.id}
+                                    listTitle = {x.todoTitle}
+                                    updateMoveListModalStatus = {updateMoveListModalStatus}
+                                    todobox = {todobox}
+                                    updateTodobox = {updateTodobox}
+                                    userName = {userName}
+                                    updateStyleChange = {updateStyleChange}
+                                    initialPage = "listInfoModal"
+                                />
+                                }
+                            <button onClick={exitModal} className="modal-block-container--listinfo-box__closeModal">
+                                <IoMdClose size="16px" style={{marginRight: "3px", position: "relative", top:"3px"}}/>
+                                Close
+                            </button>
+                        </div>
                     <div className="exitInfoModal" onClick={exitModal}>
                         <span><IoMdClose/></span>
                     </div>

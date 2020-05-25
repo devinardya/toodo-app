@@ -272,6 +272,8 @@ $color-button-cancel : #008a94;
                     list-style-type: none;
                     overflow-y: auto;
                     max-height: 65vh;
+                    z-index: 10;
+                    overflow: visible;
                 }
     
                 .board-block-main--list {
@@ -285,55 +287,96 @@ $color-button-cancel : #008a94;
                     -moz-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
                     box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
 
-    
-                    .board-block-main--list--buttons {
-                        text-align: right;
-                        @include flex-row( space-between, center );
+                    .board-block-main--list__menu {
+                        @include flex-row(space-between, center);
+                        width: 100%;
+                        position: relative;
 
-                        .list-date {
-                            width: 50%;
-                            text-align: left;
-                            margin-top: 5px;
-                            color: $color-text-dataDate;
-                        }
+                        .board-block-main--list__info {
+                            width:85%;
+                            @include flex-column(center,flex-start);
 
-                        .board-block-main--list--buttons__part {
-                            width: 50%;
-                            button {
-                                background: transparent;
-                                border: none;
-                                color: $color-text-dataDesc;
-    
+                            .list-title {
+                                font-size: 14px;
+                                color: $color-text-dataTitle;
+                                font-weight: 600;
+        
                                 &:hover {
                                     cursor: pointer;
-                                    color: $color-text-title;
+                                }
+                            }
+
+                            .list-desc {
+                                width: 20%;
+                                font-size: 15px;
+                                color: $color-text-dataDesc;
+                                padding-top: 10px;
+        
+                                &:hover {
+                                    cursor: pointer;
                                 }
                             }
                         }
-                    }
 
-                    .list-title {
-                        font-size: 14px;
-                        color: $color-text-dataTitle;
-                        font-weight: 600;
-                        margin-bottom: 10px;
+                        .item-menu-dropbox {
+                            width: 15%;
+                            text-align: right;
+                            align-self: flex-end;
+                            @include flex-row(flex-end, flex-end);
+                            position: relative;
 
-                        &:hover {
-                            cursor: pointer;
-                        }
-                    }
+                            button {
+                                border: none;
+                                background-color: transparent;
+
+                                &:hover {
+                                    cursor: pointer;
+                                    color: $color-text-dataTitle;
+                                }
+                            }
+                            
     
-                    .list-desc {
-                        font-size: 15px;
-                        color: $color-text-dataDesc;
+                            .board-block-main--list--buttons__part.active {
+                                @include flex-column(flex-start, flex-start);
+                                
+                            }
 
-                        &:hover {
-                            cursor: pointer;
+                            .board-block-main--list--buttons__part {
+                                display: none;
+                                top:25px;
+                                right: -160px;
+                                width: 180px;
+                                padding:10px;
+                                z-index: 99999;
+                                background:  rgb(255, 255, 255);
+                                border-radius: 5px;
+                                position: absolute;
+                                -webkit-box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
+                                -moz-box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
+                                box-shadow: 0px 0px 13px 1px rgba(97,97,97,0.5);
+
+                                button {
+                                    color: rgb(87, 87, 87);
+                                    background-color: rgb(182, 221, 223);
+                                    width: 100%;
+                                    font-size: 14px;
+                                    line-height: 0px;
+                                    text-align: left;
+                                    padding: 10px 15px 15px 15px;
+                                    margin-bottom: 5px;
+            
+                                    &:last-of-type {
+                                        margin-bottom: 0px;
+                                    }
+            
+                                    &:hover {
+                                        cursor: pointer;
+                                        color: $color-text-dataTitle;
+                                        background-color: rgb(203, 228, 230);
+                                    }
+                                }
+                            }
                         }
-                    }
-    
-                    .list-date {
-                        font-size: 10px;
                     }
                 }
             }
