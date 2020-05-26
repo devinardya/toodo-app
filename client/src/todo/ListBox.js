@@ -126,6 +126,7 @@ const ListBox = ({
                                     todobox = {todobox}
                                     updateTodobox = {updateTodobox}
                                     userName = {userName}
+                                    initialPage = "board"
                                 />
                                 }
                                 <button onClick={() => moveOneList()}>

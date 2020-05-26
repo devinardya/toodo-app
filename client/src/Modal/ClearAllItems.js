@@ -3,6 +3,8 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import '../index.scss';
 
+let url = "https://lit-peak-62083.herokuapp.com"
+
 const ClearListItems = ({
     todoID, 
     updateClearItemsStatus, 
@@ -14,7 +16,7 @@ const ClearListItems = ({
 
     const deleteAllItems = (todoId) => {
      
-        axios.patch("/todos/"+todoId+"/user/"+userName)
+        axios.patch(url+"/todos/"+todoId+"/user/"+userName)
         .then(response => {
             console.log("response data", response);
             let copyData = [...todobox];
