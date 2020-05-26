@@ -61,7 +61,7 @@ const Board = ({location}) => {
                 <Helmet>
                     <title>Toodo - {userName}</title>
                 </Helmet>
-                    <div className ="board-container-block">
+                    <div className ="block__board">
                         <Header 
                             userName = {userName}
                             logout = {logout}

@@ -1,4 +1,11 @@
-.board-container-block {
+@mixin inputStyle($inputColor) {
+    font-size: 10px;
+    margin-top: 8px;
+    padding: 0;
+    color: $inputColor;
+}
+
+.block__board {
     background-color: $color-primary;
     height: 100vh;
     width: 100vw;
@@ -7,20 +14,21 @@
     @include flex-column(center, center);
     position: relative;
 
-    .board-block-main {
+    .block__board--main {
         height: 90%;
         width: 100%;
         padding: 20px;
         overflow: hidden;
         @include flex-row(flex-start, flex-start);
 
-        .board-block-boxes {
+        .block__board--main.block__boxes {
             width: 100%;
             height: 100%;
             @include flex-row(flex-start, flex-start);
 
-            .board-block-main--form {
+            .block__board--main.addform {
                 width: calc(20% - 10px);
+                height: auto;
                 background-color: $color-primary;
                 padding: 20px;
                 margin: 5px;
@@ -45,16 +53,12 @@
                         color: $color-text-dataDesc;
                     }
 
-                    .board-block-main--form-inputError {
-                        font-size: 10px;
-                        color: red;
-                        margin-top: 8px;
+                    .block__board--main.addform--inputError {
+                        @include inputStyle(red);
                     }
 
-                    .board-block-main--form-input {
-                        font-size: 10px;
-                        color: $color-text-dataDesc;
-                        margin-top: 8px;
+                    .block__board--main.addform--input {
+                        @include inputStyle($color-text-dataDesc);
                     }
 
                     button {
@@ -76,7 +80,7 @@
                 }
             }
 
-            .board-block-main--eachbox {
+            .block__board--main--eachbox {
                 width: calc(20% - 10px);
                 max-height: calc(100% - 10px);
                 background-color: $color-primary;
@@ -85,12 +89,13 @@
                 text-align: left;
                 border-radius: 5px;
 
-                .addMenu-Button {
+                .block__board--main--eachbox--addItem {
                     margin-bottom: 10px;
-                    .board-block-addform {
+
+                    .block__board--main--eachbox--addItem__addform {
                         margin-top: 10px;
     
-                        .board-block-inputbox {
+                        .block__board--main--eachbox--addItem__addform--inputbox {
                             background-color: $color-secondary-light;
                             margin-bottom: 10px;
                             padding: 10px 10px;
@@ -119,11 +124,11 @@
     
                         }
     
-                        .board-block-formbutton {
+                        .block__board--main--eachbox--addItem__addform--formbutton {
                             width: 100%;
                             @include flex-row(flex-start, center);
     
-                            .board-block-main-addList {
+                            .block__board--main--eachbox--addItem__addform--formbutton--addList {
                                 padding: 8px 15px;
                                 background-color: $color-button-cancel;
                                 border-radius: 5px;
@@ -139,7 +144,7 @@
                                 }
                             }
     
-                            .board-block-main-cancel {
+                            .block__board--main--eachbox--addItem__addform--formbutton--cancel {
                                 font-size: 24px;
                                 color: $color-text-dataDesc;
                                 position: relative;
@@ -155,10 +160,10 @@
                     }
                 }
 
-                .title-menu-button {
+                .block__board--main--eachbox--title {
                     @include flex-row( space-between, center );
 
-                    .title-menu-dropbox {
+                    .block__board--main--eachbox--title--menuDropdown {
                         position: relative;
                         margin-bottom: 5px;
 
@@ -216,7 +221,7 @@
                     }
                 }
 
-                .board-block-main-addButton {
+                .block__board--main-addButton {
                     background: transparent;
                     border: none;
                     font-size: 14px;
@@ -245,7 +250,7 @@
                         max-height: 65vh;
                         overflow-x: initial;;
 
-                        .board-block-main--list {
+                        .block__board--main--list {
                             background-color: $color-secondary-light;
                             margin-bottom: 10px;
                             padding: 10px 10px;
@@ -256,16 +261,16 @@
                             -moz-box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
                             box-shadow: 0px 1px 2px 0px rgba(150,150,150,1);
         
-                            .board-block-main--list__menu {
+                            .block__board--main--list--menu {
                                 @include flex-row(space-between, center);
                                 width: 100%;
                                 position: relative;
         
-                                .board-block-main--list__info {
+                                .block__board--main--list--menu--info {
                                     width:85%;
                                     @include flex-column(center,flex-start);
         
-                                    .list-title {
+                                    .block__board--main--list--menu--info--list-title {
                                         font-size: 14px;
                                         color: $color-text-dataTitle;
                                         font-weight: 600;
@@ -275,7 +280,7 @@
                                         }
                                     }
         
-                                    .list-desc {
+                                    .block__board--main--list--menu--info--list-desc {
                                         width: 20%;
                                         font-size: 15px;
                                         color: $color-text-dataDesc;
@@ -287,7 +292,7 @@
                                     }
                                 }
         
-                                .item-menu-dropbox {
+                                .block__board--main--list--menu--infoDropdown {
                                     width: 15%;
                                     text-align: right;
                                     align-self: flex-end;
@@ -305,11 +310,11 @@
                                     }
                                     
             
-                                    .board-block-main--list--buttons__part.active {
+                                    .block__board--main--list--buttons__part.active {
                                         @include flex-column(flex-start, flex-start);
                                     }
         
-                                    .board-block-main--list--buttons__part {
+                                    .block__board--main--list--buttons__part {
                                         display: none;
                                         padding: 10px;
                                         z-index: 999999;

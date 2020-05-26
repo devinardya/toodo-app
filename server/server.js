@@ -8,6 +8,8 @@ dotenv.config({path: './config.env'});
 
 const port = process.env.PORT || 8090;
 
+const apiRouter = express.Router();
+
 
 // Middleware to logged the method, path, statuscode and amount of time needed
 app.use((req, res, next) => {
@@ -50,7 +52,7 @@ app.use((req, res, next) => {
 
 
 // TO GET THE WHOLE DATA FROM THE DATABASE
-app.get('/todos/:user', (req, res) => {
+apiRouter.get('/:user', (req, res) => {
     let userId = req.params.user;
     const db = getDB();
     db.collection(userId)
@@ -72,7 +74,7 @@ function validate(todos) {
 };
 
 
-app.post('/todos/:user', (req, res) => {
+apiRouter.post('/:user', (req, res) => {
     let userId = req.params.user;
     const db = getDB();
     let data = req.body;
@@ -93,7 +95,7 @@ app.post('/todos/:user', (req, res) => {
 });
 
 // TO EDIT/MODIFY A TO DO LIST BOX
-app.put('/todos/:id/user/:user', (req, res) => {
+apiRouter.put('/:id/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.id;
     let userId = req.params.user;
@@ -120,7 +122,7 @@ app.put('/todos/:id/user/:user', (req, res) => {
 
 // TO REMOVE A TO DO LIST BOX
 
-app.delete('/todos/:id/user/:user', (req, res) => {
+apiRouter.delete('/:id/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.id;
     let userId = req.params.user;
@@ -150,8 +152,17 @@ app.post('/list/:todosid/user/:user', (req, res) => {
     let clientData = req.body;
    
     let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    let time = today.getHours() + ":" + today.getMinutes();
+    let Month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let date = Month[(today.getMonth())]+' '+today.getDate()+", "+today.getFullYear();
+
+
+    let time;
+    if(today.getMinutes() < 10){
+        time = today.getHours() + ":0" + today.getMinutes();
+    } else {
+        time = today.getHours() + ":" + today.getMinutes();
+    }
+
     let dateTime = date+' at '+time;
 
     clientData.id = uuid.v4();
@@ -177,7 +188,7 @@ app.post('/list/:todosid/user/:user', (req, res) => {
 
 // TO CLEAR ALL ITEMS INSIDE A SPECIFIC TO DO LIST BOX
 
-app.patch('/todos/:todosid/user/:user', (req, res) => {
+apiRouter.patch('/:todosid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
     let userId = req.params.user;
@@ -207,7 +218,7 @@ app.patch('/todos/:todosid/user/:user', (req, res) => {
 
 // TO MODIFY A SPECIFIC LIST INSIDE A SPECIFIC TO DO LIST BOX
 
-app.patch('/todos/:todosid/list/:listid/user/:user', (req, res) => {
+apiRouter.patch('/:todosid/list/:listid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
     let listid = req.params.listid;
@@ -241,7 +252,7 @@ app.patch('/todos/:todosid/list/:listid/user/:user', (req, res) => {
 
 // TO DELETE A SPECIFIC LIST INSIDE A SPECIFIC TO DO LIST BOX
 
-app.delete('/todos/:todosid/list/:listid/user/:user', (req, res) => {
+apiRouter.delete('/:todosid/list/:listid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
     let listid = req.params.listid;
@@ -273,7 +284,7 @@ app.delete('/todos/:todosid/list/:listid/user/:user', (req, res) => {
 
 // TO MOVE A SPECIFIC LIST FROM ONE TO DO LIST BOX TO ANOTHER TO DO LIST BOX
 
-app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
+apiRouter.patch('/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
     const db = getDB();
     let oldDocId = req.params.oldid;
     let newDocId = req.params.newid;
@@ -325,6 +336,8 @@ app.patch('/todos/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
             res.status(400).end();
         })
 });
+
+app.use('/todos', apiRouter)
 
 
 app.listen(port, () => {
