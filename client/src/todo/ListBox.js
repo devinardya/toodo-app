@@ -74,16 +74,16 @@ const ListBox = ({
 
     let dropdownItemClass;
 	if (ItemMenuStatus) {
-		dropdownItemClass = 'board-block-main--list--buttons__part active';
+		dropdownItemClass = 'block__board--main--list--buttons__part active';
 	} else {
-		dropdownItemClass = 'board-block-main--list--buttons__part';
+		dropdownItemClass = 'block__board--main--list--buttons__part';
     };
 
-    return <li className="board-block-main--list">
-                <div className="board-block-main--list__menu">
-                    <div className="board-block-main--list__info">
-                        <p className="list-title" onClick={showInfoModal}>{x.todoTitle}</p>
-                        {x.description.length > 0 ? <span className="list-desc" onClick={showInfoModal}><IoMdList /></span> : null}
+    return <li className="block__board--main--list">
+                <div className="block__board--main--list--menu">
+                    <div className="block__board--main--list--menu--info">
+                        <p className="block__board--main--list--menu--info--list-title" onClick={showInfoModal}>{x.todoTitle}</p>
+                        {x.description.length > 0 ? <span className="block__board--main--list--menu--info--list-desc" onClick={showInfoModal}><IoMdList /></span> : null}
                         {listInfoModalStatus && <ListInfoModal 
                             todobox = {todobox}
                             todo = {todo}
@@ -93,7 +93,7 @@ const ListBox = ({
                             updateListInfoModalStatus = {updateListInfoModalStatus}
                         />}
                     </div>
-                    <div className="item-menu-dropbox" ref={itemMenu}>
+                    <div className="block__board--main--list--menu--infoDropdown" ref={itemMenu}>
                             <button onClick={activateItemMenu} >
                                 <IoIosMore size="18px" />
                             </button>

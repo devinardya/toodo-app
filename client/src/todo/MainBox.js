@@ -5,8 +5,8 @@ import TodoBox from './TodoBox';
 const MainBox = ({todobox, updateTodobox, userName}) => {
 
 
-    return <main className="board-block-main">
-                <div className="board-block-boxes">
+    return <main className="block__board--main">
+                <div className="block__board--main block__boxes">
                 {todobox.map( (todo) => {
                     return <TodoBox 
                         key={todo._id}

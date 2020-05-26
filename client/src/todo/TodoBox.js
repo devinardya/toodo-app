@@ -111,10 +111,10 @@ const TodoBox = ({
         updateAddListFormActive(false);
     };
 
-    return <div className="board-block-main--eachbox">
-                <div className="title-menu-button" >
+    return <div className="block__board--main--eachbox">
+                <div className="block__board--main--eachbox--title" >
                     <h4>{todo.title}</h4>
-                    <div className="title-menu-dropbox" ref={nodeDropdown}>
+                    <div className="block__board--main--eachbox--title--menuDropdown" ref={nodeDropdown}>
                         <button onClick={activateMenu} >
                             <IoMdMenu size="18px" />
                         </button>
@@ -176,19 +176,19 @@ const TodoBox = ({
                     }
                     </ul>
                 </span>
-                <div className="addMenu-Button">
+                <div className="block__board--main--eachbox--addItem">
                     {addListFormActive ? 
-                        <form className="board-block-addform" onSubmit = {(e) => addNewList(e, todo._id)} >
-                            <div className="board-block-inputbox">
+                        <form className="block__board--main--eachbox--addItem__addform" onSubmit = {(e) => addNewList(e, todo._id)} >
+                            <div className="block__board--main--eachbox--addItem__addform--inputbox">
                                 <input onChange={onAddListChange} placeholder="Enter title for this item..." type="text" value={addListInput}/>
                             </div>
-                            <div className="board-block-formbutton">
-                                <button className="board-block-main-addList">Add Item</button>
-                                <div className="board-block-main-cancel" onClick={cancel}><IoMdClose /></div>
+                            <div className="block__board--main--eachbox--addItem__addform--formbutton">
+                                <button className="block__board--main--eachbox--addItem__addform--formbutton--addList">Add Item</button>
+                                <div className="block__board--main--eachbox--addItem__addform--formbutton--cancel" onClick={cancel}><IoMdClose /></div>
                             </div>
                         </form>
                         : 
-                        <button className="board-block-main-addButton" onClick={() => addListActive()}>
+                        <button className="block__board--main-addButton" onClick={() => addListActive()}>
                             <IoIosAddCircle style={{position:"relative", top: "2px", marginRight:"10px"}}/>
                             Add new item
                         </button>
