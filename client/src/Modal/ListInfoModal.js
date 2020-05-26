@@ -22,7 +22,7 @@ const ListInfoModal = ({
 
     const [editDescBox, updateDescBox] = useState(false);
     const [descChange, updateDescChange] = useState(x.description);
-    const [renameListModalStatus, updateRenameListModalStatus] = useState(false);
+    const [renameListFromModal, updateRenameListFromInfoModal] = useState(false);
     const [removeOneListModalStatus, updateRemoveOneListModalStatus] = useState(false);
     const [moveListModalStatus, updateMoveListModalStatus] = useState(false);
     const [styleChange, updateStyleChange] = useState(false);
@@ -32,7 +32,7 @@ const ListInfoModal = ({
     };
 
     const editTitle = () => {
-        updateRenameListModalStatus(true); 
+        updateRenameListFromInfoModal(true); 
         updateStyleChange(true);
     };
 
@@ -88,7 +88,7 @@ const ListInfoModal = ({
     if(!styleChange) {
         styleClass = "modal-block-container--listinfo"
     } else {
-        styleClass = "modal-block-container--listinfo modalActive"
+        styleClass = "modal-block-container--listinfo NotActive"
     }
 
 
@@ -101,10 +101,10 @@ const ListInfoModal = ({
                                 {x.todoTitle}
                                 <span onClick={editTitle}><MdModeEdit style={{position: "relative", top:"3px", left:"10px"}} /></span>
                             </h3>
-                            { renameListModalStatus && <RenameListModal 
+                            { renameListFromModal && <RenameListModal 
                                 todoID = {todo._id}
                                 todoTitle = {todo.title}
-                                updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
+                                updateRenameListFromInfoModal = {updateRenameListFromInfoModal}
                                 listId = {x.id}
                                 listTitle = {x.todoTitle}
                                 listDesc = {x.description}

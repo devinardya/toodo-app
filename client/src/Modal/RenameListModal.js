@@ -16,6 +16,7 @@ const RenameTitleModal = ({
     userName, 
     updateStyleChange,
     initialPage,
+    updateRenameListFromInfoModal,
 }) => {
 
     const [titleChange, updateTitleChange] = useState(listTitle);
@@ -45,10 +46,12 @@ const RenameTitleModal = ({
                 copyData[findIndex].data[findDataIndex].todoTitle = response.data.todoTitle;
                 console.log("copyData before save", copyData);
                 
-                updateRenameListModalStatus(false);
+                
                 if(initialPage === "listInfoModal") {
-                    updateRenameListModalStatus(false);
+                    updateRenameListFromInfoModal(false);
                     updateStyleChange(false);
+                } else if(initialPage === "board") {
+                    updateRenameListModalStatus(false);
                 }
 
                 updateTodobox(copyData);
@@ -64,10 +67,11 @@ const RenameTitleModal = ({
     };
 
     const cancel = () => {
-        updateRenameListModalStatus(false);
         if(initialPage === "listInfoModal") {
-            updateRenameListModalStatus(false);
+            updateRenameListFromInfoModal(false);
             updateStyleChange(false);
+        } else if(initialPage === "board") {
+            updateRenameListModalStatus(false);
         }
     };
 
