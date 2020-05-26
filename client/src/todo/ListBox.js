@@ -20,7 +20,10 @@ const ListBox = ({
     const [moveListModalStatus, updateMoveListModalStatus] = useState(false);
     const [listInfoModalStatus, updateListInfoModalStatus] = useState(false);
     const [ItemMenuStatus, updateItemMenuStatus] = useState(false);
+    const [height, updateHeight] = useState(0);
+    const [width, updateWidth] = useState(0);
     const itemMenu = useRef();
+
 
     const deleteOneList = () => {
         updateRemoveOneListModalStatus(true);
@@ -39,7 +42,12 @@ const ListBox = ({
     };
 
     const activateItemMenu = useCallback( () => {
+        const dimensions = itemMenu.current.getBoundingClientRect();
+        updateHeight(dimensions.y);
+        updateWidth(dimensions.x);
+        console.log(dimensions);
         updateItemMenuStatus(ItemMenuStatus ? false : true);
+        
     }, [ItemMenuStatus]);
 
     const handleClickOutside = useCallback((e) => {
@@ -89,9 +97,10 @@ const ListBox = ({
                             <button onClick={activateItemMenu} >
                                 <IoIosMore size="18px" />
                             </button>
-                            <div className= {dropdownItemClass}>
+                            <div className= {dropdownItemClass} style={{position:"fixed", top:height+25, left:width-135}}>
                                 <button onClick={() => deleteOneList()}>
-                                    <TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
+                                    <TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"4px"}}/>
+                                    Delete item
                                 </button>
                                 { removeOneListModalStatus && <RemoveListModal 
                                     todoID = {todo._id}
@@ -106,6 +115,7 @@ const ListBox = ({
                                 }
                                 <button onClick={() => renameOneList()}>
                                     <MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
+                                    Edit item
                                 </button>
                                 { renameListModalStatus && <RenameListModal 
                                     todoID = {todo._id}
@@ -119,7 +129,8 @@ const ListBox = ({
                                 />
                                 }
                                 <button onClick={() => moveOneList()}>
-                                    <TiArrowForward size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
+                                    <TiArrowForward size="18px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
+                                    Move item
                                 </button>
                                 { moveListModalStatus && <MoveListModal 
                                     todoID = {todo._id}

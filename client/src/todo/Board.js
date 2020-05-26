@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import MainBox from './MainBox'
-import './board.scss';
+import '../index.scss';
 
 let url = "https://lit-peak-62083.herokuapp.com"
 

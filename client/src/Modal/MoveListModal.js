@@ -2,9 +2,13 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import {MdExpandMore} from 'react-icons/md';
+<<<<<<< HEAD
 import './moveListModal.scss';
 
 let url = "https://lit-peak-62083.herokuapp.com"
+=======
+import '../index.scss';
+>>>>>>> master
 
 const MoveListModal = ({
     todoID, 

@@ -1,39 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:wght@400;600;700&display=swap');
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-:focus {
-outline: none;
-}
-
-$Montserrat : 'Montserrat', sans-serif;
-$Open-Sans : 'Open Sans', sans-serif;
-
-$color-primary: rgb(240, 240, 240);
-$color-secondary: #406e8e;
-$color-secondary-light: #39a1eb;
-$color-text-title: #ffa84e;
-$color-text-dataTitle : #dd4600;
-$color-text-dataDesc : #737373;
-$color-text-dataDate : #737373;
-
-@mixin flex-column($justify, $align) {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: $justify;
-    align-items: $align;
-}
-
-@mixin flex-row($justify, $align) {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: $justify;
-    align-items: $align;
-}
-
 .login-block {
     height: 100vh;
     max-width: 100vw;
@@ -112,11 +76,10 @@ $color-text-dataDate : #737373;
                     border-left: none;
                     border-right: none;
                     border-bottom: 3px solid $color-text-title;
-                    padding-left: 10px;
                     font-size: 18px;
                     margin-bottom: 20px;
                     font-weight: 600;
-                    padding-bottom: 10px;
+                    padding: 15px ;
                     color: $color-primary;
 
                     &::placeholder {
@@ -127,6 +90,11 @@ $color-text-dataDate : #737373;
 
                     &:focus::placeholder {
                         color: transparent;
+                    }
+
+                    &:focus {
+                        background-color: rgba(248, 248, 248, 0.2);
+                        outline: none;
                     }
 
                 }

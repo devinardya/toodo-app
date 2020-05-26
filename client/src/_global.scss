@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+input:focus {
+    outline: none;
+}
+
+
+$Montserrat : 'Montserrat', sans-serif;
+$Open-Sans : 'Open Sans', sans-serif;
+
+$color-primary: rgb(240, 240, 240);
+$color-secondary: #406e8eff;
+$color-secondary-light: rgb(255, 255, 255);
+$color-text-title: #ffa84e;
+$color-text-dataTitle : #dd4600;
+$color-text-dataDesc : #737373;
+$color-text-cancel : #a7a7a7;
+$color-button-cancel : #008a94;
+
+@mixin flex-column($justify, $align) {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin flex-row($justify, $align) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: $justify;
+    align-items: $align;
+}

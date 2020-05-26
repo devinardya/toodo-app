@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './header.scss'
+import '../index.scss';
 import logoicon from '../Image/toodo-logo2.svg';
 
 const Header = ({userName, logout, initialPage}) => {
