@@ -1,6 +1,4 @@
 const mongo = require('mongodb');
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
 const MongoClient = mongo.MongoClient;
 const ObjectId = mongo.ObjectId;
 

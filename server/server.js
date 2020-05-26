@@ -168,7 +168,7 @@ app.post('/list/:todosid/user/:user', (req, res) => {
     clientData.id = uuid.v4();
     clientData.created = dateTime;
 
-    if (!todoId) {
+    if (!todoId || !userId) {
         return res.status(400).end();
     }
 
