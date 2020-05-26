@@ -7,12 +7,9 @@ import ReactDOM from 'react-dom';
 import RenameListModal from '../Modal/RenameListModal';
 import RemoveListModal from '../Modal/RemoveListModal';
 import MoveListModal from '../Modal/MoveListModal';
-<<<<<<< HEAD
-import './listInfoModal.scss';
-let url = "https://lit-peak-62083.herokuapp.com"
-=======
 import '../index.scss';
->>>>>>> master
+
+let url = "https://lit-peak-62083.herokuapp.com"
 
 const ListInfoModal = ({
     todobox,
