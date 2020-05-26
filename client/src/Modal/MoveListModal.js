@@ -23,7 +23,7 @@ const MoveListModal = ({
 
     const handleChange = (e) => {
         let data = e.target.value;
-        console.log(data);
+        //console.log(data);
         updateSelectValue(data);
     }
  
@@ -33,7 +33,7 @@ const MoveListModal = ({
         if(selectValue.length !== 0 && selectValue !== undefined) {
             axios.patch(url+'/todos/'+todoid+'/newtodo/'+selectValue+'/item/'+itemId+'/user/'+userName)
             .then( response => {
-                console.log(response.data)
+                //console.log(response.data)
                 
                 updateMoveListModalStatus(false);
                 if(initialPage === "listInfoModal") {

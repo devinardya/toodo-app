@@ -28,7 +28,7 @@ const AddBoxForm = ({userName, todobox, updateTodobox}) => {
 
             axios.post(url+"/todos/"+userName, input)
             .then(response => {   
-                console.log(response);
+               // console.log(response);
                //updateTodobox(response.data)
                let copy = [...todobox];
                let newData = [...copy, response.data]

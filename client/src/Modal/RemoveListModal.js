@@ -22,7 +22,7 @@ const DeleteListModal = ({
      
         axios.delete(url+"/todos/"+todoId+"/item/"+itemId+"/user/"+userName)
         .then(response => {
-            console.log("response data", response);
+            //console.log("response data", response);
             let copyData = [...todobox];
             let findIndex = copyData.findIndex(x => x._id === todoId);
             copyData[findIndex].data = copyData[findIndex].data.filter(y => y.id !== itemId);

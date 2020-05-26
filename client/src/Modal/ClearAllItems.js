@@ -18,7 +18,7 @@ const ClearListItems = ({
      
         axios.delete(url+"/todo/"+todoId+"/user/"+userName)
         .then(response => {
-            console.log("response data", response);
+            //console.log("response data", response);
             let copyData = [...todobox];
             let indexList = copyData.findIndex( x => x._id === todoId);
             copyData[indexList].data = [];

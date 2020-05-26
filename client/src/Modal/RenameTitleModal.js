@@ -38,11 +38,11 @@ const RenameTitleModal = ({
 
             axios.put(url+"/todos/"+ id + "/user/" + userName, data)
             .then( response => {
-                console.log(response);
+                //console.log(response);
                 let copyData = [...todobox];
                 let index = copyData.findIndex( x => x._id === id);
                 copyData[index].title = response.data.title;
-                console.log("copyData before save", copyData);
+                //console.log("copyData before save", copyData);
 
                 updateRenameTitleModalStatus(false);
                 updateTodobox(copyData);

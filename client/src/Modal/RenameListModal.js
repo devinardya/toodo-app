@@ -39,12 +39,12 @@ const RenameTitleModal = ({
             
             axios.patch(url+"/todos/"+todoId+"/item/"+itemId+"/user/"+userName, data)
             .then(response => {
-                console.log(response);
+                //console.log(response);
                 let copyData = [...todobox];
                 let findIndex = copyData.findIndex(x => x._id === todoId);
                 let findDataIndex = copyData[findIndex].data.findIndex(y => y.id === itemId);
                 copyData[findIndex].data[findDataIndex].todoTitle = response.data.todoTitle;
-                console.log("copyData before save", copyData);
+                //console.log("copyData before save", copyData);
                 
                 
                 if(initialPage === "listInfoModal") {

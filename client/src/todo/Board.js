@@ -22,7 +22,7 @@ const Board = ({location}) => {
             cancelToken: source.token
           })
         .then(response => {   
-            console.log(response.data);
+            //console.log(response.data);
             updateTodobox(response.data);
         })
         .catch((error) => {
@@ -45,7 +45,7 @@ const Board = ({location}) => {
           })
           .catch(function (thrown) {
             if (axios.isCancel(thrown)) {
-              console.log('Request canceled', thrown.message);
+              //console.log('Request canceled', thrown.message);
             } else {
               // handle error
             }

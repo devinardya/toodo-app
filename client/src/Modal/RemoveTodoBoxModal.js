@@ -18,7 +18,7 @@ const RemoveTodoBoxModal = ({
       
         axios.delete(url+"/todos/" + id+"/user/"+userName)
         .then(response => {
-            console.log("RESPONSE", response);
+            //console.log("RESPONSE", response);
             let copy = [...todobox];
             let newData = copy.filter(x => x._id !== id);
 

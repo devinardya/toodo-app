@@ -58,7 +58,7 @@ const TodoBox = ({
             }
             axios.post(url+"/todos/" + id + "/user/" + userName, input)
             .then(response => {   
-                console.log("response after adding data", response.data);
+                //console.log("response after adding data", response.data);
                 let copyData = [...todobox];
                 let index = copyData.findIndex(x => x._id === id);
                 copyData[index].data = [...copyData[index].data, response.data];

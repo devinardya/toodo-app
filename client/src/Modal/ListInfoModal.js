@@ -51,12 +51,12 @@ const ListInfoModal = ({
         
         axios.patch(url+"/todos/"+todoId+"/item/"+itemID+"/user/"+userName, data)
         .then(response => {
-            console.log(response);
+            //console.log(response);
             let copyData = [...todobox];
             let findIndex = copyData.findIndex(x => x._id === todoId);
             let findDataIndex = copyData[findIndex].data.findIndex(y => y.id === itemID);
             copyData[findIndex].data[findDataIndex].description = response.data.description;
-            console.log("copyData before save", copyData);
+            //console.log("copyData before save", copyData);
             updateTodobox(copyData);
             updateDescBox(false);
         })
