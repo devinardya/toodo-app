@@ -14,7 +14,7 @@ const ClearListItems = ({
 
     const deleteAllItems = (todoId) => {
      
-        axios.patch("/todos/"+todoId+"/user/"+userName)
+        axios.delete("/todo/"+todoId+"/user/"+userName)
         .then(response => {
             console.log("response data", response);
             let copyData = [...todobox];

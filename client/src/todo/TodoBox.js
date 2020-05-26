@@ -55,7 +55,7 @@ const TodoBox = ({
                 todoTitle : addListInput,
                 description : "",
             }
-            axios.post("/list/" + id + "/user/" + userName, input)
+            axios.post("/todos/" + id + "/user/" + userName, input)
             .then(response => {   
                 console.log("response after adding data", response.data);
                 let copyData = [...todobox];
