@@ -1,8 +1,7 @@
 const mongo = require('mongodb');
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
 const MongoClient = mongo.MongoClient;
 const ObjectId = mongo.ObjectId;
+const dotenv = require('dotenv');
 
 dotenv.config({path: './config.env'})
 

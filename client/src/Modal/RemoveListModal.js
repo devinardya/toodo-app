@@ -7,9 +7,9 @@ let url = "https://lit-peak-62083.herokuapp.com"
 
 const DeleteListModal = ({
     todoID, 
-    listId, 
+    itemId, 
     updateRemoveOneListModalStatus, 
-    listTitle, 
+    itemTitle, 
     todobox, 
     updateTodobox, 
     userName, 
@@ -18,14 +18,14 @@ const DeleteListModal = ({
     todoTitle,
 }) => {
 
-    const deleteList = (todoId, listID) => {
+    const deleteList = (todoId, itemId) => {
      
-        axios.delete(url+"/todos/"+todoId+"/list/"+listID+"/user/"+userName)
+        axios.delete(url+"/todos/"+todoId+"/item/"+itemId+"/user/"+userName)
         .then(response => {
             console.log("response data", response);
             let copyData = [...todobox];
             let findIndex = copyData.findIndex(x => x._id === todoId);
-            copyData[findIndex].data = copyData[findIndex].data.filter(y => y.id !== listID);
+            copyData[findIndex].data = copyData[findIndex].data.filter(y => y.id !== itemId);
 
             updateRemoveOneListModalStatus(false);
             if(initialPage === "listInfoModal") {
@@ -50,10 +50,10 @@ const DeleteListModal = ({
             <div className ="modal-block-container">
                 <div className = "modal-block-box">
                     <h2>Remove Item</h2>
-                    <p className="modal-block-box--text">Remove <span>{listTitle}</span> from <span>{todoTitle}</span> todo list ?</p>
+                    <p className="modal-block-box--text">Remove <span>{itemTitle}</span> from <span>{todoTitle}</span> todo list ?</p>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button className="modal-block-remove" onClick={() => deleteList(todoID, listId)}>Remove</button>
+                        <button className="modal-block-remove" onClick={() => deleteList(todoID, itemId)}>Remove</button>
                     </div>
                 </div>
             </div>,

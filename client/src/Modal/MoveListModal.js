@@ -9,8 +9,8 @@ let url = "https://lit-peak-62083.herokuapp.com"
 
 const MoveListModal = ({
     todoID, 
-    listId, 
-    listTitle, 
+    itemId, 
+    itemTitle, 
     updateMoveListModalStatus, 
     todobox, 
     updateTodobox, 
@@ -27,11 +27,11 @@ const MoveListModal = ({
         updateSelectValue(data);
     }
  
-    const moveOneList = (e, todoid, listid) => {
+    const moveOneList = (e, todoid, itemId) => {
         e.preventDefault();
         
         if(selectValue.length !== 0 && selectValue !== undefined) {
-            axios.patch(url+'/todos/'+todoid+'/todos/'+selectValue+'/list/'+listid+'/user/'+userName)
+            axios.patch(url+'/todos/'+todoid+'/newtodo/'+selectValue+'/item/'+itemId+'/user/'+userName)
             .then( response => {
                 console.log(response.data)
                 
@@ -57,9 +57,9 @@ const MoveListModal = ({
 
     return ReactDOM.createPortal(
             <div className ="modal-block-container">
-                <form onSubmit={(e) => moveOneList(e, todoID, listId)}>
+                <form onSubmit={(e) => moveOneList(e, todoID, itemId)}>
                     <h2>Move Item</h2>
-                    <p>Please choose a new todo list for <span>{listTitle}</span>.</p>
+                    <p>Please choose a new todo list for <span>{itemTitle}</span>.</p>
                     <div className="select-container">
                         <select value={selectValue} onChange={handleChange}>
                             <option value="">---- Todo list ----</option>

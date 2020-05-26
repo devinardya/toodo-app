@@ -45,7 +45,6 @@ const ListBox = ({
         const dimensions = itemMenu.current.getBoundingClientRect();
         updateHeight(dimensions.y);
         updateWidth(dimensions.x);
-        console.log(dimensions);
         updateItemMenuStatus(ItemMenuStatus ? false : true);
         
     }, [ItemMenuStatus]);
@@ -106,8 +105,8 @@ const ListBox = ({
                                     todoID = {todo._id}
                                     todoTitle = {todo.title}
                                     updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
-                                    listId = {x.id}
-                                    listTitle = {x.todoTitle}
+                                    itemId = {x.id}
+                                    itemTitle = {x.todoTitle}
                                     todobox = {todobox}
                                     updateTodobox = {updateTodobox}
                                     userName = {userName}
@@ -119,10 +118,10 @@ const ListBox = ({
                                 </button>
                                 { renameListModalStatus && <RenameListModal 
                                     todoID = {todo._id}
-                                    listId = {x.id}
+                                    itemId = {x.id}
                                     updateRenameListModalStatus = {updateRenameListModalStatus}
-                                    listTitle = {x.todoTitle}
-                                    listDesc = {x.description}
+                                    itemTitle = {x.todoTitle}
+                                    itemDesc = {x.description}
                                     todobox = {todobox}
                                     updateTodobox = {updateTodobox}
                                     userName = {userName}
@@ -135,8 +134,8 @@ const ListBox = ({
                                 </button>
                                 { moveListModalStatus && <MoveListModal 
                                     todoID = {todo._id}
-                                    listId = {x.id}
-                                    listTitle = {x.todoTitle}
+                                    itemId = {x.id}
+                                    itemTitle = {x.todoTitle}
                                     updateMoveListModalStatus = {updateMoveListModalStatus}
                                     todobox = {todobox}
                                     updateTodobox = {updateTodobox}

@@ -96,9 +96,9 @@ apiRouter.post('/:user', (req, res) => {
 });
 
 // TO EDIT/MODIFY A TO DO LIST BOX
-apiRouter.put('/:id/user/:user', (req, res) => {
+apiRouter.put('/:todosid/user/:user', (req, res) => {
     const db = getDB();
-    let todoId = req.params.id;
+    let todoId = req.params.todosid;
     let userId = req.params.user;
 
     let clientData = req.body;
@@ -123,9 +123,9 @@ apiRouter.put('/:id/user/:user', (req, res) => {
 
 // TO REMOVE A TO DO LIST BOX
 
-apiRouter.delete('/:id/user/:user', (req, res) => {
+apiRouter.delete('/:todosid/user/:user', (req, res) => {
     const db = getDB();
-    let todoId = req.params.id;
+    let todoId = req.params.todosid;
     let userId = req.params.user;
 
     if (!todoId || !userId) {
@@ -144,9 +144,9 @@ apiRouter.delete('/:id/user/:user', (req, res) => {
     
 });
 
-// TO ADD A LIST INSIDE A SPECIFIC TO DO LIST BOX
+// TO ADD AN ITEM INSIDE A SPECIFIC TO DO LIST BOX
 
-app.post('/list/:todosid/user/:user', (req, res) => {
+apiRouter.post('/:todosid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
     let userId = req.params.user;
@@ -169,7 +169,7 @@ app.post('/list/:todosid/user/:user', (req, res) => {
     clientData.id = uuid.v4();
     clientData.created = dateTime;
 
-    if (!todoId) {
+    if (!todoId || !userId) {
         return res.status(400).end();
     }
 
@@ -189,13 +189,10 @@ app.post('/list/:todosid/user/:user', (req, res) => {
 
 // TO CLEAR ALL ITEMS INSIDE A SPECIFIC TO DO LIST BOX
 
-apiRouter.patch('/:todosid/user/:user', (req, res) => {
+app.delete('/todo/:todoid/user/:user', (req, res) => {
     const db = getDB();
-    let todoId = req.params.todosid;
+    let todoId = req.params.todoid;
     let userId = req.params.user;
-
-    console.log('todoid ', todoId)
-   
 
     if (!todoId || !userId) {
         return res.status(400).end();
@@ -209,7 +206,7 @@ apiRouter.patch('/:todosid/user/:user', (req, res) => {
     )
     .then( () => {
         res.status(204).end();
-        console.log("List item is deleted");
+        console.log("all items were deleted");
     })
     .catch( e => {
         console.error(e);
@@ -217,23 +214,23 @@ apiRouter.patch('/:todosid/user/:user', (req, res) => {
     })
 });
 
-// TO MODIFY A SPECIFIC LIST INSIDE A SPECIFIC TO DO LIST BOX
+// TO MODIFY A SPECIFIC ITEM INSIDE A SPECIFIC TO DO LIST BOX
 
-apiRouter.patch('/:todosid/list/:listid/user/:user', (req, res) => {
+apiRouter.patch('/:todosid/item/:itemid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
-    let listid = req.params.listid;
+    let itemid = req.params.itemid;
     let userId = req.params.user;
 
     let clientData = req.body;
 
-    if (!todoId || !listid || !userId) {
+    if (!todoId || !itemid || !userId) {
         return res.status(400).end();
     }
 
     db.collection(userId)
     .updateOne( 
-            {_id : createObjectId(todoId) , "data.id" : listid } , 
+            {_id : createObjectId(todoId) , "data.id" : itemid } , 
                     {$set : {"data.$.todoTitle" : clientData.todoTitle,
                             "data.$.description" : clientData.description,
                             }
@@ -251,30 +248,27 @@ apiRouter.patch('/:todosid/list/:listid/user/:user', (req, res) => {
     })
 });
 
-// TO DELETE A SPECIFIC LIST INSIDE A SPECIFIC TO DO LIST BOX
+// TO DELETE A SPECIFIC ITEM INSIDE A SPECIFIC TO DO LIST BOX
 
-apiRouter.delete('/:todosid/list/:listid/user/:user', (req, res) => {
+apiRouter.delete('/:todosid/item/:itemid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
-    let listid = req.params.listid;
+    let itemid = req.params.itemid;
     let userId = req.params.user;
 
-    console.log('todoid ', todoId)
-    console.log('listid ',listid)
-
-    if (!todoId || !listid || !userId) {
+    if (!todoId || !itemid || !userId) {
         return res.status(400).end();
     }
 
     db.collection(userId)
     .updateOne(
         {_id : createObjectId(todoId)},
-        { $pull: { data: { id: listid } } },
+        { $pull: { data: { id: itemid } } },
         { multi: true }
     )
     .then( () => {
         res.status(204).end();
-        console.log("List item is deleted");
+        console.log("an item is deleted");
     })
     .catch( e => {
         console.error(e);
@@ -283,27 +277,27 @@ apiRouter.delete('/:todosid/list/:listid/user/:user', (req, res) => {
 });
 
 
-// TO MOVE A SPECIFIC LIST FROM ONE TO DO LIST BOX TO ANOTHER TO DO LIST BOX
+// TO MOVE A SPECIFIC ITEM FROM ONE TO DO LIST TO ANOTHER 
 
-apiRouter.patch('/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
+apiRouter.patch('/:oldid/newtodo/:newid/item/:itemid/user/:user', (req, res) => {
     const db = getDB();
     let oldDocId = req.params.oldid;
     let newDocId = req.params.newid;
-    let listId = req.params.listid;
+    let itemid = req.params.itemid;
     let userId = req.params.user;
 
-    if (!oldDocId || !newDocId || !listId || !userId) {
+    if (!oldDocId || !newDocId || !itemid || !userId) {
         return res.status(400).end();
     }
 
     db.collection(userId)
         .findOne({ 
-             data: {$elemMatch : {id: listId}}
+             data: {$elemMatch : {id: itemid}}
          })
         .then( result => {
             let savedData;
             console.log("the result data", result.data)
-            let index = result.data.findIndex(x => x.id === listId);
+            let index = result.data.findIndex(x => x.id === itemid);
             savedData = result.data[index];
             console.log("Saved Data", savedData)
             return savedData;
@@ -319,7 +313,7 @@ apiRouter.patch('/:oldid/todos/:newid/list/:listid/user/:user', (req, res) => {
             return db.collection(userId)
             .updateOne( 
                 {_id : createObjectId(oldDocId)},
-                { $pull: { data: { id: listId } } },
+                { $pull: { data: { id: itemid } } },
                 { multi: true }
             )
         })

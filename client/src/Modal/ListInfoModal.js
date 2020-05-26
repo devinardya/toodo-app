@@ -41,7 +41,7 @@ const ListInfoModal = ({
         updateDescChange(input);
     };
 
-    const renameDescList = (e, todoId, listID) => {
+    const editDescItem = (e, todoId, itemID) => {
         e.preventDefault();
 
         let data = {
@@ -49,12 +49,12 @@ const ListInfoModal = ({
                     description: descChange
                 }
         
-        axios.patch(url+"/todos/"+todoId+"/list/"+listID+"/user/"+userName, data)
+        axios.patch(url+"/todos/"+todoId+"/item/"+itemID+"/user/"+userName, data)
         .then(response => {
             console.log(response);
             let copyData = [...todobox];
             let findIndex = copyData.findIndex(x => x._id === todoId);
-            let findDataIndex = copyData[findIndex].data.findIndex(y => y.id === listID);
+            let findDataIndex = copyData[findIndex].data.findIndex(y => y.id === itemID);
             copyData[findIndex].data[findDataIndex].description = response.data.description;
             console.log("copyData before save", copyData);
             updateTodobox(copyData);
@@ -103,11 +103,10 @@ const ListInfoModal = ({
                             </h3>
                             { renameListFromModal && <RenameListModal 
                                 todoID = {todo._id}
-                                todoTitle = {todo.title}
+                                itemId = {x.id}
                                 updateRenameListFromInfoModal = {updateRenameListFromInfoModal}
-                                listId = {x.id}
-                                listTitle = {x.todoTitle}
-                                listDesc = {x.description}
+                                itemTitle = {x.todoTitle}
+                                itemDesc = {x.description}
                                 todobox = {todobox}
                                 updateTodobox = {updateTodobox}
                                 userName = {userName}
@@ -124,7 +123,7 @@ const ListInfoModal = ({
                                 {x.description.length !== 0 ?<span onClick={editDescription}><MdModeEdit style={{position: "relative", top:"3px", left:"10px"}} /></span>: null }
                             </h3>
                             {editDescBox || x.description.length === 0 ? 
-                            <form onSubmit={(e) => renameDescList(e, todo._id, x.id )}>
+                            <form onSubmit={(e) => editDescItem(e, todo._id, x.id )}>
                                 <input onChange={inputChange} type="text" value={descChange} placeholder={x.description.length === 0 ? "Add a more detailed description..." : null} />
                                 <div className="modal-block-container--listinfo-box__descInfo--formbuttons">
                                     <button>Save</button>
@@ -153,9 +152,9 @@ const ListInfoModal = ({
                             {removeOneListModalStatus && <RemoveListModal 
                                     todoID = {todo._id}
                                     updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
-                                    listId = {x.id}
+                                    itemId = {x.id}
                                     todoTitle = {todo.title}
-                                    listTitle = {x.todoTitle}
+                                    itemTitle = {x.todoTitle}
                                     todobox = {todobox}
                                     updateTodobox = {updateTodobox}
                                     userName = {userName}
@@ -169,8 +168,8 @@ const ListInfoModal = ({
                             </button>
                             {moveListModalStatus && <MoveListModal 
                                     todoID = {todo._id}
-                                    listId = {x.id}
-                                    listTitle = {x.todoTitle}
+                                    itemId = {x.id}
+                                    itemTitle = {x.todoTitle}
                                     updateMoveListModalStatus = {updateMoveListModalStatus}
                                     todobox = {todobox}
                                     updateTodobox = {updateTodobox}

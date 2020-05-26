@@ -152,7 +152,14 @@
                         font-weight: 600;
                         color: $color-button-cancel;
                     }
+
+                    &:last-of-type {
+                        font-size: 12px;
+                        margin-top: 5px;
+                    }
                 }
+
+
 
             }
         }
