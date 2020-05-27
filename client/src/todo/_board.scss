@@ -11,8 +11,13 @@
     width: 100vw;
     background: rgb(0,97,126);
     background: linear-gradient(129deg, rgba(0,97,126,1) 0%, rgba(17,196,196,1) 100%);
-    @include flex-column(center, center);
+    @include flex-column(flex-start, center);
     position: relative;
+
+    .loader {
+        position:absolute; 
+        top: 50%;
+    }
 
     .block__board--main {
         height: 90%;
