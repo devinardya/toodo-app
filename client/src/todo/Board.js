@@ -78,7 +78,7 @@ const Board = ({location}) => {
                               color="#D56F85"
                               height={100}
                               width={100}
-                              timeout={5000}
+                              timeout={0}
                           /> 
                               : 
                         <MainBox 
