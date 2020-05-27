@@ -22,6 +22,6 @@ const Home = () => {
                         <Link to="/login" className="home-block-link">Get started</Link>
                 </div>
            </HelmetProvider>
-}
+};
 
 export default Home;

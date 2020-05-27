@@ -106,6 +106,6 @@ const Login = () => {
                     </div>
                 </div>
            </HelmetProvider>
-}
+};
 
 export default Login;

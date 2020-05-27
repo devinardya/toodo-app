@@ -3,7 +3,6 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import Board from './todo/Board';
 import Home from './Home/Home';
 import Login from './Login/Login';
-import './App.css';
 
 function App() {
   return (
@@ -15,6 +14,7 @@ function App() {
       </Router>
     </div>
   );
-}
+};
+
 
 export default App;
