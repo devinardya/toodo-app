@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Redirect } from 'react-router-dom';
 import { MdCheckCircle, MdCancel } from "react-icons/md";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
@@ -10,6 +10,11 @@ const Login = () => {
     const [username, updateUsername] = useState("");
     const [status, updateStatus] = useState(false);
     const [name, updateName] = useState(""); 
+    const [login, updateLogin] = useState("");
+
+    useEffect( () => {
+        updateLogin("Login")
+    }, [])
 
     const onChange = (e) => {
         let value = e.target.value.trim();
@@ -85,7 +90,7 @@ const Login = () => {
 
     return <HelmetProvider>
                 <Helmet>
-                    <title>Welcome to Toodo | Login</title>
+                    <title>Welcome to Toodo | {login}</title>
                 </Helmet>
                 <div className="login-block">
                     <Header 
@@ -106,6 +111,6 @@ const Login = () => {
                     </div>
                 </div>
            </HelmetProvider>
-}
+};
 
 export default Login;

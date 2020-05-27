@@ -1,3 +1,6 @@
+/* GLOBAL */
+@import "../src/_global.scss";
+
 /* HOME */
 @import "../src/Home/_home.scss";
 
@@ -15,4 +18,3 @@
 
 @import "../src/todo/_board.scss";
 @import "../src/todo/_header.scss";
-@import "../src/todo/_listdropdown.scss";
