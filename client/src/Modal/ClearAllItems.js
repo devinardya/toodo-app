@@ -4,12 +4,11 @@ import ReactDOM from 'react-dom';
 import '../index.scss';
 
 const ClearListItems = ({
-    todoID, 
     updateClearItemsStatus, 
     updateTodobox, 
     userName, 
     todobox,
-    todoTitle,
+    todo,
 }) => {
 
     const deleteAllItems = (todoId) => {
@@ -36,10 +35,10 @@ const ClearListItems = ({
             <div className ="modal-block-container">
                 <div className = "modal-block-box">
                     <h2>Remove All Items</h2>
-                    <p className="modal-block-box--text">Remove all items from <span>{todoTitle}</span> todo list ?</p>
+                    <p className="modal-block-box--text">Remove all items from <span>{todo.title}</span> todo list ?</p>
                     <div className="modal-block-buttons">
                         <div className="modal-block-cancel" onClick={cancel}>Cancel</div>
-                        <button className="modal-block-remove" onClick={() => deleteAllItems(todoID)}>Remove</button>
+                        <button className="modal-block-remove" onClick={() => deleteAllItems(todo._id)}>Remove</button>
                     </div>
                 </div>
             </div>,

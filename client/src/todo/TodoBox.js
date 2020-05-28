@@ -1,12 +1,8 @@
-import React, {useState, useRef, useCallback, useEffect} from 'react';
-import {IoMdMenu, IoIosAddCircle, IoMdClose} from 'react-icons/io';
-import {TiDelete} from 'react-icons/ti';
-import {MdModeEdit, MdDelete} from 'react-icons/md';
+import React, {useState} from 'react';
+import {IoIosAddCircle, IoMdClose} from 'react-icons/io';
 import axios from 'axios';
-import RenameTitleModal from '../Modal/RenameTitleModal';
-import RemoveToDoModal from '../Modal/RemoveTodoBoxModal';
-import ClearListItems from '../Modal/ClearAllItems';
 import ListBox from './ListBox';
+import Dropdown from './Dropdown';
 
 const TodoBox = ({
     todobox,
@@ -15,34 +11,17 @@ const TodoBox = ({
     updateTodobox,
 }) => {
 
-    const [renameTitleModalStatus, updateRenameTitleModalStatus] = useState(false);
-    const [removeTodoBoxModalStatus, updateRemoveTodoBoxModalStatus] = useState(false);
-    const [todoboxMenu, updateTodoboxMenu] = useState(false);
     const [addListFormActive, updateAddListFormActive] = useState(false);
-    const [clearAllItemsStatus, updateClearItemsStatus] = useState(false);
     const [addListInput, updateAddListText] = useState("");
-    const nodeDropdown = useRef();
 
     const onAddListChange = (e) => {
         let data = e.target.value;
         updateAddListText(data);
     };
 
-    const removeTodoBox = () => {
-        updateRemoveTodoBoxModalStatus(true);
-    };
-
-    const activateRename = () => {
-        updateRenameTitleModalStatus(true);
-    };
-
     const addListActive = () => {
         updateAddListFormActive(true);
     };
-
-    const clearAllItems = () => {
-        updateClearItemsStatus(true);
-    }
 
     const addNewList = (e, id) => {
 
@@ -71,40 +50,6 @@ const TodoBox = ({
             updateAddListText("");
         } 
     };
-
-   
-    const activateMenu = useCallback( () => {
-        updateTodoboxMenu(todoboxMenu ? false : true);
-    }, [todoboxMenu]);
-
-    const handleClickOutside = useCallback((e) => {
-		if (nodeDropdown.current.contains(e.target)) {
-			// inside click
-			return;
-		}
-		// outside click 
-        activateMenu(todoboxMenu)
-	}, [todoboxMenu, activateMenu]);
-
-	useEffect(() => {
-		//this document.addEventListerner can only be used inside a useEffect
-		if (todoboxMenu) {
-			document.addEventListener("mousedown", handleClickOutside);
-		} else {
-			document.removeEventListener("mousedown", handleClickOutside);
-		}
-
-		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-    }, [todoboxMenu, handleClickOutside]);
-
-    let dropdownClass;
-	if (todoboxMenu) {
-		dropdownClass = 'board-main-dropdown active';
-	} else {
-		dropdownClass = 'board-main-dropdown';
-    };
     
     const cancel = () => {
         updateAddListFormActive(false);
@@ -113,52 +58,13 @@ const TodoBox = ({
     return <div className="block__board--main--eachbox">
                 <div className="block__board--main--eachbox--title" >
                     <h4>{todo.title}</h4>
-                    <div className="block__board--main--eachbox--title--menuDropdown" ref={nodeDropdown}>
-                        <button onClick={activateMenu} >
-                            <IoMdMenu size="18px" />
-                        </button>
-                        <div className= {dropdownClass}>
-                            <button onClick={() => removeTodoBox()}>
-                                <TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
-                                Remove list
-                            </button>
-                            { removeTodoBoxModalStatus && <RemoveToDoModal 
-                                todobox = {todobox}
-                                updateTodobox = {updateTodobox}
-                                todoID = {todo._id}
-                                updateRemoveTodoBoxModalStatus = {updateRemoveTodoBoxModalStatus}
-                                oldTitle = {todo.title}
-                                userName = {userName}
-                            />
-                            }
-                            <button onClick={() => activateRename()}>
-                                <MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
-                                Rename list
-                            </button>
-                            { renameTitleModalStatus && <RenameTitleModal 
-                                todoID = {todo._id}
-                                updateRenameTitleModalStatus = {updateRenameTitleModalStatus}
-                                oldTitle = {todo.title}
-                                todobox = {todobox}
-                                updateTodobox = {updateTodobox}
-                                userName = {userName}
-                            />
-                            }
-                            <button onClick={() => clearAllItems()}>
-                                <MdDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
-                                Clear all items
-                            </button>
-                            { clearAllItemsStatus && <ClearListItems 
-                                todoID = {todo._id}
-                                updateClearItemsStatus = {updateClearItemsStatus}
-                                oldTitle = {todo.title}
-                                updateTodobox = {updateTodobox}
-                                userName = {userName}
-                                todobox = {todobox}
-                            />
-                            }
-                        </div>
-                    </div>
+                    <Dropdown 
+                        todobox = {todobox}
+                        updateTodobox = {updateTodobox}
+                        todo = {todo}
+                        userName = {userName}
+                        initialElement = "lists"
+                    />
                 </div>
                 <span>
                     <ul>

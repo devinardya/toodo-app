@@ -46,7 +46,7 @@ const AddBoxForm = ({userName, todobox, updateTodobox}) => {
     return  <div className="block__board--main addform">
                 <form onSubmit={addNewTodoBox}>
                     <input onChange={onAddingToDoBox} type="text" value={inputAddTodoBox} style={ createBoxInputError ? { color : "red"} : {color : "#737373"}}/>
-                    {createBoxInputError ? <p className="block__board--main addform--inputError">Can not create a list with empty title or more than 20 characters</p> : <p className="block__board--main addform--input">Title length is minimun 1 character and maximum 20 characters</p>}
+                    {createBoxInputError ? <p className="block__board--main addform--inputError">Can not create a list with an empty title or more than 20 characters</p> : <p className="block__board--main addform--input">Title length is minimun 1 character and maximum 20 characters</p>}
                     <button type="submit">Create todo list</button>
                 </form>
             </div>  
