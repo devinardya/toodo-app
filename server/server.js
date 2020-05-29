@@ -55,6 +55,11 @@ app.use((req, res, next) => {
 // TO GET THE WHOLE DATA FROM THE DATABASE
 apiRouter.get('/:user', (req, res) => {
     let userId = req.params.user;
+
+    if (!userId) {
+        return res.status(400).end();
+    }
+
     const db = getDB();
     db.collection(userId)
     .find({})
@@ -77,6 +82,11 @@ function validate(todos) {
 
 apiRouter.post('/:user', (req, res) => {
     let userId = req.params.user;
+
+    if (!userId) {
+        return res.status(400).end();
+    }
+    
     const db = getDB();
     let data = req.body;
     data.data = [];

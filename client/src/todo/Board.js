@@ -74,8 +74,8 @@ const Board = ({location}) => {
                         />
                          {loaderActive ? 
                           <Loader className="loader"
-                              type="Oval"
-                              color="#D56F85"
+                              type="Grid"
+                              color="#FFFFFF"
                               height={100}
                               width={100}
                               timeout={0}

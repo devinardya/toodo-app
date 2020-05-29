@@ -5,15 +5,14 @@ import '../index.scss';
 let url = "https://lit-peak-62083.herokuapp.com"
 
 const RenameTitleModal = ({
-    todoID, 
+    todo,
     updateRenameTitleModalStatus, 
-    oldTitle, 
     todobox, 
     updateTodobox, 
     userName
 }) => {
 
-    const [inputChange, updateInputChange] = useState(oldTitle);
+    const [inputChange, updateInputChange] = useState(todo.title);
     const [errorStatus, updateErrorStatus] = useState(false);
     const [renameBoxInputError , updateRenameBoxInputError] = useState(false);
 
@@ -61,7 +60,7 @@ const RenameTitleModal = ({
 
     return ReactDOM.createPortal(
             <div className ="modal-block-container--rename">
-                <form onSubmit = {(e) => renameTitle(e, todoID)}>
+                <form onSubmit = {(e) => renameTitle(e, todo._id)}>
                     <h2>Rename Todo List Title</h2>
                     <label>New Title</label>
                     <input onChange={renameChange} placeholder= {errorStatus ? "Title is not allowed to be empty" : null} type="text" value={inputChange} style={ renameBoxInputError ? { color : "red"} : {color : "#737373"}} />
