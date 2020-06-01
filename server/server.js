@@ -226,7 +226,7 @@ apiRouter.post('/:todosid/user/:user', (req, res) => {
 // TO CLEAR ALL ITEMS INSIDE A TO DO LIST BOX
 // =============================================================
 
-app.delete('/todo/:todoid/user/:user', (req, res) => {
+apiRouter.patch('/:todoid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todoid;
     let userId = req.params.user;
