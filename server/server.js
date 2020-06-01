@@ -2,14 +2,12 @@ const express = require("express");
 const uuid = require("uuid");
 const app = express();
 const dotenv = require('dotenv');
-const cors = require('cors');
 
 const {getDB, createObjectId} = require("./db")
 dotenv.config({path: './config.env'});
 
 const port = process.env.PORT || 8090;
 
-app.use(cors());
 const apiRouter = express.Router();
 
 // =============================================================
@@ -375,7 +373,7 @@ apiRouter.patch('/:oldid/newtodo/:newid/item/:itemid/user/:user', (req, res) => 
         })
         .catch( e => {
             console.error(e);
-            res.status(400).end();
+            res.status(500).end();
         })
 });
 
