@@ -373,7 +373,7 @@ apiRouter.patch('/:oldid/newtodo/:newid/item/:itemid/user/:user', (req, res) => 
         })
         .catch( e => {
             console.error(e);
-            res.status(400).end();
+            res.status(500).end();
         })
 });
 
