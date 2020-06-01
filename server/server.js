@@ -12,8 +12,10 @@ const port = process.env.PORT || 8090;
 app.use(cors());
 const apiRouter = express.Router();
 
-
+// =============================================================
 // Middleware to logged the method, path, statuscode and amount of time needed
+// =============================================================
+
 app.use((req, res, next) => {
     let start = Date.now();
     res.once('finish', () => {
@@ -24,7 +26,11 @@ app.use((req, res, next) => {
     next();
 });
 
+
+// =============================================================
 // JSON-Parse middleware - to make sure all data that are received is JSON 
+// =============================================================
+
 app.use((req, res, next) => {
     // Check that the incoming data is JSON
     if (req.is('json')) {
@@ -52,7 +58,10 @@ app.use((req, res, next) => {
   });
 
 
+// =============================================================
 // TO GET THE WHOLE DATA FROM THE DATABASE
+// =============================================================
+
 apiRouter.get('/:user', (req, res) => {
     let userId = req.params.user;
 
@@ -74,7 +83,10 @@ apiRouter.get('/:user', (req, res) => {
 });
 
 
+// =============================================================
 // CREATE A TO DO LIST BOX
+// =============================================================
+
 function validate(todos) {
     return !!todos.data
 };
@@ -105,7 +117,11 @@ apiRouter.post('/:user', (req, res) => {
     })
 });
 
-// TO EDIT/MODIFY A TO DO LIST BOX
+
+// =============================================================
+// TO EDIT A TO DO LIST BOX
+// =============================================================
+
 apiRouter.put('/:todosid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
@@ -131,7 +147,10 @@ apiRouter.put('/:todosid/user/:user', (req, res) => {
     })
 });
 
+
+// =============================================================
 // TO REMOVE A TO DO LIST BOX
+// =============================================================
 
 apiRouter.delete('/:todosid/user/:user', (req, res) => {
     const db = getDB();
@@ -154,7 +173,10 @@ apiRouter.delete('/:todosid/user/:user', (req, res) => {
     
 });
 
-// TO ADD AN ITEM INSIDE A SPECIFIC TO DO LIST BOX
+
+// =============================================================
+// TO ADD AN ITEM INSIDE A TO DO LIST BOX
+// =============================================================
 
 apiRouter.post('/:todosid/user/:user', (req, res) => {
     const db = getDB();
@@ -197,7 +219,10 @@ apiRouter.post('/:todosid/user/:user', (req, res) => {
     })
 });
 
-// TO CLEAR ALL ITEMS INSIDE A SPECIFIC TO DO LIST BOX
+
+// =============================================================
+// TO CLEAR ALL ITEMS INSIDE A TO DO LIST BOX
+// =============================================================
 
 app.delete('/todo/:todoid/user/:user', (req, res) => {
     const db = getDB();
@@ -224,7 +249,10 @@ app.delete('/todo/:todoid/user/:user', (req, res) => {
     })
 });
 
-// TO MODIFY A SPECIFIC ITEM INSIDE A SPECIFIC TO DO LIST BOX
+
+// =============================================================
+// TO MODIFY A SPECIFIC ITEM INSIDE A TO DO LIST BOX
+// =============================================================
 
 apiRouter.patch('/:todosid/item/:itemid/user/:user', (req, res) => {
     const db = getDB();
@@ -258,7 +286,10 @@ apiRouter.patch('/:todosid/item/:itemid/user/:user', (req, res) => {
     })
 });
 
-// TO DELETE A SPECIFIC ITEM INSIDE A SPECIFIC TO DO LIST BOX
+
+// =============================================================
+// TO DELETE A SPECIFIC ITEM INSIDE A TO DO LIST BOX
+// =============================================================
 
 apiRouter.delete('/:todosid/item/:itemid/user/:user', (req, res) => {
     const db = getDB();
@@ -287,7 +318,9 @@ apiRouter.delete('/:todosid/item/:itemid/user/:user', (req, res) => {
 });
 
 
+// =============================================================
 // TO MOVE A SPECIFIC ITEM FROM ONE TO DO LIST TO ANOTHER 
+// =============================================================
 
 apiRouter.patch('/:oldid/newtodo/:newid/item/:itemid/user/:user', (req, res) => {
     const db = getDB();

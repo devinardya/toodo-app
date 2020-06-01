@@ -16,7 +16,6 @@ const RenameTitleModal = ({
     userName, 
     updateStyleChange,
     initialPage,
-    updateRenameListFromInfoModal,
 }) => {
 
     const [titleChange, updateTitleChange] = useState(itemTitle);
@@ -48,12 +47,10 @@ const RenameTitleModal = ({
                 
                 
                 if(initialPage === "listInfoModal") {
-                    updateRenameListFromInfoModal(false);
-                    updateStyleChange(false);
-                } else if(initialPage === "board") {
                     updateRenameListModalStatus(false);
-                }
-
+                    updateStyleChange(false);
+                } 
+                updateRenameListModalStatus(false);
                 updateTodobox(copyData);
                 
             })
@@ -68,11 +65,10 @@ const RenameTitleModal = ({
 
     const cancel = () => {
         if(initialPage === "listInfoModal") {
-            updateRenameListFromInfoModal(false);
-            updateStyleChange(false);
-        } else if(initialPage === "board") {
             updateRenameListModalStatus(false);
-        }
+            updateStyleChange(false);
+        } 
+        updateRenameListModalStatus(false);
     };
 
     return ReactDOM.createPortal(
