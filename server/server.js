@@ -178,14 +178,14 @@ apiRouter.delete('/:todosid/user/:user', (req, res) => {
 // TO ADD AN ITEM INSIDE A TO DO LIST BOX
 // =============================================================
 
-function Unix_timestamp(t)
+function unixTimestamp(t)
 {
-let dt = new Date(t*1000);
-let hr = dt.getHours();
-let m = "0" + dt.getMinutes();
-let s = "0" + dt.getSeconds();
-return hr+ ':' + m.substr(-2) + ':' + s.substr(-2);  
+let date = new Date(t*1000);
+let hour = date.getHours();
+let min = "0" + date.getMinutes();
+return hour+ ':' + min.substr(-2);
 }
+
 
 apiRouter.post('/:todosid/user/:user', (req, res) => {
     const db = getDB();
@@ -197,17 +197,8 @@ apiRouter.post('/:todosid/user/:user', (req, res) => {
     let Month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let date = Month[(today.getMonth())]+' '+today.getDate()+", "+today.getFullYear();
 
-
-    let currentUnixTime = Date.time();
-    currentUnixTime = Date.now().getUnixTime();
-
-    let time = Unix_timestamp(currentUnixTime);
-    console.log("TIME", time);
-   /*  if(today.getMinutes() < 10){
-        time = today.getHours() + ":0" + today.getMinutes();
-    } else {
-        time = today.getHours() + ":" + today.getMinutes();
-    } */
+    let currentUnixTime = Math.round((+new Date()) / 1000);
+    let time = unixTimestamp(currentUnixTime);
 
     let dateTime = date+' at '+time;
 
