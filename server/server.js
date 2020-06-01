@@ -176,12 +176,17 @@ apiRouter.delete('/:todosid/user/:user', (req, res) => {
 // TO ADD AN ITEM INSIDE A TO DO LIST BOX
 // =============================================================
 
-function unixTimestamp(t)
-{
-let date = new Date(t*1000);
+function unixTimestamp(timestamp) {
+let date = new Date(timestamp * 1000);
+
+let Month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+let currentDate = Month[(date.getMonth())]+' '+date.getDate()+", "+date.getFullYear();
+
 let hour = date.getHours();
 let min = "0" + date.getMinutes();
-return hour+ ':' + min.substr(-2);
+let time = hour+ ':' + min.substr(-2);
+
+return currentDate +' at '+ time;
 }
 
 
@@ -190,15 +195,9 @@ apiRouter.post('/:todosid/user/:user', (req, res) => {
     let todoId = req.params.todosid;
     let userId = req.params.user;
     let clientData = req.body;
-   
-    let today = new Date();
-    let Month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let date = Month[(today.getMonth())]+' '+today.getDate()+", "+today.getFullYear();
 
-    let currentUnixTime = Math.round((+new Date()) / 1000);
-    let time = unixTimestamp(currentUnixTime);
-
-    let dateTime = date+' at '+time;
+    let currentUnixTime = Math.floor((+new Date()) / 1000);
+    let dateTime = unixTimestamp(currentUnixTime);
 
     clientData.id = uuid.v4();
     clientData.created = dateTime;
