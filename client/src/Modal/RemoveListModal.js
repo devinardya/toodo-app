@@ -26,10 +26,6 @@ const DeleteListModal = ({
             copyData[findIndex].data = copyData[findIndex].data.filter(y => y.id !== itemId);
 
             updateRemoveOneListModalStatus(false);
-            if(initialPage === "listInfoModal") {
-                updateStyleChange(false);
-            }
-
             updateTodobox(copyData);
         })
         .catch( err => {
