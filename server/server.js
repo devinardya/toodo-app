@@ -176,6 +176,15 @@ apiRouter.delete('/:todosid/user/:user', (req, res) => {
 // TO ADD AN ITEM INSIDE A TO DO LIST BOX
 // =============================================================
 
+function unixTimestamp(t)
+{
+let date = new Date(t*1000);
+let hour = date.getHours();
+let min = "0" + date.getMinutes();
+return hour+ ':' + min.substr(-2);
+}
+
+
 apiRouter.post('/:todosid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
@@ -186,13 +195,8 @@ apiRouter.post('/:todosid/user/:user', (req, res) => {
     let Month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let date = Month[(today.getMonth())]+' '+today.getDate()+", "+today.getFullYear();
 
-
-    let time;
-    if(today.getMinutes() < 10){
-        time = today.getHours() + ":0" + today.getMinutes();
-    } else {
-        time = today.getHours() + ":" + today.getMinutes();
-    }
+    let currentUnixTime = Math.round((+new Date()) / 1000);
+    let time = unixTimestamp(currentUnixTime);
 
     let dateTime = date+' at '+time;
 
