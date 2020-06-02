@@ -2,6 +2,7 @@ const express = require("express");
 const uuid = require("uuid");
 const app = express();
 const dotenv = require('dotenv');
+const moment = require('moment');
 
 const {getDB, createObjectId} = require("./db")
 dotenv.config({path: './config.env'});
@@ -176,19 +177,6 @@ apiRouter.delete('/:todosid/user/:user', (req, res) => {
 // TO ADD AN ITEM INSIDE A TO DO LIST BOX
 // =============================================================
 
-function unixTimestamp(timestamp) {
-let date = new Date(timestamp * 1000);
-
-let Month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-let currentDate = Month[(date.getMonth())]+' '+date.getDate()+", "+date.getFullYear();
-
-let hour = date.getHours();
-let min = "0" + date.getMinutes();
-let time = hour+ ':' + min.substr(-2);
-
-return currentDate +' at '+ time;
-}
-
 
 apiRouter.post('/:todosid/user/:user', (req, res) => {
     const db = getDB();
@@ -197,7 +185,7 @@ apiRouter.post('/:todosid/user/:user', (req, res) => {
     let clientData = req.body;
 
     let currentUnixTime = Math.floor((+new Date()) / 1000);
-    let dateTime = unixTimestamp(currentUnixTime);
+    let dateTime = moment.unix(currentUnixTime).format('lll');
 
     clientData.id = uuid.v4();
     clientData.created = dateTime;
