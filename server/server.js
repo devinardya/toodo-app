@@ -2,6 +2,8 @@ const express = require("express");
 const uuid = require("uuid");
 const app = express();
 const dotenv = require('dotenv');
+const moment = require('moment');
+const cors = require('cors');
 
 const {getDB, createObjectId} = require("./db")
 dotenv.config({path: './config.env'});
@@ -10,6 +12,7 @@ const port = process.env.PORT || 8090;
 
 const apiRouter = express.Router();
 
+app.use(cors())
 // =============================================================
 // Middleware to logged the method, path, statuscode and amount of time needed
 // =============================================================
@@ -176,29 +179,15 @@ apiRouter.delete('/:todosid/user/:user', (req, res) => {
 // TO ADD AN ITEM INSIDE A TO DO LIST BOX
 // =============================================================
 
-function unixTimestamp(t)
-{
-let date = new Date(t*1000);
-let hour = date.getHours();
-let min = "0" + date.getMinutes();
-return hour+ ':' + min.substr(-2);
-}
-
 
 apiRouter.post('/:todosid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todosid;
     let userId = req.params.user;
     let clientData = req.body;
-   
-    let today = new Date();
-    let Month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let date = Month[(today.getMonth())]+' '+today.getDate()+", "+today.getFullYear();
 
-    let currentUnixTime = Math.round((+new Date()) / 1000);
-    let time = unixTimestamp(currentUnixTime);
-
-    let dateTime = date+' at '+time;
+    let currentUnixTime = Math.floor((+new Date()) / 1000);
+    let dateTime = moment.unix(currentUnixTime).format('lll');
 
     clientData.id = uuid.v4();
     clientData.created = dateTime;
@@ -226,7 +215,7 @@ apiRouter.post('/:todosid/user/:user', (req, res) => {
 // TO CLEAR ALL ITEMS INSIDE A TO DO LIST BOX
 // =============================================================
 
-app.delete('/todo/:todoid/user/:user', (req, res) => {
+apiRouter.patch('/:todoid/user/:user', (req, res) => {
     const db = getDB();
     let todoId = req.params.todoid;
     let userId = req.params.user;

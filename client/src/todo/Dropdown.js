@@ -1,13 +1,7 @@
 import React, {useRef, useEffect, useState, useCallback} from 'react';
 import {IoMdMenu} from 'react-icons/io';
-import {TiDelete, TiArrowForward} from 'react-icons/ti';
-import {MdModeEdit, MdDelete} from 'react-icons/md';
-import RenameTitleModal from '../Modal/RenameTitleModal';
-import RemoveToDoModal from '../Modal/RemoveTodoBoxModal';
-import RemoveListModal from '../Modal/RemoveListModal';
-import RenameListModal from '../Modal/RenameListModal';
-import MoveListModal from '../Modal/MoveListModal';
-import ClearListItems from '../Modal/ClearAllItems';
+import ButtonsList from './ButtonsLists';
+import ButtonsItems from './ButtonsItems';
 
 const Dropdown = ({
     todobox,
@@ -18,40 +12,10 @@ const Dropdown = ({
     initialElement,
 }) => {
 
-    const [renameTitleModalStatus, updateRenameTitleModalStatus] = useState(false);
-    const [removeTodoBoxModalStatus, updateRemoveTodoBoxModalStatus] = useState(false);
-    const [clearAllItemsStatus, updateClearItemsStatus] = useState(false);
-    const [removeOneListModalStatus, updateRemoveOneListModalStatus] = useState(false);
-    const [renameListModalStatus, updateRenameListModalStatus] = useState(false);
-    const [moveListModalStatus, updateMoveListModalStatus] = useState(false);
     const [dropdownMenu, updateDropdownMenu] = useState(false);
     const [height, updateHeight] = useState(0);
     const [width, updateWidth] = useState(0);
     const nodeDropdown = useRef();
-
-    const removeTodoBox = () => {
-        updateRemoveTodoBoxModalStatus(true);
-    };
-
-    const activateRename = () => {
-        updateRenameTitleModalStatus(true);
-    };
-
-    const clearAllItems = () => {
-        updateClearItemsStatus(true);
-    }
-
-    const deleteOneList = () => {
-        updateRemoveOneListModalStatus(true);
-    };
-
-    const renameOneList = () => {
-        updateRenameListModalStatus(true);
-    };
-
-    const moveOneList = () => {
-        updateMoveListModalStatus(true);
-    };
 
     const activateMenu = useCallback( () => {
         if(initialElement === "items") {
@@ -97,45 +61,13 @@ const Dropdown = ({
             dropdownClass = 'board-main-dropdown';
         };
 
-        renderMenus = <div className= {dropdownClass} >
-                        <button onClick={() => removeTodoBox()}>
-                            <TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
-                            Remove list
-                        </button>
-                        { removeTodoBoxModalStatus && <RemoveToDoModal 
+        renderMenus = <ButtonsList 
                             todobox = {todobox}
-                            updateTodobox = {updateTodobox}
-                            todo = {todo}
-                            updateRemoveTodoBoxModalStatus = {updateRemoveTodoBoxModalStatus}
-                            userName = {userName}
-                        />
-                        }
-                        <button onClick={() => activateRename()}>
-                            <MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
-                            Rename list
-                        </button>
-                        { renameTitleModalStatus && <RenameTitleModal 
-                            todo = {todo}
-                            updateRenameTitleModalStatus = {updateRenameTitleModalStatus}
-                            todobox = {todobox}
+                            todo = {todo} 
+                            dropdownClass = {dropdownClass}
                             updateTodobox = {updateTodobox}
                             userName = {userName}
-                        />
-                        }
-                        <button onClick={() => clearAllItems()}>
-                            <MdDelete size="18px" style={{marginRight: "8px", position: "relative", top:"5px"}}/>
-                            Clear all items
-                        </button>
-                        { clearAllItemsStatus && <ClearListItems 
-                            todo = {todo}
-                            updateClearItemsStatus = {updateClearItemsStatus}
-                            updateTodobox = {updateTodobox}
-                            userName = {userName}
-                            todobox = {todobox}
-                        />
-                        }
-                    </div>
-
+                       />
     } else if (initialElement === "items") {
         dropdownBlock = "block__board--main--list--menu--infoDropdown";
 
@@ -146,52 +78,15 @@ const Dropdown = ({
             dropdownClass = 'block__board--main--list--buttons__part';
         };
 
-        renderMenus = <div className= {dropdownClass} style={dropdownStyle} >
-                        <button onClick={() => deleteOneList()}>
-                            <TiDelete size="18px" style={{marginRight: "8px", position: "relative", top:"4px"}}/>
-                            Delete item
-                        </button>
-                        { removeOneListModalStatus && <RemoveListModal 
-                            todoID = {todo._id}
-                            todoTitle = {todo.title}
-                            updateRemoveOneListModalStatus = {updateRemoveOneListModalStatus}
-                            itemId = {x.id}
-                            itemTitle = {x.todoTitle}
+        renderMenus = <ButtonsItems
                             todobox = {todobox}
+                            todo = {todo} 
+                            dropdownClass = {dropdownClass}
                             updateTodobox = {updateTodobox}
                             userName = {userName}
-                        />
-                        }
-                        <button onClick={() => renameOneList()}>
-                            <MdModeEdit size="18px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
-                            Edit item
-                        </button>
-                        { renameListModalStatus && <RenameListModal 
-                            todoID = {todo._id}
-                            itemId = {x.id}
-                            updateRenameListModalStatus = {updateRenameListModalStatus}
-                            itemTitle = {x.todoTitle}
-                            itemDesc = {x.description}
-                            todobox = {todobox}
-                            updateTodobox = {updateTodobox}
-                            userName = {userName}
-                        />
-                        }
-                        <button onClick={() => moveOneList()}>
-                            <TiArrowForward size="18px" style={{marginRight: "8px", position: "relative", top:"3px"}}/>
-                            Move item
-                        </button>
-                        { moveListModalStatus && <MoveListModal 
-                            todoID = {todo._id}
-                            itemId = {x.id}
-                            itemTitle = {x.todoTitle}
-                            updateMoveListModalStatus = {updateMoveListModalStatus}
-                            todobox = {todobox}
-                            updateTodobox = {updateTodobox}
-                            userName = {userName}
-                        />
-                        }
-                    </div>
+                            dropdownStyle = {dropdownStyle}
+                            x = {x}
+                      />
     } 
 
     return <div className={dropdownBlock} ref={nodeDropdown}>
