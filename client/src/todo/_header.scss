@@ -4,32 +4,64 @@
     @include flex-row( space-between, center );
 
     .board-header--logo {
-        width: 50%;
+        width: 20%;
         height: 100%;
         @include flex-column( center, flex-start);
 
+        @media #{$phone-small} {
+            width: 10%;
+        }
+
+        @media #{$phone-large} {
+            width: 10%;
+        }
+
         .board-logo {
-            padding-left: 60px;
-            padding-top: 20px;
-            width: 180px;
+            width: 200px;
             transform: translateY(-15%);
+            background: url("../Image/toodo-logo2.svg") no-repeat;
+            height: 38px;
+            margin-left: 60px;
+            margin-top: 20px;
+
+            @media #{$phone-small} {
+                background: url("../Image/logo-small.svg") no-repeat;
+                margin-left: 20px;
+            }
+    
+            @media #{$phone-large} {
+                background: url("../Image/logo-small.svg") no-repeat;
+                margin-left: 20px;
+            }
         }
     }
 
     .board-header--logo.login {
         @include flex-column( flex-end, flex-start);
+
        .board-logo {
            width: 210px;
-           
+
+        @media #{$phone-large} {
+            margin-left: 30px;
+        }
        }
     }
 
     .board-header--text {
-        width: 50%;
+        width: 80%;
         height: 100%;
         @include flex-row( flex-end, center );
         color: #fff;
         font-family: $Open-Sans;
+
+        @media #{$phone-small} {
+            width: 90%;
+        }
+
+        @media #{$phone-large} {
+            width: 90%;
+        }
 
         .board-header--info {
             @include flex-row( flex-end, center );
@@ -39,6 +71,16 @@
             margin-top: 20px;
             background-color: $color-primary;
             z-index: 9999;
+
+            @media #{$phone-small} {
+                margin-right: 20px;
+                padding: 10px 20px;
+            }
+    
+            @media #{$phone-large} {
+                margin-right: 20px;
+                padding: 10px 20px;
+            }
 
             .board-header-link {
                 color: $color-text-dataTitle;
@@ -77,6 +119,24 @@
                     cursor: pointer;
                     color: #363636;
                 }
+
+                &::before {
+                    font-family: $Open-Sans;
+                    content: 'Log out';
+                }
+
+                @media #{$phone-large} {
+                    &::before {
+                        font-family: 'Material Icons';
+                        content: 'exit_to_app';
+                        font-size: 20px;
+                        position: relative;
+                        top: 3px;
+                        text-transform: lowercase;
+                    }
+                }
+
+                
             }
 
         }

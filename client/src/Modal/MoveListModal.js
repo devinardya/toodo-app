@@ -53,7 +53,7 @@ const MoveListModal = ({
     };
 
     return ReactDOM.createPortal(
-            <div className ="modal-block-container">
+            <div className ="modal-block-container form">
                 <form onSubmit={(e) => moveOneList(e, todoID, itemId)}>
                     <h2>Move Item</h2>
                     <p>Please choose a new todo list for <span>{itemTitle}</span>.</p>

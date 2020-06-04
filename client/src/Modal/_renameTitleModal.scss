@@ -1,4 +1,4 @@
-.modal-block-container--rename {
+.modal-block-container.renameList {
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.7);
@@ -15,6 +15,17 @@
         background-color: $color-primary;
         border-radius: 20px;
         @include flex-column(center, center);
+
+        @media #{$tablet-large} {
+            width: 75%;
+            max-height: 100vh;
+        }
+
+        @media #{$phone-large} {
+            width: 85%;
+            max-height: 100vh;
+        }
+
 
         h2 {
             margin-bottom: 20px;
@@ -44,6 +55,11 @@
             border-left: none;
             border-right: none;
             border-bottom: 2px solid $color-text-title;
+    
+            @media #{$phone-large} {
+                width: 100%;
+            }
+    
         }
 
         .board-block-main--form-inputError {
@@ -62,6 +78,11 @@
             @include flex-row(center,center );
             text-align: center;
 
+            @media #{$phone-medium} {
+                @include flex-column(center,center );
+                margin-right: 0px;
+            }
+
             .modal-block-cancel {
                 margin-top: 10px;
                 padding: 10px 25px;
@@ -72,6 +93,10 @@
                 color: #fff;
                 font-size: 13px;
                 margin-right: 20px;
+
+                @media #{$phone-medium} {
+                    margin-right: 0px;
+                }
     
                 &:hover {
                     cursor: pointer;
