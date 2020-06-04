@@ -14,6 +14,10 @@
         top: 40px;
         left: 60px;
         width: 160px;
+
+        @media #{$phone-large} {
+            left: 30px;
+        }
     }
 
     .home-login-button {
@@ -44,6 +48,11 @@
         line-height: 55px;
         font-size: 24px;
         transform: translateY(-50%);
+
+        @media #{$phone-large} {
+            left: 30px;
+            width: 80%;
+        }
     }
 
     .home-block-link {
@@ -63,6 +72,11 @@
         &:hover {
             background-color: $color-text-dataTitle;
             color: #fff;
+        }
+
+        @media #{$phone-large} {
+            left: 30px;
+            margin-top: 30px;
         }
     }
 

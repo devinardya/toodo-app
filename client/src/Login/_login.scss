@@ -158,6 +158,12 @@
                         background-color: $color-text-dataTitle;
                         color: #fff;
                     }
+
+                    @media #{$phone-large} {
+                        height: 45px;
+                        margin-top: 40px;
+                        width: 150px;
+                    }
                 }
             }
 
