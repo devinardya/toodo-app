@@ -34,7 +34,7 @@ const ClearListItems = ({
     };
 
     return ReactDOM.createPortal(
-            <div className ="modal-block-container">
+            <div className ="modal-block-container remove">
                 <div className = "modal-block-box">
                     <h2>Remove All Items</h2>
                     <p className="modal-block-box--text">Remove all items in <span>{todo.title}</span> todo list ?</p>

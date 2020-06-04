@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../index.scss';
-import logoicon from '../Image/toodo-logo2.svg';
 
 const Header = ({userName, logout, initialPage}) => {
 
@@ -9,24 +8,20 @@ const Header = ({userName, logout, initialPage}) => {
     if (initialPage === "board") {
         renderHeader = <header className="board-block-header">
                             <div className="board-header--logo">
-                                <figure className="board-logo">
-                                    <img src={logoicon} alt="toodo logo" />
-                                </figure>
+                                <div className="board-logo"></div>
                             </div>
                             <div className="board-header--text">
                                 <div className="board-header--info">
                                     <h4>Welcome, {userName}</h4>
                                     <span>|</span>
-                                    <button onClick={logout}>Log out</button>
+                                    <button onClick={logout}></button>
                                 </div>
                             </div>
                         </header>
     } else if (initialPage === "login") {
         renderHeader = <header className="board-block-header">
                             <div className="board-header--logo login">
-                                <figure className="board-logo">
-                                    <img src={logoicon} alt="toodo logo" />
-                                </figure>
+                                <div className="board-logo"></div>
                             </div>
                             <div className="board-header--text">
                                 <div className="board-header--info">

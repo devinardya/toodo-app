@@ -59,7 +59,7 @@ const RenameTitleModal = ({
     };
 
     return ReactDOM.createPortal(
-            <div className ="modal-block-container--rename">
+            <div className ="modal-block-container renameList">
                 <form onSubmit = {(e) => renameTitle(e, todo._id)}>
                     <h2>Rename Todo List Title</h2>
                     <label>New Title</label>

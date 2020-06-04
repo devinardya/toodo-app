@@ -1,5 +1,5 @@
-.modal-block-container {
-    height: 100vh;
+.modal-block-container.form {
+    min-height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.7);
     position: absolute;
@@ -7,6 +7,7 @@
     left: 0;
     @include flex-column( center, center );
     text-align: center;
+
 
     form {
         width: 45%;
@@ -16,6 +17,11 @@
         border-radius: 20px;
         @include flex-column(center, center);
         position: relative;
+
+        @media #{$phone-large} {
+            width: 85%;
+            max-height: 100vh;
+        }
 
         h2 {
             font-family: $Montserrat;
@@ -104,6 +110,10 @@
                 color: #fff;
                 font-size: 13px;
                 margin-right: 20px;
+
+                @media #{$phone-large} {
+                    margin-right: 0px;
+                }
     
                 &:hover {
                     cursor: pointer;

@@ -7,7 +7,8 @@
 
 .block__board {
     background-color: $color-primary;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     width: 100vw;
     background: rgb(0,97,126);
     background: linear-gradient(129deg, rgba(0,97,126,1) 0%, rgba(17,196,196,1) 100%);
@@ -26,6 +27,15 @@
         overflow: hidden;
         @include flex-row(flex-start, flex-start);
 
+        @media #{$phone-small} {
+            padding:20px 5px 5px 5px;
+        }
+
+        @media #{$phone-large} {
+            padding:20px 5px 5px 5px;
+        }
+      
+
         .block__board--main.block__boxes {
             width: 100%;
             height: 100%;
@@ -33,6 +43,7 @@
 
             .block__board--main.addform {
                 width: calc(20% - 10px);
+                min-width: 220px;
                 height: auto;
                 background-color: $color-primary;
                 padding: 20px;
@@ -41,6 +52,14 @@
                 border-radius: 5px;
                 opacity: 0.6;
                 filter: saturate(0);
+
+                @media #{$phone-small} {
+                    flex-grow: 1;
+                }
+        
+                @media #{$phone-large} {
+                    flex-grow: 1;
+                }
 
                 &:hover {
                     opacity: 1;
@@ -88,10 +107,12 @@
 
             .block__board--main--eachbox {
                 width: calc(20% - 10px);
+                min-width: 200px;
                 max-height: calc(100% - 10px);
                 background-color: $color-primary;
                 padding: 20px;
                 margin: 5px;
+                flex-grow: 1;
                 text-align: left;
                 border-radius: 5px;
 
