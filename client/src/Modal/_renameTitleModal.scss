@@ -8,6 +8,12 @@
     @include flex-column( center, center );
     z-index: 9999999999;
 
+    @media #{$phone-large} {
+        max-height: 100vh;
+        overflow: hidden;
+        position: fixed;
+    }
+
     form {
         width: 45%;
         height: auto;

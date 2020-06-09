@@ -42,8 +42,8 @@ $color-button-cancel : #008a94;
   $phone-small: "only screen and (max-width : 320px)";
   $phone-medium:  "only screen and (max-width : 588px)";
   $phone-large: "only screen and (max-width : 667px)";
-  $tablet-small: "only screen and (max-width : 998px)";
-  $tablet-large: "only screen and (max-width : 1024px)";
+  $tablet-small: "only screen and (min-width : 768px)";
+  $tablet-large: "only screen and (min-width : 1024px)";
   $desktop-large: "only screen and (min-width : 1440px)";
 
   .material-icons {

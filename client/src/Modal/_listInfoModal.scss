@@ -10,8 +10,8 @@
     z-index: 99999;
 
     @media #{$phone-large} {
-        width: 100%;
         max-height: 100vh;
+        position: fixed;
     }
     
     .modal-block-container--listinfo-box {
@@ -23,9 +23,20 @@
         padding: 60px 40px 60px 60px;
         position: relative;
 
+        @media #{$phone-large} {
+            width: 85%;
+            max-height: 100vh;
+            padding: 40px 20px;
+        }
+
         @media #{$tablet-small} {
             width: 85%;
             padding: 40px 30px;
+        }
+
+        @media #{$tablet-large} {
+            width: 65%;
+            padding: 40px 50px;
         }
 
         .modal-block-container--listinfo-box-contain {

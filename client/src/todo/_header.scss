@@ -16,6 +16,7 @@
             width: 10%;
         }
 
+
         .board-logo {
             width: 200px;
             transform: translateY(-15%);
@@ -33,11 +34,19 @@
                 background: url("../Image/logo-small.svg") no-repeat;
                 margin-left: 20px;
             }
+
+            @media #{$tablet-small} {
+                margin-top: 0;
+            }
         }
     }
 
     .board-header--logo.login {
         @include flex-column( flex-end, flex-start);
+
+        @media #{$tablet-small} {
+            @include flex-column( center, flex-start);
+        }
 
        .board-logo {
            width: 210px;
@@ -81,6 +90,10 @@
             @media #{$phone-large} {
                 margin-right: 20px;
                 padding: 10px 20px;
+            }
+            
+            @media #{$tablet-small} {
+                margin-top: 0px;
             }
 
             .board-header-link {

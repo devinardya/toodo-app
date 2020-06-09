@@ -6,6 +6,12 @@
     top: 0;
     left: 0;
     @include flex-column( center, center );
+
+    @media #{$phone-large} {
+        max-height: 100vh;
+        overflow: hidden;
+        position: fixed;
+    }
     
     form {
         width: 45%;
